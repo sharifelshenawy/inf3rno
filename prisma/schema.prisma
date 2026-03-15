@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --- NextAuth models (Prisma adapter expects all three even with JWT strategy) ---
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// --- Application models ---
+
+model User {
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  emailVerified       DateTime?
+  handle              String?   @unique
+  displayName         String?
+  suburb              String?
+  suburbLat           Float?
+  suburbLng           Float?
+  profilePicUrl       String?
+  onboardingCompleted Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  accounts     Account[]
+  sessions     Session[]
+  bike         Bike?
+  ridesCreated Ride[]       @relation("RideCreator")
+  rideMembers  RideMember[]
+  rideVotes    RideVote[]
+}
+
+model Bike {
+  id                  String  @id @default(cuid())
+  userId              String  @unique
+  make                String
+  model               String
+  year                Int?
+  tankLitres          Float
+  consumptionPer100km Float
+  isManualRange       Boolean @default(false)
+  manualRangeKm       Float?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Ride {
+  id              String     @id @default(cuid())
+  creatorId       String
+  title           String
+  status          RideStatus @default(DRAFT)
+  scheduledAt     DateTime?
+  routeId         String?
+  destinationName String?
+  meetingPointId  String?
+  vibe            String?
+  difficulty      String?
+  inviteCode      String     @unique
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  creator User         @relation("RideCreator", fields: [creatorId], references: [id])
+  members RideMember[]
+  votes   RideVote[]
+}
+
+model RideMember {
+  id          String     @id @default(cuid())
+  rideId      String
+  userId      String
+  role        MemberRole @default(RIDER)
+  startLat    Float?
+  startLng    Float?
+  startSuburb String?
+  joinedAt    DateTime   @default(now())
+
+  ride Ride @relation(fields: [rideId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([rideId, userId])
+}
+
+model RideVote {
+  id              String   @id @default(cuid())
+  rideId          String
+  userId          String
+  routeId         String
+  destinationName String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  ride Ride @relation(fields: [rideId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([rideId, userId])
+}
+
+// Future — schema only, not implemented
+model RideLocation {
+  id        String   @id @default(cuid())
+  rideId    String
+  userId    String
+  lat       Float
+  lng       Float
+  timestamp DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([rideId, userId, timestamp])
+}
+
+enum RideStatus {
+  DRAFT
+  VOTING
+  LOCKED
+  COMPLETED
+  CANCELLED
+}
+
+enum MemberRole {
+  LEADER
+  RIDER
+}

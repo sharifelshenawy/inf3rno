@@ -49,9 +49,10 @@ export function haversineDistance(a: LatLng, b: LatLng): number {
 export function findOptimalMeetingPoint(
   riders: { lat: number; lng: number; displayName: string }[],
   routeStart: LatLng,
-  detourWeight: number = 0.4
+  detourWeight: number = 0.4,
+  candidateOverride?: MeetingPoint[]
 ): ScoredMeetingPoint {
-  const candidates = meetingPointsData as MeetingPoint[];
+  const candidates = candidateOverride || (meetingPointsData as MeetingPoint[]);
   let bestResult: ScoredMeetingPoint | null = null;
   let bestScore = Infinity;
 

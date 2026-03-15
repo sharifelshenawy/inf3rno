@@ -20,7 +20,19 @@ export async function POST(request: Request) {
     await storeAuthCode(email, code);
 
     const formatted = formatCode(code);
-    await sendAuthCodeEmail(email, formatted);
+
+    // In dev, log the code to console so you don't need Resend delivery
+    if (process.env.NODE_ENV === "development") {
+      console.log(`\n🔑 Auth code for ${email}: ${formatted}\n`);
+    }
+
+    try {
+      await sendAuthCodeEmail(email, formatted);
+    } catch (emailError) {
+      // Don't fail the request if email fails in dev — code is logged above
+      if (process.env.NODE_ENV !== "development") throw emailError;
+      console.warn("Email send failed (dev mode, code logged above):", emailError);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

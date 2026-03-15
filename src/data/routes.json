@@ -1,0 +1,398 @@
+[
+  {
+    "id": "reefton-spur",
+    "name": "Reefton Spur Classic",
+    "description": "The holy grail of Melbourne twisties. 95% corner ratio — 25km of non-stop switchbacks through dense rainforest. Quieter and twistier than Black Spur.",
+    "vibe": ["twisty"],
+    "difficulty": "advanced",
+    "durationMinutes": 150,
+    "distanceKm": 130,
+    "region": "east",
+    "meetingPointIds": ["lilydale-hub", "coldstream-bakery"],
+    "waypoints": [
+      { "lat": -37.7550, "lng": 145.3510, "label": "Start — Warburton" },
+      { "lat": -37.8167, "lng": 145.5500, "label": "Reefton — left over wooden bridge" },
+      { "lat": -37.7833, "lng": 145.5500, "label": "Reefton Spur Rd" },
+      { "lat": -37.6900, "lng": 145.7100, "label": "Cumberland Junction" },
+      { "lat": -37.7800, "lng": 145.7300, "label": "Marysville" }
+    ],
+    "destinations": [
+      { "name": "Fat Tony's — Marysville", "lat": -37.7800, "lng": 145.7450, "type": "cafe", "position": "endpoint" },
+      { "name": "Bruno's Art & Sculpture Garden", "lat": -37.7750, "lng": 145.7600, "type": "attraction", "position": "endpoint" },
+      { "name": "Three Sugars — Warburton", "lat": -37.7545, "lng": 145.6890, "type": "cafe", "position": "enroute" }
+    ],
+    "highlights": ["95% corner ratio", "Rainforest canopy", "Elevation changes", "Rarely sees traffic"],
+    "warnings": ["Watch for gravel in wet conditions", "Heavy police presence on weekends"]
+  },
+  {
+    "id": "black-spur",
+    "name": "Black Spur Sweep",
+    "description": "Flowing fast sweepers through towering mountain ash — the tallest flowering trees on earth. Consistent-radius bends, wide road, incredible scenery.",
+    "vibe": ["scenic", "twisty"],
+    "difficulty": "intermediate",
+    "durationMinutes": 120,
+    "distanceKm": 110,
+    "region": "east",
+    "meetingPointIds": ["lilydale-hub", "healesville-bakery"],
+    "waypoints": [
+      { "lat": -37.6536, "lng": 145.5269, "label": "Start — Healesville" },
+      { "lat": -37.6200, "lng": 145.6200, "label": "Black Spur Dr" },
+      { "lat": -37.5700, "lng": 145.6600, "label": "Black Spur Inn" },
+      { "lat": -37.5170, "lng": 145.7250, "label": "Narbethong" }
+    ],
+    "destinations": [
+      { "name": "Black Spur Inn", "lat": -37.5700, "lng": 145.6600, "type": "pub", "position": "enroute" },
+      { "name": "Narbethong General Store", "lat": -37.5170, "lng": 145.7250, "type": "cafe", "position": "endpoint" },
+      { "name": "Fat Tony's — Marysville", "lat": -37.7800, "lng": 145.7450, "type": "cafe", "position": "endpoint" }
+    ],
+    "highlights": ["Mountain ash forest", "Wide sweeping corners", "Scenic lookouts", "Black Spur Inn stop"],
+    "warnings": ["Highway Patrol with laser between km markers 67-71", "Tourists in cars on weekends", "Occasional wildlife"]
+  },
+  {
+    "id": "donna-buang",
+    "name": "Mount Donna Buang Climb",
+    "description": "Smooth, wide twisties ascending through semi-rainforest to a summit viewing tower. 70% corner ratio with a great mix of tight and sweeping bends. Light traffic.",
+    "vibe": ["twisty", "scenic"],
+    "difficulty": "intermediate",
+    "durationMinutes": 90,
+    "distanceKm": 70,
+    "region": "east",
+    "meetingPointIds": ["lilydale-hub", "coldstream-bakery"],
+    "waypoints": [
+      { "lat": -37.7540, "lng": 145.6890, "label": "Start — Warburton" },
+      { "lat": -37.7500, "lng": 145.7200, "label": "Cement Creek turnoff" },
+      { "lat": -37.7170, "lng": 145.6850, "label": "Mt Donna Buang Summit" }
+    ],
+    "destinations": [
+      { "name": "Mt Donna Buang Viewing Tower", "lat": -37.7170, "lng": 145.6850, "type": "lookout", "position": "endpoint" },
+      { "name": "Three Sugars — Warburton", "lat": -37.7545, "lng": 145.6890, "type": "cafe", "position": "enroute" },
+      { "name": "Cog Bike Cafe — Warburton", "lat": -37.7540, "lng": 145.6910, "type": "cafe", "position": "enroute" }
+    ],
+    "highlights": ["Summit viewing tower", "Smooth wide road", "Semi-rainforest", "Light traffic"],
+    "warnings": ["Can be damp and misty at summit", "Cool temperatures year-round at top"]
+  },
+  {
+    "id": "great-ocean-road-torquay",
+    "name": "Great Ocean Road — Torquay to Apollo Bay",
+    "description": "Iconic heritage-listed coastal cruise with ocean views, cliff roads, and beach town stops. Australia's most famous motorcycle road.",
+    "vibe": ["scenic"],
+    "difficulty": "beginner",
+    "durationMinutes": 180,
+    "distanceKm": 155,
+    "region": "west",
+    "meetingPointIds": ["geelong-westfield", "little-river-servo"],
+    "waypoints": [
+      { "lat": -38.3322, "lng": 144.3260, "label": "Start — Torquay" },
+      { "lat": -38.4697, "lng": 144.1820, "label": "Bells Beach Lookout" },
+      { "lat": -38.4630, "lng": 144.0980, "label": "Aireys Inlet — Split Point Lighthouse" },
+      { "lat": -38.5270, "lng": 144.0760, "label": "Lorne" },
+      { "lat": -38.7568, "lng": 143.6715, "label": "Apollo Bay" }
+    ],
+    "destinations": [
+      { "name": "Apollo Bay Bakery", "lat": -38.7580, "lng": 143.6700, "type": "cafe", "position": "endpoint" },
+      { "name": "Teddy's Lookout — Lorne", "lat": -38.5480, "lng": 143.9650, "type": "lookout", "position": "enroute" },
+      { "name": "Aireys Inlet Lighthouse", "lat": -38.4630, "lng": 144.0980, "type": "landmark", "position": "enroute" },
+      { "name": "Lorne Pier", "lat": -38.5420, "lng": 143.9780, "type": "landmark", "position": "enroute" }
+    ],
+    "highlights": ["Ocean cliff views", "Beach town stops", "Photo ops everywhere", "Heritage-listed road"],
+    "warnings": ["Speed heavily enforced", "Tourist traffic in summer", "Strong crosswinds on exposed sections"]
+  },
+  {
+    "id": "lorne-deans-marsh",
+    "name": "Lorne to Deans Marsh — Otways Back Road",
+    "description": "The local Reefton Spur. Climbs from the coast through Otway bush with slow-to-medium speed corners, sporadic straights for blasting, then convoluted twisting sections. Much less traffic than GOR.",
+    "vibe": ["twisty"],
+    "difficulty": "intermediate",
+    "durationMinutes": 60,
+    "distanceKm": 30,
+    "region": "west",
+    "meetingPointIds": ["geelong-westfield", "little-river-servo"],
+    "waypoints": [
+      { "lat": -38.5410, "lng": 143.9750, "label": "Start — Lorne" },
+      { "lat": -38.4500, "lng": 143.8800, "label": "Otway Ranges midpoint" },
+      { "lat": -38.3800, "lng": 143.8700, "label": "Deans Marsh" }
+    ],
+    "destinations": [
+      { "name": "Deans Marsh General Store", "lat": -38.3800, "lng": 143.8700, "type": "cafe", "position": "endpoint" },
+      { "name": "Forrest Brewing Co", "lat": -38.5170, "lng": 143.7150, "type": "brewery", "position": "endpoint" },
+      { "name": "Teddy's Lookout — Lorne", "lat": -38.5480, "lng": 143.9650, "type": "lookout", "position": "enroute" }
+    ],
+    "highlights": ["Otway bush twisties", "Almost no traffic", "Coast to forest transition"],
+    "warnings": ["Off-camber tightening bends", "Leaf litter and dampness", "Moss on road surface in shaded sections"]
+  },
+  {
+    "id": "skenes-creek-otways",
+    "name": "Skenes Creek to Forrest — Otway Twisties",
+    "description": "Well-maintained intense twisties climbing from the coast into the Otways. Less travelled than GOR but far more technical. One tight corner after another.",
+    "vibe": ["twisty"],
+    "difficulty": "intermediate",
+    "durationMinutes": 70,
+    "distanceKm": 30,
+    "region": "west",
+    "meetingPointIds": ["geelong-westfield", "little-river-servo"],
+    "waypoints": [
+      { "lat": -38.6900, "lng": 143.6950, "label": "Start — Skenes Creek" },
+      { "lat": -38.6000, "lng": 143.7100, "label": "Otway Ranges climb" },
+      { "lat": -38.5170, "lng": 143.7150, "label": "Forrest" }
+    ],
+    "destinations": [
+      { "name": "Forrest Brewing Co", "lat": -38.5170, "lng": 143.7150, "type": "brewery", "position": "endpoint" },
+      { "name": "Forrest General Store", "lat": -38.5170, "lng": 143.7170, "type": "cafe", "position": "endpoint" },
+      { "name": "Apollo Bay Bakery", "lat": -38.7580, "lng": 143.6700, "type": "cafe", "position": "enroute" }
+    ],
+    "highlights": ["Intense technical riding", "Quiet roads", "Brewery finish"],
+    "warnings": ["Damp patches in shaded corners", "Fallen branches possible"]
+  },
+  {
+    "id": "kinglake-loop",
+    "name": "Kinglake — St Andrews Loop",
+    "description": "Hairpin corners on massive cliffs along Heidelberg-Kinglake Road, phenomenal valley views, and ridge-line riding through national park forest.",
+    "vibe": ["twisty", "scenic"],
+    "difficulty": "intermediate",
+    "durationMinutes": 100,
+    "distanceKm": 90,
+    "region": "north",
+    "meetingPointIds": ["whittlesea-coles", "hurstbridge-cafe"],
+    "waypoints": [
+      { "lat": -37.6390, "lng": 145.1940, "label": "Start — Hurstbridge" },
+      { "lat": -37.6120, "lng": 145.2780, "label": "St Andrews" },
+      { "lat": -37.5330, "lng": 145.3400, "label": "Kinglake" },
+      { "lat": -37.4580, "lng": 145.3700, "label": "Kinglake Central" },
+      { "lat": -37.5273, "lng": 145.1687, "label": "Whittlesea" }
+    ],
+    "destinations": [
+      { "name": "Kinglake General Store", "lat": -37.4580, "lng": 145.3700, "type": "cafe", "position": "endpoint" },
+      { "name": "Kinglake National Park Lookout", "lat": -37.4700, "lng": 145.3500, "type": "lookout", "position": "enroute" },
+      { "name": "St Andrews Hotel", "lat": -37.6120, "lng": 145.2780, "type": "pub", "position": "enroute" }
+    ],
+    "highlights": ["Cliff-edge hairpins", "Valley views", "National park scenery", "Ridge-line riding"],
+    "warnings": ["Narrow roads", "Hairpins on cliff edges with limited railing", "Cyclists on weekends"]
+  },
+  {
+    "id": "dandenong-ranges",
+    "name": "Dandenong Ranges Explorer",
+    "description": "Easy cruise through the Dandenongs. Great cafes, gardens, and gentle curves through charming hillside villages.",
+    "vibe": ["scenic"],
+    "difficulty": "beginner",
+    "durationMinutes": 75,
+    "distanceKm": 55,
+    "region": "east",
+    "meetingPointIds": ["bayswater-maccas", "lilydale-hub"],
+    "waypoints": [
+      { "lat": -37.8427, "lng": 145.2722, "label": "Start — Bayswater" },
+      { "lat": -37.8540, "lng": 145.3470, "label": "Mount Dandenong Tourist Rd" },
+      { "lat": -37.8285, "lng": 145.3672, "label": "SkyHigh Mt Dandenong" },
+      { "lat": -37.8620, "lng": 145.3580, "label": "Sassafras" },
+      { "lat": -37.8790, "lng": 145.3530, "label": "Olinda" }
+    ],
+    "destinations": [
+      { "name": "SkyHigh Mount Dandenong", "lat": -37.8285, "lng": 145.3672, "type": "lookout", "position": "endpoint" },
+      { "name": "Sassafras Bakehouse", "lat": -37.8620, "lng": 145.3580, "type": "cafe", "position": "enroute" },
+      { "name": "Olinda Village Cafe", "lat": -37.8790, "lng": 145.3530, "type": "cafe", "position": "enroute" },
+      { "name": "Puffing Billy — Lakeside Station", "lat": -37.8930, "lng": 145.3700, "type": "attraction", "position": "endpoint" }
+    ],
+    "highlights": ["SkyHigh lookout", "Charming villages", "Garden stops", "Puffing Billy railway"],
+    "warnings": ["Narrow roads with parked cars", "Fog in winter mornings"]
+  },
+  {
+    "id": "mornington-loop",
+    "name": "Mornington Peninsula Coastal Loop",
+    "description": "Coastal cruising through wine country and seaside towns down to Cape Schanck lighthouse.",
+    "vibe": ["scenic"],
+    "difficulty": "beginner",
+    "durationMinutes": 120,
+    "distanceKm": 100,
+    "region": "south",
+    "meetingPointIds": ["cranbourne-centro", "frankston-bayside"],
+    "waypoints": [
+      { "lat": -38.1437, "lng": 145.1230, "label": "Start — Frankston" },
+      { "lat": -38.2240, "lng": 145.0380, "label": "Mornington" },
+      { "lat": -38.3490, "lng": 144.9440, "label": "Red Hill" },
+      { "lat": -38.4873, "lng": 144.8656, "label": "Cape Schanck" }
+    ],
+    "destinations": [
+      { "name": "Cape Schanck Lighthouse", "lat": -38.4873, "lng": 144.8656, "type": "landmark", "position": "endpoint" },
+      { "name": "Red Hill Brewery", "lat": -38.3620, "lng": 145.0100, "type": "pub", "position": "enroute" },
+      { "name": "Flinders Pier & Village", "lat": -38.4800, "lng": 145.0200, "type": "landmark", "position": "endpoint" },
+      { "name": "Montalto Vineyard", "lat": -38.3580, "lng": 145.0020, "type": "restaurant", "position": "enroute" }
+    ],
+    "highlights": ["Wine country", "Coastal views", "Lighthouse stop"],
+    "warnings": ["Tourist traffic on weekends", "Windy coastal sections"]
+  },
+  {
+    "id": "yarra-valley-loop",
+    "name": "Yarra Valley Full Loop",
+    "description": "The ultimate Yarra Ranges day ride. Vineyards to rainforest, linking Healesville, Black Spur, Marysville, and Warburton in one big loop through Victoria's best riding roads.",
+    "vibe": ["scenic", "twisty"],
+    "difficulty": "intermediate",
+    "durationMinutes": 180,
+    "distanceKm": 156,
+    "region": "east",
+    "meetingPointIds": ["lilydale-hub", "coldstream-bakery"],
+    "waypoints": [
+      { "lat": -37.7570, "lng": 145.3540, "label": "Start — Lilydale" },
+      { "lat": -37.6690, "lng": 145.3700, "label": "Yarra Glen" },
+      { "lat": -37.6536, "lng": 145.5269, "label": "Healesville" },
+      { "lat": -37.5700, "lng": 145.6600, "label": "Black Spur" },
+      { "lat": -37.7800, "lng": 145.7300, "label": "Marysville" },
+      { "lat": -37.7550, "lng": 145.6890, "label": "Warburton" }
+    ],
+    "destinations": [
+      { "name": "Healesville Hotel", "lat": -37.6536, "lng": 145.5269, "type": "pub", "position": "enroute" },
+      { "name": "Black Spur Inn", "lat": -37.5700, "lng": 145.6600, "type": "pub", "position": "enroute" },
+      { "name": "Fat Tony's — Marysville", "lat": -37.7800, "lng": 145.7450, "type": "cafe", "position": "enroute" },
+      { "name": "Three Sugars — Warburton", "lat": -37.7545, "lng": 145.6890, "type": "cafe", "position": "endpoint" },
+      { "name": "Cog Bike Cafe — Warburton", "lat": -37.7540, "lng": 145.6910, "type": "cafe", "position": "endpoint" }
+    ],
+    "highlights": ["Vineyard views", "Black Spur sweepers", "Marysville stop", "Multiple cafe options"],
+    "warnings": ["Long ride — plan fuel", "Tourists on Black Spur weekends", "Highway Patrol on Spur roads"]
+  },
+  {
+    "id": "yarra-glen-loop",
+    "name": "Yarra Valley Wine Run",
+    "description": "Gentle rolling roads through vineyards and farmland. Perfect cruisy morning ride with great brunch stops.",
+    "vibe": ["scenic"],
+    "difficulty": "beginner",
+    "durationMinutes": 90,
+    "distanceKm": 85,
+    "region": "east",
+    "meetingPointIds": ["lilydale-hub", "coldstream-bakery"],
+    "waypoints": [
+      { "lat": -37.6690, "lng": 145.3700, "label": "Start — Yarra Glen" },
+      { "lat": -37.7320, "lng": 145.4670, "label": "Healesville Rd" },
+      { "lat": -37.6536, "lng": 145.5269, "label": "Healesville" },
+      { "lat": -37.5800, "lng": 145.5000, "label": "Dixons Creek" }
+    ],
+    "destinations": [
+      { "name": "Healesville Hotel", "lat": -37.6536, "lng": 145.5269, "type": "pub", "position": "endpoint" },
+      { "name": "Four Pillars Gin Distillery", "lat": -37.6540, "lng": 145.5310, "type": "attraction", "position": "endpoint" },
+      { "name": "TarraWarra Estate", "lat": -37.6620, "lng": 145.4650, "type": "restaurant", "position": "enroute" },
+      { "name": "Yarra Glen Grand Hotel", "lat": -37.6580, "lng": 145.3730, "type": "pub", "position": "enroute" }
+    ],
+    "highlights": ["Vineyard views", "Rolling hills", "Great brunch stops"],
+    "warnings": ["Tractors on back roads", "Wine tourists in cars"]
+  },
+  {
+    "id": "mt-baw-baw",
+    "name": "Mount Baw Baw Alpine Run",
+    "description": "Serious elevation gain through alpine forest. Technical hairpin switchbacks and remote alpine scenery. Rewarding if you're up for it.",
+    "vibe": ["twisty"],
+    "difficulty": "advanced",
+    "durationMinutes": 210,
+    "distanceKm": 200,
+    "region": "east",
+    "meetingPointIds": ["lilydale-hub", "drouin-maccas"],
+    "waypoints": [
+      { "lat": -38.0300, "lng": 145.5600, "label": "Start — Warragul" },
+      { "lat": -37.9800, "lng": 145.7500, "label": "Noojee" },
+      { "lat": -37.8600, "lng": 146.2700, "label": "Mt Baw Baw Tourist Rd" },
+      { "lat": -37.8390, "lng": 146.2710, "label": "Mt Baw Baw Village" }
+    ],
+    "destinations": [
+      { "name": "Mt Baw Baw Alpine Resort", "lat": -37.8390, "lng": 146.2710, "type": "landmark", "position": "endpoint" },
+      { "name": "Noojee Trestle Bridge", "lat": -37.9800, "lng": 145.7500, "type": "landmark", "position": "enroute" },
+      { "name": "Toorongo Falls Reserve", "lat": -37.9200, "lng": 145.8400, "type": "landmark", "position": "enroute" }
+    ],
+    "highlights": ["Hairpin switchbacks", "Alpine scenery", "Massive elevation gain", "Noojee Trestle Bridge"],
+    "warnings": ["Snow/ice in winter", "Very remote — no mobile signal in parts", "Long ride — check fuel"]
+  },
+  {
+    "id": "lerderderg-gorge",
+    "name": "Lerderderg Gorge to Daylesford",
+    "description": "Fast open roads through bush into a dramatic gorge, then on through forest to Daylesford for brunch. Under-rated western ride.",
+    "vibe": ["twisty", "scenic"],
+    "difficulty": "intermediate",
+    "durationMinutes": 100,
+    "distanceKm": 90,
+    "region": "west",
+    "meetingPointIds": ["bacchus-marsh-coles", "melton-centro"],
+    "waypoints": [
+      { "lat": -37.6750, "lng": 144.4330, "label": "Start — Bacchus Marsh" },
+      { "lat": -37.5900, "lng": 144.3300, "label": "Lerderderg Gorge Rd" },
+      { "lat": -37.5100, "lng": 144.3000, "label": "Daylesford Rd" },
+      { "lat": -37.3486, "lng": 144.1500, "label": "Daylesford" }
+    ],
+    "destinations": [
+      { "name": "The Perfect Drop Cafe — Daylesford", "lat": -37.3486, "lng": 144.1500, "type": "cafe", "position": "endpoint" },
+      { "name": "Hepburn Bathhouse & Spa", "lat": -37.3170, "lng": 144.1410, "type": "attraction", "position": "endpoint" },
+      { "name": "Lerderderg Gorge Lookout", "lat": -37.5500, "lng": 144.3200, "type": "lookout", "position": "enroute" }
+    ],
+    "highlights": ["Gorge views", "Fast open sections", "Daylesford brunch at the end"],
+    "warnings": ["Gravel patches near gorge", "Kangaroos at dawn/dusk"]
+  },
+  {
+    "id": "blackwood-trentham-loop",
+    "name": "Blackwood — Trentham Forest Loop",
+    "description": "Medium-radius curves through Wombat State Forest from Bacchus Marsh, then large sweeping curves to Trentham. Cool forest riding with waterfalls and heritage towns.",
+    "vibe": ["twisty", "scenic"],
+    "difficulty": "intermediate",
+    "durationMinutes": 130,
+    "distanceKm": 120,
+    "region": "west",
+    "meetingPointIds": ["bacchus-marsh-coles", "melton-centro"],
+    "waypoints": [
+      { "lat": -37.6750, "lng": 144.4330, "label": "Start — Bacchus Marsh" },
+      { "lat": -37.4720, "lng": 144.3050, "label": "Blackwood" },
+      { "lat": -37.3880, "lng": 144.3170, "label": "Trentham" },
+      { "lat": -37.3486, "lng": 144.1500, "label": "Daylesford" }
+    ],
+    "destinations": [
+      { "name": "Trentham Falls", "lat": -37.3900, "lng": 144.3100, "type": "landmark", "position": "enroute" },
+      { "name": "Cosmopolitan Hotel — Trentham", "lat": -37.3880, "lng": 144.3170, "type": "pub", "position": "enroute" },
+      { "name": "The Perfect Drop Cafe — Daylesford", "lat": -37.3486, "lng": 144.1500, "type": "cafe", "position": "endpoint" },
+      { "name": "Hepburn Bathhouse & Spa", "lat": -37.3170, "lng": 144.1410, "type": "attraction", "position": "endpoint" }
+    ],
+    "highlights": ["Wombat State Forest", "Trentham Falls", "Cool forest riding", "Heritage towns"],
+    "warnings": ["Kangaroos at dawn/dusk through forest", "Can be cold and damp in forest"]
+  },
+  {
+    "id": "great-alpine-road",
+    "name": "Great Alpine Road — Bright to Omeo",
+    "description": "Australia's highest year-round sealed road. Fast sweeping corners climbing to 1840m at Mount Hotham, then tight continuous twists descending to Omeo. The ultimate Victorian ride.",
+    "vibe": ["twisty", "scenic"],
+    "difficulty": "advanced",
+    "durationMinutes": 240,
+    "distanceKm": 130,
+    "region": "alpine",
+    "meetingPointIds": ["lilydale-hub", "drouin-maccas"],
+    "waypoints": [
+      { "lat": -36.7300, "lng": 146.9630, "label": "Start — Bright" },
+      { "lat": -36.9280, "lng": 147.0710, "label": "Harrietville" },
+      { "lat": -37.0470, "lng": 147.1430, "label": "Mt Hotham Summit — 1840m" },
+      { "lat": -37.0350, "lng": 147.1970, "label": "Dinner Plain" },
+      { "lat": -37.0990, "lng": 147.5930, "label": "Omeo" }
+    ],
+    "destinations": [
+      { "name": "Danny's Lookout — Mt Hotham", "lat": -37.0370, "lng": 147.1500, "type": "lookout", "position": "enroute" },
+      { "name": "Dinner Plain Village", "lat": -37.0350, "lng": 147.1970, "type": "cafe", "position": "enroute" },
+      { "name": "Omeo Golden Age Hotel", "lat": -37.0990, "lng": 147.5930, "type": "pub", "position": "endpoint" },
+      { "name": "Bright Brewery", "lat": -36.7300, "lng": 146.9650, "type": "brewery", "position": "enroute" }
+    ],
+    "highlights": ["1840m summit", "Infinite alpine views", "Danny's Lookout", "Tight descents to Omeo"],
+    "warnings": ["Snow chains required in declared snow season", "Cold even in summer at altitude", "Long ride from Melbourne — plan overnight or early start"]
+  },
+  {
+    "id": "south-gippsland-cruise",
+    "name": "South Gippsland Coastal Cruise",
+    "description": "Rolling green hills down to the coast. Easy and stunning with views all the way to Wilsons Promontory.",
+    "vibe": ["scenic"],
+    "difficulty": "beginner",
+    "durationMinutes": 150,
+    "distanceKm": 140,
+    "region": "south",
+    "meetingPointIds": ["cranbourne-centro", "drouin-maccas"],
+    "waypoints": [
+      { "lat": -38.2100, "lng": 145.5600, "label": "Start — Korumburra" },
+      { "lat": -38.4400, "lng": 145.6900, "label": "Fish Creek" },
+      { "lat": -38.6800, "lng": 146.0400, "label": "Wilsons Promontory Rd" },
+      { "lat": -38.6300, "lng": 145.9100, "label": "Yanakie" }
+    ],
+    "destinations": [
+      { "name": "Wilsons Promontory NP Entrance", "lat": -38.6800, "lng": 146.0400, "type": "landmark", "position": "endpoint" },
+      { "name": "Fish Creek Hotel", "lat": -38.4400, "lng": 145.6900, "type": "pub", "position": "enroute" },
+      { "name": "Waratah Bay Beach", "lat": -38.8050, "lng": 145.9400, "type": "landmark", "position": "endpoint" }
+    ],
+    "highlights": ["Green rolling hills", "Coastal views", "Wilson's Prom"],
+    "warnings": ["Long ride — plan fuel stops", "Wind on coastal sections"]
+  }
+]

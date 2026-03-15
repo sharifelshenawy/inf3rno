@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" fill="#0A0A0A"/>
+  <g transform="translate(96, 96)">
+    <circle cx="0" cy="0" r="72.96000000000001" fill="none" stroke="#FF6B2B" stroke-width="7.68"/>
+    <text x="0" y="9.600000000000001" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="42.24" fill="#FF6B2B">inf</text>
+    <text x="0" y="42.24" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="30.72" fill="#FFFFFF">3rno</text>
+  </g>
+</svg>

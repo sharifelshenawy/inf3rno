@@ -1,0 +1,145 @@
+[
+  {
+    "id": "lilydale-hub",
+    "name": "Lilydale Marketplace",
+    "address": "33 Hutchinson St, Lilydale VIC 3140",
+    "lat": -37.7570,
+    "lng": 145.3540,
+    "region": "east",
+    "type": "shopping",
+    "notes": "Big car park, multiple cafes, easy access from Maroondah Hwy",
+    "amenities": ["parking", "coffee", "fuel_nearby", "toilets"]
+  },
+  {
+    "id": "coldstream-bakery",
+    "name": "Coldstream Bakery",
+    "address": "453 Maroondah Hwy, Coldstream VIC 3770",
+    "lat": -37.7270,
+    "lng": 145.3830,
+    "region": "east",
+    "type": "cafe",
+    "notes": "Classic rider meeting spot. Good pies. Parking on the street.",
+    "amenities": ["coffee", "food", "parking"]
+  },
+  {
+    "id": "healesville-bakery",
+    "name": "Healesville Harvest Bakery",
+    "address": "293 Maroondah Hwy, Healesville VIC 3777",
+    "lat": -37.6536,
+    "lng": 145.5269,
+    "region": "east",
+    "type": "cafe",
+    "notes": "Popular with riders heading to Black Spur or Reefton.",
+    "amenities": ["coffee", "food", "parking"]
+  },
+  {
+    "id": "geelong-westfield",
+    "name": "Westfield Geelong",
+    "address": "95 Malop St, Geelong VIC 3220",
+    "lat": -38.1485,
+    "lng": 144.3580,
+    "region": "west",
+    "type": "shopping",
+    "notes": "Covered parking, food court. Good central west meeting spot.",
+    "amenities": ["parking", "coffee", "food", "toilets"]
+  },
+  {
+    "id": "little-river-servo",
+    "name": "United Little River",
+    "address": "Princes Fwy, Little River VIC 3211",
+    "lat": -37.9480,
+    "lng": 144.5000,
+    "region": "west",
+    "type": "fuel",
+    "notes": "Quick fuel-up point before heading to the GOR.",
+    "amenities": ["fuel", "parking", "toilets"]
+  },
+  {
+    "id": "whittlesea-coles",
+    "name": "Coles Whittlesea",
+    "address": "58 Church St, Whittlesea VIC 3757",
+    "lat": -37.5130,
+    "lng": 145.1170,
+    "region": "north",
+    "type": "shopping",
+    "notes": "Easy meeting point for Kinglake runs. Free parking.",
+    "amenities": ["parking", "coffee", "toilets"]
+  },
+  {
+    "id": "hurstbridge-cafe",
+    "name": "Hurstbridge General Store & Cafe",
+    "address": "885 Heidelberg-Kinglake Rd, Hurstbridge VIC 3099",
+    "lat": -37.6390,
+    "lng": 145.1940,
+    "region": "north",
+    "type": "cafe",
+    "notes": "End of the train line. Popular with riders heading north.",
+    "amenities": ["coffee", "food", "parking"]
+  },
+  {
+    "id": "bayswater-maccas",
+    "name": "McDonald's Bayswater",
+    "address": "Mountain Hwy & Station St, Bayswater VIC 3153",
+    "lat": -37.8427,
+    "lng": 145.2630,
+    "region": "east",
+    "type": "fast_food",
+    "notes": "Easy access, big parking lot. Quick coffee before Dandenongs.",
+    "amenities": ["parking", "coffee", "food", "toilets"]
+  },
+  {
+    "id": "cranbourne-centro",
+    "name": "Cranbourne Park Shopping Centre",
+    "address": "Cranbourne Park, Shop 1 High St, Cranbourne VIC 3977",
+    "lat": -38.0980,
+    "lng": 145.2830,
+    "region": "south",
+    "type": "shopping",
+    "notes": "Good meeting point for south/southeast riders. Heaps of parking.",
+    "amenities": ["parking", "coffee", "food", "toilets"]
+  },
+  {
+    "id": "frankston-bayside",
+    "name": "Bayside Shopping Centre Frankston",
+    "address": "28 Beach St, Frankston VIC 3199",
+    "lat": -38.1437,
+    "lng": 145.1230,
+    "region": "south",
+    "type": "shopping",
+    "notes": "Central Frankston. Easy access to Mornington Peninsula rides.",
+    "amenities": ["parking", "coffee", "food", "toilets"]
+  },
+  {
+    "id": "bacchus-marsh-coles",
+    "name": "Coles Bacchus Marsh",
+    "address": "2 Grant St, Bacchus Marsh VIC 3340",
+    "lat": -37.6750,
+    "lng": 144.4330,
+    "region": "west",
+    "type": "shopping",
+    "notes": "Gateway to Lerderderg and western rides.",
+    "amenities": ["parking", "coffee", "food", "toilets"]
+  },
+  {
+    "id": "melton-centro",
+    "name": "Woodgrove Shopping Centre Melton",
+    "address": "533-569 High St, Melton West VIC 3337",
+    "lat": -37.6820,
+    "lng": 144.5690,
+    "region": "west",
+    "type": "shopping",
+    "notes": "Good for western suburbs riders.",
+    "amenities": ["parking", "coffee", "food", "toilets"]
+  },
+  {
+    "id": "drouin-maccas",
+    "name": "McDonald's Drouin",
+    "address": "1 Princes Way, Drouin VIC 3818",
+    "lat": -38.1370,
+    "lng": 145.8570,
+    "region": "east",
+    "type": "fast_food",
+    "notes": "Last easy stop before heading into Gippsland or Baw Baw.",
+    "amenities": ["parking", "coffee", "food", "fuel_nearby", "toilets"]
+  }
+]

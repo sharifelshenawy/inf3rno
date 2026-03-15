@@ -1,0 +1,99 @@
+{
+  "reefton-spur": [
+    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Last fuel before Reefton Spur" },
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service" },
+    { "name": "Marysville General Store (fuel)", "lat": -37.7790, "lng": 145.7440, "type": "fuel", "notes": "Basic fuel at end of route" },
+    { "name": "Warburton Medical Centre", "lat": -37.7535, "lng": 145.6880, "type": "medical", "notes": "GP clinic — weekdays only" },
+    { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" },
+    { "name": "Marysville CFA / Ambulance", "lat": -37.7810, "lng": 145.7430, "type": "medical", "notes": "Emergency services" }
+  ],
+  "black-spur": [
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service" },
+    { "name": "Marysville General Store (fuel)", "lat": -37.7790, "lng": 145.7440, "type": "fuel", "notes": "Basic fuel" },
+    { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" },
+    { "name": "Marysville CFA / Ambulance", "lat": -37.7810, "lng": 145.7430, "type": "medical", "notes": "Emergency services" }
+  ],
+  "donna-buang": [
+    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Last fuel before climb" },
+    { "name": "Warburton Medical Centre", "lat": -37.7535, "lng": 145.6880, "type": "medical", "notes": "GP clinic — weekdays only" },
+    { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "Nearest emergency — 30 min" }
+  ],
+  "great-ocean-road-torquay": [
+    { "name": "United Torquay", "lat": -38.3310, "lng": 144.3250, "type": "fuel", "notes": "Full service" },
+    { "name": "BP Anglesea", "lat": -38.4080, "lng": 144.1850, "type": "fuel", "notes": "On the GOR" },
+    { "name": "Shell Lorne", "lat": -38.5400, "lng": 143.9750, "type": "fuel", "notes": "Mid-route fuel" },
+    { "name": "BP Apollo Bay", "lat": -38.7560, "lng": 143.6710, "type": "fuel", "notes": "End of route" },
+    { "name": "Lorne Community Hospital", "lat": -38.5430, "lng": 143.9760, "type": "medical", "notes": "Urgent care" },
+    { "name": "Apollo Bay Medical Centre", "lat": -38.7570, "lng": 143.6720, "type": "medical", "notes": "GP + urgent care" },
+    { "name": "Geelong University Hospital", "lat": -38.1600, "lng": 144.3500, "type": "medical", "notes": "Major hospital — pre-route" }
+  ],
+  "lorne-deans-marsh": [
+    { "name": "Shell Lorne", "lat": -38.5400, "lng": 143.9750, "type": "fuel", "notes": "Fuel up before heading inland" },
+    { "name": "Lorne Community Hospital", "lat": -38.5430, "lng": 143.9760, "type": "medical", "notes": "Urgent care" }
+  ],
+  "skenes-creek-otways": [
+    { "name": "BP Apollo Bay", "lat": -38.7560, "lng": 143.6710, "type": "fuel", "notes": "Near route start" },
+    { "name": "Apollo Bay Medical Centre", "lat": -38.7570, "lng": 143.6720, "type": "medical", "notes": "GP + urgent care" }
+  ],
+  "kinglake-loop": [
+    { "name": "Shell Whittlesea", "lat": -37.5130, "lng": 145.1180, "type": "fuel", "notes": "Fuel before loop" },
+    { "name": "BP Hurstbridge", "lat": -37.6380, "lng": 145.1930, "type": "fuel", "notes": "Near start" },
+    { "name": "Northern Hospital (Epping)", "lat": -37.6380, "lng": 145.0630, "type": "medical", "notes": "Major hospital — 30 min from route" },
+    { "name": "Whittlesea Medical Centre", "lat": -37.5120, "lng": 145.1170, "type": "medical", "notes": "GP clinic" }
+  ],
+  "dandenong-ranges": [
+    { "name": "BP Bayswater", "lat": -37.8420, "lng": 145.2700, "type": "fuel", "notes": "Full service at start" },
+    { "name": "Angliss Hospital — Upper Ferntree Gully", "lat": -37.8840, "lng": 145.3100, "type": "medical", "notes": "24hr emergency" }
+  ],
+  "mornington-loop": [
+    { "name": "Shell Frankston", "lat": -38.1430, "lng": 145.1220, "type": "fuel", "notes": "Full service at start" },
+    { "name": "BP Mornington", "lat": -38.2190, "lng": 145.0370, "type": "fuel", "notes": "Mid-route" },
+    { "name": "United Rosebud", "lat": -38.3560, "lng": 144.9200, "type": "fuel", "notes": "Before peninsula tip" },
+    { "name": "Frankston Hospital", "lat": -38.1500, "lng": 145.1350, "type": "medical", "notes": "24hr emergency" },
+    { "name": "Rosebud Hospital", "lat": -38.3580, "lng": 144.9150, "type": "medical", "notes": "Urgent care" }
+  ],
+  "yarra-valley-loop": [
+    { "name": "Shell Lilydale", "lat": -37.7560, "lng": 145.3530, "type": "fuel", "notes": "Start point fuel" },
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Mid-route fuel — fill up here" },
+    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Last fuel on loop" },
+    { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" },
+    { "name": "Warburton Medical Centre", "lat": -37.7535, "lng": 145.6880, "type": "medical", "notes": "GP clinic — weekdays only" }
+  ],
+  "yarra-glen-loop": [
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service" },
+    { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" }
+  ],
+  "mt-baw-baw": [
+    { "name": "BP Warragul", "lat": -38.0280, "lng": 145.5580, "type": "fuel", "notes": "FILL UP — no fuel until end" },
+    { "name": "United Noojee", "lat": -37.9790, "lng": 145.7480, "type": "fuel", "notes": "Last fuel before alpine section" },
+    { "name": "West Gippsland Hospital — Warragul", "lat": -38.0300, "lng": 145.5550, "type": "medical", "notes": "24hr emergency" },
+    { "name": "Noojee Fire Station / Ambulance", "lat": -37.9800, "lng": 145.7500, "type": "medical", "notes": "Emergency services — call 000" }
+  ],
+  "lerderderg-gorge": [
+    { "name": "Shell Bacchus Marsh", "lat": -37.6740, "lng": 144.4320, "type": "fuel", "notes": "Fuel at start" },
+    { "name": "BP Daylesford", "lat": -37.3490, "lng": 144.1520, "type": "fuel", "notes": "Fuel at end" },
+    { "name": "Bacchus Marsh Hospital", "lat": -37.6750, "lng": 144.4350, "type": "medical", "notes": "Urgent care" },
+    { "name": "Daylesford Hospital", "lat": -37.3500, "lng": 144.1530, "type": "medical", "notes": "Urgent care" }
+  ],
+  "blackwood-trentham-loop": [
+    { "name": "Shell Bacchus Marsh", "lat": -37.6740, "lng": 144.4320, "type": "fuel", "notes": "Fuel at start" },
+    { "name": "BP Daylesford", "lat": -37.3490, "lng": 144.1520, "type": "fuel", "notes": "Fuel at end" },
+    { "name": "Bacchus Marsh Hospital", "lat": -37.6750, "lng": 144.4350, "type": "medical", "notes": "Urgent care" },
+    { "name": "Daylesford Hospital", "lat": -37.3500, "lng": 144.1530, "type": "medical", "notes": "Urgent care" }
+  ],
+  "great-alpine-road": [
+    { "name": "Shell Bright", "lat": -36.7310, "lng": 146.9640, "type": "fuel", "notes": "FILL UP — no fuel for 130km" },
+    { "name": "Dinner Plain fuel (seasonal)", "lat": -37.0350, "lng": 147.1970, "type": "fuel", "notes": "Limited — check before relying on it" },
+    { "name": "Omeo Fuel", "lat": -37.0990, "lng": 147.5920, "type": "fuel", "notes": "End of route fuel" },
+    { "name": "Bright Hospital", "lat": -36.7290, "lng": 146.9620, "type": "medical", "notes": "Urgent care" },
+    { "name": "Omeo District Hospital", "lat": -37.1000, "lng": 147.5940, "type": "medical", "notes": "Small rural hospital" },
+    { "name": "Mt Hotham Alpine Resort First Aid", "lat": -37.0470, "lng": 147.1430, "type": "medical", "notes": "Seasonal — ski season only" }
+  ],
+  "south-gippsland-cruise": [
+    { "name": "Shell Korumburra", "lat": -38.2100, "lng": 145.5610, "type": "fuel", "notes": "Fuel at start" },
+    { "name": "United Fish Creek", "lat": -38.4400, "lng": 145.6910, "type": "fuel", "notes": "Mid-route fuel" },
+    { "name": "Foster fuel", "lat": -38.6550, "lng": 146.2000, "type": "fuel", "notes": "Last fuel before Prom" },
+    { "name": "Korumburra Medical Centre", "lat": -38.2110, "lng": 145.5620, "type": "medical", "notes": "GP clinic" },
+    { "name": "Foster Hospital", "lat": -38.6560, "lng": 146.2010, "type": "medical", "notes": "Urgent care" }
+  ]
+}

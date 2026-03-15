@@ -16,7 +16,9 @@ export async function GET(
       handle: true,
       profilePicUrl: true,
       suburb: true,
-      bike: {
+      bikes: {
+        where: { isPrimary: true },
+        take: 1,
         select: {
           make: true,
           model: true,
@@ -34,18 +36,19 @@ export async function GET(
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  const rangeKm = user.bike ? computeRangeKm(user.bike) : null;
+  const primaryBike = user.bikes[0] ?? null;
+  const rangeKm = primaryBike ? computeRangeKm(primaryBike) : null;
 
   return NextResponse.json({
     displayName: user.displayName,
     handle: user.handle,
     profilePicUrl: user.profilePicUrl,
     suburb: user.suburb,
-    bike: user.bike
+    bike: primaryBike
       ? {
-          make: user.bike.make,
-          model: user.bike.model,
-          year: user.bike.year,
+          make: primaryBike.make,
+          model: primaryBike.model,
+          year: primaryBike.year,
           rangeKm,
         }
       : null,

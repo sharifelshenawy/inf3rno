@@ -17,7 +17,9 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
       handle: true,
       profilePicUrl: true,
       suburb: true,
-      bike: {
+      bikes: {
+        where: { isPrimary: true },
+        take: 1,
         select: {
           make: true,
           model: true,
@@ -35,7 +37,8 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
     notFound();
   }
 
-  const rangeKm = user.bike ? computeRangeKm(user.bike) : null;
+  const bike = user.bikes[0] ?? null;
+  const rangeKm = bike ? computeRangeKm(bike) : null;
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] px-4 py-8">
@@ -91,7 +94,7 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
           )}
 
           {/* Bike info */}
-          {user.bike && (
+          {bike && (
             <div className="border-t border-[#2A2A2A] pt-4 mt-4">
               <h2 className="text-xs text-[#555555] uppercase tracking-wide mb-3">
                 Ride
@@ -100,10 +103,10 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-white font-semibold">
-                    {user.bike.make} {user.bike.model}
+                    {bike.make} {bike.model}
                   </p>
-                  {user.bike.year && (
-                    <p className="text-sm text-[#555555]">{user.bike.year}</p>
+                  {bike.year && (
+                    <p className="text-sm text-[#555555]">{bike.year}</p>
                   )}
                 </div>
 

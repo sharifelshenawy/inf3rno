@@ -15,6 +15,7 @@ import { RIDER_COLORS } from "@/lib/constants";
 import { encodeRidePlan } from "@/lib/shareUrl";
 import { fetchRouteGeometry } from "@/lib/routing";
 import { planFuelStops } from "@/lib/fuel-planner";
+import { trackEvent } from "@/lib/analytics";
 import poiData from "@/data/poi.json";
 
 type FuelPlan = ReturnType<typeof planFuelStops>;
@@ -56,6 +57,11 @@ export default function RouteResult({
 
   const destination = route.destinations[selectedDest];
   const mp = scored.meetingPoint;
+
+  // Track route completed when result is shown
+  useEffect(() => {
+    trackEvent("route_completed", { routeId: route.id, routeName: route.name });
+  }, [route.id, route.name]);
 
   // Compute fuel plan when route + rangeKm are available
   useEffect(() => {
@@ -114,6 +120,7 @@ export default function RouteResult({
   }, [fetchGeometries]);
 
   const handleShare = () => {
+    trackEvent("share_clicked", { routeId: route.id });
     const url = encodeRidePlan({
       riders,
       vibe,

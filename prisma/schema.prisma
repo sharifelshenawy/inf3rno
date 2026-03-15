@@ -172,6 +172,18 @@ model RideVote {
   @@unique([rideId, userId])
 }
 
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  event     String
+  data      String?  // JSON string for flexible event data
+  path      String?
+  createdAt DateTime @default(now())
+
+  @@index([event, createdAt])
+  @@index([userId, createdAt])
+}
+
 // Future — schema only, not implemented
 model RideLocation {
   id        String   @id @default(cuid())

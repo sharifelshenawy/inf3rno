@@ -15,6 +15,7 @@ import { geocodeSuburb } from "@/lib/geocode";
 import type { RiderLocation } from "@/components/RiderInput";
 import routesData from "@/data/routes.json";
 import bikeSpecsData from "@/data/bikeSpecs.json";
+import { trackEvent } from "@/lib/analytics";
 
 interface BikeSpec {
   make: string;
@@ -398,12 +399,16 @@ function SoloPlanContent() {
   };
 
   const handleBikeNext = () => {
+    if (selectedBike) {
+      trackEvent("bike_selected", { make: selectedBike.make, model: selectedBike.model });
+    }
     setStep("vibe");
   };
 
   const handleVibeSubmit = (selectedVibe: Vibe, selectedDifficulty: Difficulty, selectedDuration?: Duration) => {
     setVibe(selectedVibe);
     setDifficulty(selectedDifficulty);
+    trackEvent("vibe_selected", { vibe: selectedVibe, difficulty: selectedDifficulty, duration: selectedDuration });
     const filtered = filterRoutes(selectedVibe, selectedDifficulty, selectedDuration);
     setCandidateRoutes(filtered);
     setStep("routes");
@@ -412,6 +417,7 @@ function SoloPlanContent() {
   const handleRouteSelect = (route: Route) => {
     if (!rider) return;
     setSelectedRoute(route);
+    trackEvent("route_selected", { routeId: route.id, routeName: route.name });
     computeMeetingPoint(route, rider);
   };
 

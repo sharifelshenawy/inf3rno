@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import bikeSpecs from "@/data/bikeSpecs.json";
 import { computeRangeKm, computeRawRangeKm } from "@/lib/types";
+import { trackEvent } from "@/lib/analytics";
 
 type Step = 1 | 2 | 3 | 4;
 type RidingLevel = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
@@ -448,6 +449,8 @@ function OnboardingContent() {
           throw new Error(data.error ?? "Failed to save bike");
         }
       }
+
+      trackEvent("onboarding_completed", { bikesAdded: addedBikes.length });
 
       // Redirect to callbackUrl or home
       const callbackUrl = searchParams.get("callbackUrl");

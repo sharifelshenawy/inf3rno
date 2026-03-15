@@ -24,6 +24,11 @@ Features and ideas for future sessions.
   - Post photos to the ride (during or after)
   - Rate the ride (1-5 stars) after completion
 - [ ] **Ride ratings data** — aggregate ratings to identify which routes are most popular and highest rated. Feed this into route recommendations
+- [ ] **Intercom channel coordination** -- ride organiser sets the Sena channel number or Cardo group name for the ride. Displayed prominently on the ride plan page so everyone knows which channel to tune to before departure
+- [ ] **Intercom type field on profile** -- riders can specify: Sena, Cardo, None. If a group has mixed Sena/Cardo riders, prompt for a "bridge rider" volunteer -- someone with both systems or a dual-compatible unit who bridges between the two networks
+- [ ] **Intercom pairing instructions** -- show a quick guide on the ride plan page for how to pair to the specified channel (different for Sena mesh vs Sena Bluetooth vs Cardo mesh vs Cardo-to-Sena bridge mode)
+- [ ] **Large group comms strategy** -- for rides with 10+ riders, suggest splitting into smaller intercom groups (lead group, sweep group, middle group) with a designated channel for each. The ride organiser defines the groups and channel assignments
+- [ ] **Future: in-app push-to-talk** -- research feasibility of using WebRTC for browser-based group voice chat as an alternative to hardware intercoms (backlog only, very complex)
 - [ ] Community-submitted routes (moderated)
 - [ ] Leaderboard: most routes ridden, most km, highest-rated ride organiser
 

@@ -3,6 +3,7 @@
 import { Suspense, useState, useCallback } from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { trackEvent } from "@/lib/analytics";
 
 type Phase = "email" | "code";
 
@@ -64,6 +65,7 @@ function LoginContent() {
       return;
     }
 
+    trackEvent("login_started");
     const success = await sendCode(trimmed);
     if (success) {
       setEmail(trimmed);
@@ -91,6 +93,7 @@ function LoginContent() {
       if (result?.error) {
         setError("Invalid or expired code. Please try again.");
       } else {
+        trackEvent("login_completed");
         router.push(callbackUrl);
       }
     } catch {

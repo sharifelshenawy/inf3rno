@@ -1,8 +1,11 @@
+"use client";
+
 import {
   generateGoogleMapsUrl,
   generateWazeUrl,
   generateAppleMapsUrl,
 } from "@/lib/navLinks";
+import { trackEvent } from "@/lib/analytics";
 
 interface LatLng {
   lat: number;
@@ -42,6 +45,7 @@ export default function NavLinks({
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("nav_link_clicked", { app: link.label })}
             className="flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] hover:border-[#FF6B2B] transition-colors text-center"
           >
             <span className="text-xl">{link.icon}</span>

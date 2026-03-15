@@ -18,10 +18,10 @@
     "next": "16.1.6",
     "next-auth": "^5.0.0-beta.30",
     "pg": "^8.20.0",
+    "prisma": "^7.5.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-leaflet": "^5.0.0",
-    "prisma": "^7.5.0",
     "resend": "^6.9.3"
   },
   "devDependencies": {
@@ -33,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

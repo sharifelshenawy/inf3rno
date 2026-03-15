@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import UserMenu from "@/components/UserMenu";
+import Providers from "@/components/Providers";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -70,7 +71,9 @@ export default async function RootLayout({
             </nav>
           </div>
         </header>
-        <main className="max-w-lg mx-auto px-4 py-6">{children}</main>
+        <Providers>
+          <main className="max-w-lg mx-auto px-4 py-6">{children}</main>
+        </Providers>
       </body>
     </html>
   );

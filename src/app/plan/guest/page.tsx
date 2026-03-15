@@ -169,7 +169,7 @@ function HomeContent() {
         style={{ opacity: step === "loading" ? 0.5 : 1 }}
       >
         {step === "riders" && (
-          <RiderInput onNext={handleRidersNext} initialRiders={riders} />
+          <RiderInput onNext={handleRidersNext} initialRiders={riders} minRiders={1} />
         )}
 
         {step === "vibe" && (

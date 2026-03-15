@@ -13,11 +13,13 @@ export interface RiderLocation {
 interface RiderInputProps {
   onNext: (riders: RiderLocation[]) => void;
   initialRiders?: RiderLocation[];
+  minRiders?: number;
 }
 
 export default function RiderInput({
   onNext,
   initialRiders = [],
+  minRiders = 2,
 }: RiderInputProps) {
   const [riders, setRiders] = useState<RiderLocation[]>(initialRiders);
   const [input, setInput] = useState("");
@@ -110,7 +112,7 @@ export default function RiderInput({
 
         <p className="text-xs text-zinc-500">
           {riders.length}/5 riders added
-          {riders.length < 2 && " — need at least 2"}
+          {riders.length < minRiders && ` — need at least ${minRiders}`}
         </p>
       </div>
 
@@ -150,7 +152,7 @@ export default function RiderInput({
         </div>
       )}
 
-      {riders.length >= 2 && (
+      {riders.length >= minRiders && (
         <button
           onClick={() => onNext(riders)}
           className="w-full h-14 rounded-lg bg-[#FF6B2B] text-white text-lg font-bold hover:bg-[#FF6B2B]/90 transition-colors"

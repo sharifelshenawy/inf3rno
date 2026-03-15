@@ -1,4 +1,4 @@
-import type { RideVote } from "@/generated/prisma";
+import type { RideVote } from "@/generated/prisma/client";
 import { filterRoutes } from "./routeMatcher";
 import type { Route, Vibe, Difficulty } from "./routeMatcher";
 import { findOptimalMeetingPoint } from "./midpoint";

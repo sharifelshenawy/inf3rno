@@ -4,7 +4,7 @@ import { Suspense, useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import bikeSpecs from "@/data/bikeSpecs.json";
-import { computeRangeKm } from "@/lib/types";
+import { computeRangeKm, computeRawRangeKm } from "@/lib/types";
 
 type Step = 1 | 2 | 3 | 4;
 type RidingLevel = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
@@ -59,8 +59,14 @@ function OnboardingContent() {
   // Step 3: Suburb
   const [suburb, setSuburb] = useState("");
 
-  // Step 4: Bikes
-  const [bikeSearch, setBikeSearch] = useState("");
+  // Step 4: Bikes — cascading Year > Brand > Model
+  const [selectedYear, setSelectedYear] = useState<string>("");
+  const [selectedBrand, setSelectedBrand] = useState<string>("");
+  const [selectedModel, setSelectedModel] = useState<string>("");
+  const [showManualEntry, setShowManualEntry] = useState(false);
+  const [manualMake, setManualMake] = useState("");
+  const [manualModel, setManualModel] = useState("");
+  const [manualYear, setManualYear] = useState<number | "">("");
   const [selectedBike, setSelectedBike] = useState<BikeSpec | null>(null);
   const [tankLitres, setTankLitres] = useState<number | "">("");
   const [consumptionPer100km, setConsumptionPer100km] = useState<number | "">(
@@ -68,7 +74,6 @@ function OnboardingContent() {
   );
   const [isManualRange, setIsManualRange] = useState(false);
   const [manualRangeKm, setManualRangeKm] = useState<number | "">("");
-  const [bikeDropdownOpen, setBikeDropdownOpen] = useState(false);
   const [addedBikes, setAddedBikes] = useState<AddedBike[]>([]);
 
   // Flow
@@ -174,34 +179,127 @@ function OnboardingContent() {
     }
   }, []);
 
-  // ---- Step 4: Bike search filtering ----
-  const filteredBikes = useMemo(() => {
-    if (!bikeSearch.trim()) return [];
-    const term = bikeSearch.toLowerCase();
-    return (bikeSpecs as BikeSpec[])
-      .filter(
-        (b) =>
-          `${b.make} ${b.model}`.toLowerCase().includes(term) ||
-          b.make.toLowerCase().includes(term) ||
-          b.model.toLowerCase().includes(term)
-      )
-      .slice(0, 10);
-  }, [bikeSearch]);
+  // ---- Step 4: Cascading Year > Brand > Model ----
+  const allSpecs = bikeSpecs as BikeSpec[];
 
-  const selectBike = useCallback((bike: BikeSpec) => {
-    setSelectedBike(bike);
-    setBikeSearch(`${bike.make} ${bike.model} (${bike.year})`);
-    setTankLitres(bike.tankLitres);
-    setConsumptionPer100km(bike.consumptionPer100km);
-    setBikeDropdownOpen(false);
+  const uniqueYears = useMemo(() => {
+    const years = [...new Set(allSpecs.map((b) => b.year))].sort(
+      (a, b) => b - a
+    );
+    return years;
+  }, [allSpecs]);
+
+  const brandsForYear = useMemo(() => {
+    if (!selectedYear) return [];
+    const filtered =
+      selectedYear === "Other"
+        ? allSpecs
+        : allSpecs.filter((b) => b.year === parseInt(selectedYear, 10));
+    return [...new Set(filtered.map((b) => b.make))].sort();
+  }, [selectedYear, allSpecs]);
+
+  const modelsForBrandYear = useMemo(() => {
+    if (!selectedBrand || selectedBrand === "Other") return [];
+    const filtered =
+      selectedYear === "Other"
+        ? allSpecs.filter((b) => b.make === selectedBrand)
+        : allSpecs.filter(
+            (b) =>
+              b.year === parseInt(selectedYear, 10) &&
+              b.make === selectedBrand
+          );
+    return [...new Set(filtered.map((b) => b.model))].sort();
+  }, [selectedYear, selectedBrand, allSpecs]);
+
+  const handleYearChange = useCallback((year: string) => {
+    setSelectedYear(year);
+    setSelectedBrand("");
+    setSelectedModel("");
+    setSelectedBike(null);
+    setShowManualEntry(false);
+    setTankLitres("");
+    setConsumptionPer100km("");
     setIsManualRange(false);
     setManualRangeKm("");
   }, []);
 
-  const computedRange = useMemo(() => {
-    if (isManualRange && typeof manualRangeKm === "number") {
-      return manualRangeKm;
+  const handleBrandChange = useCallback(
+    (brand: string) => {
+      setSelectedBrand(brand);
+      setSelectedModel("");
+      setSelectedBike(null);
+      setTankLitres("");
+      setConsumptionPer100km("");
+      setIsManualRange(false);
+      setManualRangeKm("");
+      if (brand === "Other") {
+        setShowManualEntry(true);
+      } else {
+        setShowManualEntry(false);
+      }
+    },
+    []
+  );
+
+  const handleModelChange = useCallback(
+    (model: string) => {
+      setSelectedModel(model);
+      if (model === "Other") {
+        setShowManualEntry(true);
+        setSelectedBike(null);
+        setTankLitres("");
+        setConsumptionPer100km("");
+      } else {
+        setShowManualEntry(false);
+        const yearNum =
+          selectedYear === "Other" ? undefined : parseInt(selectedYear, 10);
+        const match = allSpecs.find(
+          (b) =>
+            b.make === selectedBrand &&
+            b.model === model &&
+            (yearNum === undefined || b.year === yearNum)
+        );
+        if (match) {
+          setSelectedBike(match);
+          setTankLitres(match.tankLitres);
+          setConsumptionPer100km(match.consumptionPer100km);
+          setIsManualRange(false);
+          setManualRangeKm("");
+        }
+      }
+    },
+    [selectedYear, selectedBrand, allSpecs]
+  );
+
+  const handleShowManualEntry = useCallback(() => {
+    setShowManualEntry(true);
+    setSelectedYear("");
+    setSelectedBrand("");
+    setSelectedModel("");
+    setSelectedBike(null);
+    setTankLitres("");
+    setConsumptionPer100km("");
+    setIsManualRange(false);
+    setManualRangeKm("");
+  }, []);
+
+  const computedRawRange = useMemo(() => {
+    if (
+      typeof tankLitres === "number" &&
+      typeof consumptionPer100km === "number" &&
+      consumptionPer100km > 0
+    ) {
+      return computeRawRangeKm({
+        tankLitres,
+        consumptionPer100km,
+        isManualRange: false,
+        manualRangeKm: null,
+      });
     }
+    return null;
+  }, [tankLitres, consumptionPer100km]);
+
+  const computedSafeRange = useMemo(() => {
     if (
       typeof tankLitres === "number" &&
       typeof consumptionPer100km === "number" &&
@@ -215,19 +313,38 @@ function OnboardingContent() {
       });
     }
     return null;
-  }, [tankLitres, consumptionPer100km, isManualRange, manualRangeKm]);
+  }, [tankLitres, consumptionPer100km]);
+
+  const computedRange = useMemo(() => {
+    if (isManualRange && typeof manualRangeKm === "number") {
+      return manualRangeKm;
+    }
+    return computedSafeRange;
+  }, [isManualRange, manualRangeKm, computedSafeRange]);
 
   const addBike = useCallback(() => {
-    if (
-      !selectedBike ||
-      typeof tankLitres !== "number" ||
-      typeof consumptionPer100km !== "number"
-    )
+    if (typeof tankLitres !== "number" || typeof consumptionPer100km !== "number")
       return;
     if (addedBikes.length >= 5) return;
 
+    let bikeSpec: BikeSpec;
+
+    if (selectedBike) {
+      bikeSpec = selectedBike;
+    } else if (showManualEntry && manualMake.trim() && manualModel.trim() && typeof manualYear === "number") {
+      bikeSpec = {
+        make: manualMake.trim(),
+        model: manualModel.trim(),
+        year: manualYear,
+        tankLitres,
+        consumptionPer100km,
+      };
+    } else {
+      return;
+    }
+
     const newBike: AddedBike = {
-      spec: selectedBike,
+      spec: bikeSpec,
       tankLitres,
       consumptionPer100km,
       isManualRange,
@@ -241,13 +358,23 @@ function OnboardingContent() {
 
     // Reset bike form
     setSelectedBike(null);
-    setBikeSearch("");
+    setSelectedYear("");
+    setSelectedBrand("");
+    setSelectedModel("");
+    setShowManualEntry(false);
+    setManualMake("");
+    setManualModel("");
+    setManualYear("");
     setTankLitres("");
     setConsumptionPer100km("");
     setIsManualRange(false);
     setManualRangeKm("");
   }, [
     selectedBike,
+    showManualEntry,
+    manualMake,
+    manualModel,
+    manualYear,
     tankLitres,
     consumptionPer100km,
     isManualRange,
@@ -332,8 +459,15 @@ function OnboardingContent() {
     }
   };
 
+  const hasBikeIdentity =
+    selectedBike !== null ||
+    (showManualEntry &&
+      manualMake.trim().length > 0 &&
+      manualModel.trim().length > 0 &&
+      typeof manualYear === "number");
+
   const canAddBike =
-    selectedBike !== null &&
+    hasBikeIdentity &&
     typeof tankLitres === "number" &&
     typeof consumptionPer100km === "number" &&
     addedBikes.length < 5;
@@ -643,171 +777,302 @@ function OnboardingContent() {
                 </div>
               )}
 
-              {/* Bike search (only show if under limit) */}
-              {addedBikes.length < 5 && (
+              {/* Bike entry form (only show if under limit) */}
+              {addedBikes.length < 5 && !showManualEntry && (
                 <>
-                  <div className="relative">
+                  <p className="text-sm font-medium text-[#999999]">
+                    {addedBikes.length === 0 ? "Your bike" : "Add another bike"}
+                  </p>
+
+                  {/* Year dropdown */}
+                  <div>
                     <label
-                      htmlFor="bikeSearch"
-                      className="block text-sm font-medium text-[#999999] mb-2"
+                      htmlFor="bikeYear"
+                      className="block text-xs font-medium text-[#999999] mb-1"
                     >
-                      {addedBikes.length === 0
-                        ? "Your bike"
-                        : "Add another bike"}
+                      Year
+                    </label>
+                    <select
+                      id="bikeYear"
+                      value={selectedYear}
+                      onChange={(e) => handleYearChange(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-base focus:outline-none focus:border-[#FF6B2B] transition-colors appearance-none"
+                    >
+                      <option value="" disabled>
+                        Select year...
+                      </option>
+                      {uniqueYears.map((y) => (
+                        <option key={y} value={String(y)}>
+                          {y}
+                        </option>
+                      ))}
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  {/* Brand dropdown — shown after year selected */}
+                  {selectedYear && (
+                    <div>
+                      <label
+                        htmlFor="bikeBrand"
+                        className="block text-xs font-medium text-[#999999] mb-1"
+                      >
+                        Brand
+                      </label>
+                      <select
+                        id="bikeBrand"
+                        value={selectedBrand}
+                        onChange={(e) => handleBrandChange(e.target.value)}
+                        className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-base focus:outline-none focus:border-[#FF6B2B] transition-colors appearance-none"
+                      >
+                        <option value="" disabled>
+                          Select brand...
+                        </option>
+                        {brandsForYear.map((b) => (
+                          <option key={b} value={b}>
+                            {b}
+                          </option>
+                        ))}
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  )}
+
+                  {/* Model dropdown — shown after brand selected (not for "Other" brand) */}
+                  {selectedBrand && selectedBrand !== "Other" && (
+                    <div>
+                      <label
+                        htmlFor="bikeModel"
+                        className="block text-xs font-medium text-[#999999] mb-1"
+                      >
+                        Model
+                      </label>
+                      <select
+                        id="bikeModel"
+                        value={selectedModel}
+                        onChange={(e) => handleModelChange(e.target.value)}
+                        className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-base focus:outline-none focus:border-[#FF6B2B] transition-colors appearance-none"
+                      >
+                        <option value="" disabled>
+                          Select model...
+                        </option>
+                        {modelsForBrandYear.map((m) => (
+                          <option key={m} value={m}>
+                            {m}
+                          </option>
+                        ))}
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  )}
+
+                  {/* "My bike isn't listed" link */}
+                  {!selectedBike && !showManualEntry && (
+                    <button
+                      type="button"
+                      onClick={handleShowManualEntry}
+                      className="text-sm text-[#FF6B2B] hover:underline"
+                    >
+                      My bike isn&apos;t listed
+                    </button>
+                  )}
+                </>
+              )}
+
+              {/* Manual entry fields */}
+              {addedBikes.length < 5 && showManualEntry && (
+                <>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-[#999999]">
+                      Enter bike details
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowManualEntry(false);
+                        setManualMake("");
+                        setManualModel("");
+                        setManualYear("");
+                        setTankLitres("");
+                        setConsumptionPer100km("");
+                        setIsManualRange(false);
+                        setManualRangeKm("");
+                      }}
+                      className="text-xs text-[#FF6B2B] hover:underline"
+                    >
+                      Back to search
+                    </button>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="manualMake"
+                      className="block text-xs font-medium text-[#999999] mb-1"
+                    >
+                      Make
                     </label>
                     <input
-                      id="bikeSearch"
+                      id="manualMake"
                       type="text"
-                      value={bikeSearch}
-                      onChange={(e) => {
-                        setBikeSearch(e.target.value);
-                        setBikeDropdownOpen(true);
-                        if (!e.target.value.trim()) {
-                          setSelectedBike(null);
-                          setTankLitres("");
-                          setConsumptionPer100km("");
-                        }
-                      }}
-                      onFocus={() => {
-                        if (bikeSearch.trim()) setBikeDropdownOpen(true);
-                      }}
-                      placeholder="Search make or model..."
-                      autoFocus={addedBikes.length === 0}
+                      value={manualMake}
+                      onChange={(e) => setManualMake(e.target.value)}
+                      placeholder="e.g. Honda"
+                      autoFocus
                       className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white placeholder-[#555555] text-base focus:outline-none focus:border-[#FF6B2B] transition-colors"
                     />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="manualModelName"
+                      className="block text-xs font-medium text-[#999999] mb-1"
+                    >
+                      Model
+                    </label>
+                    <input
+                      id="manualModelName"
+                      type="text"
+                      value={manualModel}
+                      onChange={(e) => setManualModel(e.target.value)}
+                      placeholder="e.g. CB500F"
+                      className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white placeholder-[#555555] text-base focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="manualYearInput"
+                      className="block text-xs font-medium text-[#999999] mb-1"
+                    >
+                      Year
+                    </label>
+                    <input
+                      id="manualYearInput"
+                      type="number"
+                      value={manualYear}
+                      onChange={(e) =>
+                        setManualYear(
+                          e.target.value ? parseInt(e.target.value, 10) : ""
+                        )
+                      }
+                      placeholder="e.g. 2024"
+                      min="1900"
+                      max="2100"
+                      className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white placeholder-[#555555] text-base focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                    />
+                  </div>
+                </>
+              )}
 
-                    {/* Dropdown */}
-                    {bikeDropdownOpen && filteredBikes.length > 0 && (
-                      <div className="absolute z-20 mt-1 w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg max-h-48 overflow-y-auto">
-                        {filteredBikes.map((bike, i) => (
-                          <button
-                            key={`${bike.make}-${bike.model}-${bike.year}-${i}`}
-                            type="button"
-                            onClick={() => selectBike(bike)}
-                            className="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#2A2A2A] transition-colors"
-                          >
-                            <span className="font-semibold">{bike.make}</span>{" "}
-                            {bike.model}{" "}
-                            <span className="text-[#555555]">
-                              ({bike.year})
-                            </span>
-                          </button>
-                        ))}
-                      </div>
+              {/* Tank + Consumption + Range — shown when bike selected or manual entry active */}
+              {addedBikes.length < 5 && (selectedBike || showManualEntry) && (
+                <>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label
+                        htmlFor="tank"
+                        className="block text-xs font-medium text-[#999999] mb-1"
+                      >
+                        Tank (L)
+                      </label>
+                      <input
+                        id="tank"
+                        type="number"
+                        value={tankLitres}
+                        onChange={(e) =>
+                          setTankLitres(
+                            e.target.value
+                              ? parseFloat(e.target.value)
+                              : ""
+                          )
+                        }
+                        step="0.1"
+                        min="0"
+                        className="w-full px-3 py-2.5 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-sm focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="consumption"
+                        className="block text-xs font-medium text-[#999999] mb-1"
+                      >
+                        L/100km
+                      </label>
+                      <input
+                        id="consumption"
+                        type="number"
+                        value={consumptionPer100km}
+                        onChange={(e) =>
+                          setConsumptionPer100km(
+                            e.target.value
+                              ? parseFloat(e.target.value)
+                              : ""
+                          )
+                        }
+                        step="0.1"
+                        min="0"
+                        className="w-full px-3 py-2.5 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-sm focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Range display */}
+                  {computedRawRange !== null && computedSafeRange !== null && (
+                    <div className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-4 text-center">
+                      <p className="text-xs text-[#999999] uppercase tracking-wide mb-1">
+                        Fuel range
+                      </p>
+                      <p className="text-3xl font-bold text-[#FF6B2B]">
+                        {Math.round(computedRawRange)} km
+                      </p>
+                      <p className="text-xs text-[#999999] mt-2">
+                        We&apos;ll plan fuel stops at ~{Math.round(computedSafeRange)} km (80% safety margin)
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Manual range override toggle */}
+                  <div>
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={isManualRange}
+                        onChange={(e) =>
+                          setIsManualRange(e.target.checked)
+                        }
+                        className="w-4 h-4 rounded border-[#2A2A2A] bg-[#0A0A0A] text-[#FF6B2B] focus:ring-[#FF6B2B] focus:ring-offset-0"
+                      />
+                      <span className="text-sm text-[#999999]">
+                        Override with manual range
+                      </span>
+                    </label>
+
+                    {isManualRange && (
+                      <input
+                        type="number"
+                        value={manualRangeKm}
+                        onChange={(e) =>
+                          setManualRangeKm(
+                            e.target.value
+                              ? parseFloat(e.target.value)
+                              : ""
+                          )
+                        }
+                        placeholder="Range in km"
+                        min="0"
+                        className="mt-2 w-full px-4 py-2.5 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white placeholder-[#555555] text-sm focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                      />
                     )}
                   </div>
 
-                  {/* Tank + Consumption (shown when bike selected) */}
-                  {selectedBike && (
-                    <>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <label
-                            htmlFor="tank"
-                            className="block text-xs font-medium text-[#999999] mb-1"
-                          >
-                            Tank (L)
-                          </label>
-                          <input
-                            id="tank"
-                            type="number"
-                            value={tankLitres}
-                            onChange={(e) =>
-                              setTankLitres(
-                                e.target.value
-                                  ? parseFloat(e.target.value)
-                                  : ""
-                              )
-                            }
-                            step="0.1"
-                            min="0"
-                            className="w-full px-3 py-2.5 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-sm focus:outline-none focus:border-[#FF6B2B] transition-colors"
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="consumption"
-                            className="block text-xs font-medium text-[#999999] mb-1"
-                          >
-                            L/100km
-                          </label>
-                          <input
-                            id="consumption"
-                            type="number"
-                            value={consumptionPer100km}
-                            onChange={(e) =>
-                              setConsumptionPer100km(
-                                e.target.value
-                                  ? parseFloat(e.target.value)
-                                  : ""
-                              )
-                            }
-                            step="0.1"
-                            min="0"
-                            className="w-full px-3 py-2.5 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-sm focus:outline-none focus:border-[#FF6B2B] transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Range display */}
-                      {computedRange !== null && (
-                        <div className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-4 text-center">
-                          <p className="text-xs text-[#999999] uppercase tracking-wide mb-1">
-                            Fuel range
-                          </p>
-                          <p className="text-3xl font-bold text-[#FF6B2B]">
-                            {Math.round(computedRange)} km
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Manual range toggle */}
-                      <div>
-                        <label className="flex items-center gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={isManualRange}
-                            onChange={(e) =>
-                              setIsManualRange(e.target.checked)
-                            }
-                            className="w-4 h-4 rounded border-[#2A2A2A] bg-[#0A0A0A] text-[#FF6B2B] focus:ring-[#FF6B2B] focus:ring-offset-0"
-                          />
-                          <span className="text-sm text-[#999999]">
-                            Override with manual range
-                          </span>
-                        </label>
-
-                        {isManualRange && (
-                          <input
-                            type="number"
-                            value={manualRangeKm}
-                            onChange={(e) =>
-                              setManualRangeKm(
-                                e.target.value
-                                  ? parseFloat(e.target.value)
-                                  : ""
-                              )
-                            }
-                            placeholder="Range in km"
-                            min="0"
-                            className="mt-2 w-full px-4 py-2.5 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white placeholder-[#555555] text-sm focus:outline-none focus:border-[#FF6B2B] transition-colors"
-                          />
-                        )}
-                      </div>
-
-                      {/* Add bike button */}
-                      <button
-                        type="button"
-                        onClick={addBike}
-                        disabled={!canAddBike}
-                        className="w-full py-2.5 bg-[#0A0A0A] text-[#FF6B2B] font-semibold text-sm rounded-lg border border-[#2A2A2A] hover:border-[#FF6B2B] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {addedBikes.length === 0
-                          ? "Add bike"
-                          : "Add another bike"}
-                      </button>
-                    </>
-                  )}
+                  {/* Add bike button */}
+                  <button
+                    type="button"
+                    onClick={addBike}
+                    disabled={!canAddBike}
+                    className="w-full py-2.5 bg-[#0A0A0A] text-[#FF6B2B] font-semibold text-sm rounded-lg border border-[#2A2A2A] hover:border-[#FF6B2B] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {addedBikes.length === 0
+                      ? "Add bike"
+                      : "Add another bike"}
+                  </button>
                 </>
               )}
 

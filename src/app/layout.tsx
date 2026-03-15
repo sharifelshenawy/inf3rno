@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
+import Link from "next/link";
+import { auth } from "@/lib/auth";
+import UserMenu from "@/components/UserMenu";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -27,21 +30,44 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  const user = session?.user as
+    | { handle?: string | null; displayName?: string | null }
+    | undefined;
+
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased`}>
         <header className="sticky top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-md border-b border-[#2A2A2A]">
-          <div className="max-w-lg mx-auto px-4 py-3 flex items-center">
-            <h1 className="text-xl font-bold tracking-tight">
-              <span className="text-[#FF6B2B]">inf</span>
-              <span className="text-white">3</span>
-              <span className="text-[#FF6B2B]">rno</span>
-            </h1>
+          <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
+            <Link href="/">
+              <h1 className="text-xl font-bold tracking-tight">
+                <span className="text-[#FF6B2B]">inf</span>
+                <span className="text-white">3</span>
+                <span className="text-[#FF6B2B]">rno</span>
+              </h1>
+            </Link>
+
+            <nav>
+              {session?.user && user?.handle ? (
+                <UserMenu
+                  handle={user.handle}
+                  displayName={user.displayName ?? null}
+                />
+              ) : (
+                <Link
+                  href="/login"
+                  className="px-4 py-1.5 rounded-lg border border-[#2A2A2A] bg-[#141414] text-sm text-zinc-300 hover:border-[#FF6B2B]/50 hover:text-white transition-colors"
+                >
+                  Log in
+                </Link>
+              )}
+            </nav>
           </div>
         </header>
         <main className="max-w-lg mx-auto px-4 py-6">{children}</main>

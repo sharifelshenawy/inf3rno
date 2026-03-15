@@ -1,229 +1,109 @@
-"use client";
+import Link from "next/link";
 
-import { Suspense, useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
-import RiderInput from "@/components/RiderInput";
-import type { RiderLocation } from "@/components/RiderInput";
-import VibePicker from "@/components/VibePicker";
-import RouteSelector from "@/components/RouteSelector";
-import RouteResult from "@/components/RouteResult";
-import { findOptimalMeetingPoint } from "@/lib/midpoint";
-import type { ScoredMeetingPoint } from "@/lib/midpoint";
-import { filterRoutes } from "@/lib/routeMatcher";
-import type { Route, Vibe, Difficulty } from "@/lib/routeMatcher";
-import { decodeRidePlan } from "@/lib/shareUrl";
-import routesData from "@/data/routes.json";
-
-type Step = "riders" | "vibe" | "routes" | "loading" | "result";
-
-const STEPS: { key: Step; label: string }[] = [
-  { key: "riders", label: "Riders" },
-  { key: "vibe", label: "Vibe" },
-  { key: "routes", label: "Route" },
-  { key: "result", label: "Plan" },
-];
-
-export default function Home() {
+export default function LandingPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="py-20 text-center text-zinc-500">Loading...</div>
-      }
-    >
-      <HomeContent />
-    </Suspense>
-  );
-}
+    <div className="space-y-6 py-4">
+      {/* Hero */}
+      <div className="text-center space-y-2 pb-4">
+        <h2 className="text-2xl font-bold text-white">Plan your ride</h2>
+        <p className="text-sm text-zinc-400">
+          Pick a vibe, match a route, meet your crew.
+        </p>
+      </div>
 
-function HomeContent() {
-  const searchParams = useSearchParams();
-  const [step, setStep] = useState<Step>("riders");
-  const [riders, setRiders] = useState<RiderLocation[]>([]);
-  const [vibe, setVibe] = useState<Vibe>("mix");
-  const [difficulty, setDifficulty] = useState<Difficulty>("any");
-  const [candidateRoutes, setCandidateRoutes] = useState<Route[]>([]);
-  const [selectedRoute, setSelectedRoute] = useState<Route | null>(null);
-  const [scored, setScored] = useState<ScoredMeetingPoint | null>(null);
-
-  const computeMeetingPoint = useCallback(
-    (route: Route, riderList: RiderLocation[]) => {
-      setStep("loading");
-      setTimeout(() => {
-        const routeStart = {
-          lat: route.waypoints[0].lat,
-          lng: route.waypoints[0].lng,
-        };
-        const result = findOptimalMeetingPoint(riderList, routeStart);
-        setScored(result);
-        setStep("result");
-      }, 600);
-    },
-    []
-  );
-
-  // Check for shared URL on mount
-  useEffect(() => {
-    const plan = decodeRidePlan(searchParams);
-    if (plan) {
-      setRiders(plan.riders);
-      setVibe(plan.vibe);
-      setDifficulty(plan.difficulty);
-
-      if (plan.routeId) {
-        const route = (routesData as Route[]).find(
-          (r) => r.id === plan.routeId
-        );
-        if (route) {
-          setSelectedRoute(route);
-          computeMeetingPoint(route, plan.riders);
-          return;
-        }
-      }
-
-      // Fallback: auto-filter routes
-      const filtered = filterRoutes(plan.vibe, plan.difficulty);
-      if (filtered.length > 0) {
-        setSelectedRoute(filtered[0]);
-        computeMeetingPoint(filtered[0], plan.riders);
-      }
-    }
-  }, [searchParams, computeMeetingPoint]);
-
-  const handleRidersNext = (riderList: RiderLocation[]) => {
-    setRiders(riderList);
-    setStep("vibe");
-  };
-
-  const handleVibeSubmit = (
-    selectedVibe: Vibe,
-    selectedDifficulty: Difficulty
-  ) => {
-    setVibe(selectedVibe);
-    setDifficulty(selectedDifficulty);
-    const filtered = filterRoutes(selectedVibe, selectedDifficulty);
-    setCandidateRoutes(filtered);
-    setStep("routes");
-  };
-
-  const handleRouteSelect = (route: Route) => {
-    setSelectedRoute(route);
-    computeMeetingPoint(route, riders);
-  };
-
-  const handleReset = () => {
-    setRiders([]);
-    setVibe("mix");
-    setDifficulty("any");
-    setCandidateRoutes([]);
-    setSelectedRoute(null);
-    setScored(null);
-    setStep("riders");
-    window.history.replaceState({}, "", window.location.pathname);
-  };
-
-  const currentStepIndex = STEPS.findIndex(
-    (s) =>
-      s.key === (step === "loading" ? "result" : step)
-  );
-
-  return (
-    <div className="space-y-6">
-      {/* Progress indicator */}
-      {step !== "result" && (
-        <div className="flex items-center gap-2">
-          {STEPS.map((s, i) => (
-            <div key={s.key} className="flex items-center gap-2 flex-1">
-              <div className="flex items-center gap-2 flex-1">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                    i <= currentStepIndex
-                      ? "bg-[#FF6B2B] text-white"
-                      : "bg-[#141414] text-zinc-500 border border-[#2A2A2A]"
-                  }`}
-                >
-                  {i + 1}
-                </div>
-                <span
-                  className={`text-xs font-medium ${
-                    i <= currentStepIndex ? "text-white" : "text-zinc-500"
-                  }`}
-                >
-                  {s.label}
-                </span>
-              </div>
-              {i < STEPS.length - 1 && (
-                <div
-                  className={`h-px flex-1 ${
-                    i < currentStepIndex ? "bg-[#FF6B2B]" : "bg-[#2A2A2A]"
-                  }`}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Step content */}
-      <div
-        className="transition-opacity duration-300"
-        style={{ opacity: step === "loading" ? 0.5 : 1 }}
-      >
-        {step === "riders" && (
-          <RiderInput onNext={handleRidersNext} initialRiders={riders} />
-        )}
-
-        {step === "vibe" && (
-          <VibePicker
-            onSubmit={handleVibeSubmit}
-            onBack={() => setStep("riders")}
-          />
-        )}
-
-        {step === "routes" && (
-          <RouteSelector
-            routes={candidateRoutes}
-            onSelect={handleRouteSelect}
-            onBack={() => setStep("vibe")}
-          />
-        )}
-
-        {step === "loading" && (
-          <div className="flex flex-col items-center justify-center py-20 gap-4">
-            <svg
-              className="animate-spin h-10 w-10 text-[#FF6B2B]"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
+      {/* Solo Ride card */}
+      <Link href="/plan" className="block group">
+        <div className="rounded-xl border border-[#2A2A2A] bg-[#141414] p-5 space-y-3 hover:border-[#FF6B2B]/50 transition-colors">
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#FF6B2B]/10 flex items-center justify-center">
+              <svg
+                className="w-6 h-6 text-[#FF6B2B]"
                 fill="none"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-              />
-            </svg>
-            <p className="text-zinc-400 text-sm">
-              Finding your perfect ride...
-            </p>
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-lg font-bold text-white">Solo Ride</h3>
+              <p className="text-sm text-zinc-400 mt-1">
+                Plan your ride with saved profile, bike range &amp; favourites
+              </p>
+            </div>
           </div>
-        )}
+          <div className="pt-1">
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF6B2B] group-hover:gap-2.5 transition-all">
+              Start riding
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </Link>
 
-        {step === "result" && selectedRoute && scored && (
-          <RouteResult
-            route={selectedRoute}
-            scored={scored}
-            riders={riders}
-            vibe={vibe}
-            difficulty={difficulty}
-            onReset={handleReset}
-          />
-        )}
+      {/* Group Ride card */}
+      <Link href="/rides/new" className="block group">
+        <div className="rounded-xl border border-[#2A2A2A] bg-[#141414] p-5 space-y-3 hover:border-[#FF6B2B]/50 transition-colors">
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#FF6B2B]/10 flex items-center justify-center">
+              <svg
+                className="w-6 h-6 text-[#FF6B2B]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+                />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-lg font-bold text-white">Group Ride</h3>
+              <p className="text-sm text-zinc-400 mt-1">
+                Create a ride, invite your crew, vote on the plan
+              </p>
+            </div>
+          </div>
+          <div className="pt-1">
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF6B2B] group-hover:gap-2.5 transition-all">
+              Get started
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </Link>
+
+      {/* Guest card */}
+      <div className="rounded-xl border border-[#2A2A2A]/60 bg-[#0F0F0F] p-4">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <p className="text-sm font-medium text-zinc-400">Quick Ride (Guest)</p>
+            <p className="text-xs text-zinc-600">No account needed</p>
+          </div>
+          <Link
+            href="/plan/guest"
+            className="text-sm font-medium text-zinc-400 hover:text-[#FF6B2B] transition-colors"
+          >
+            Plan as guest &rarr;
+          </Link>
+        </div>
       </div>
     </div>
   );

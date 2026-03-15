@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import bikeSpecs from "@/data/bikeSpecs.json";
 import { computeRangeKm } from "@/lib/types";
 

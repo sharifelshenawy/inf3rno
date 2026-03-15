@@ -51,25 +51,36 @@ model User {
   emailVerified       DateTime?
   handle              String?   @unique
   displayName         String?
+  phone               String?
+  ridingLevel         RidingLevel?
   suburb              String?
   suburbLat           Float?
   suburbLng           Float?
   profilePicUrl       String?
   onboardingCompleted Boolean   @default(false)
+  handleLastChangedAt DateTime?
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
   accounts     Account[]
   sessions     Session[]
-  bike         Bike?
+  bikes        Bike[]
   ridesCreated Ride[]       @relation("RideCreator")
   rideMembers  RideMember[]
   rideVotes    RideVote[]
 }
 
+// Retired handles can never be reused
+model RetiredHandle {
+  id        String   @id @default(cuid())
+  handle    String   @unique
+  userId    String
+  retiredAt DateTime @default(now())
+}
+
 model Bike {
   id                  String  @id @default(cuid())
-  userId              String  @unique
+  userId              String
   make                String
   model               String
   year                Int?
@@ -77,8 +88,15 @@ model Bike {
   consumptionPer100km Float
   isManualRange       Boolean @default(false)
   manualRangeKm       Float?
+  isPrimary           Boolean @default(false)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum RidingLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
 }
 
 model Ride {

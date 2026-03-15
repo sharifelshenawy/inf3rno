@@ -55,10 +55,10 @@ export default async function RootLayout({
             </Link>
 
             <nav>
-              {session?.user && user?.handle ? (
+              {session?.user ? (
                 <UserMenu
-                  handle={user.handle}
-                  displayName={user.displayName ?? null}
+                  handle={user?.handle ?? null}
+                  displayName={user?.displayName ?? null}
                 />
               ) : (
                 <Link

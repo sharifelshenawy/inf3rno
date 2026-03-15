@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { Vibe, Difficulty } from "@/lib/routeMatcher";
+import type { Vibe, Difficulty, Duration } from "@/lib/routeMatcher";
 
 interface VibePickerProps {
-  onSubmit: (vibe: Vibe, difficulty: Difficulty) => void;
+  onSubmit: (vibe: Vibe, difficulty: Difficulty, duration: Duration) => void;
   onBack: () => void;
 }
 
@@ -22,10 +22,18 @@ const DIFFICULTIES: { id: Difficulty; label: string }[] = [
   { id: "any", label: "Any" },
 ];
 
+const DURATIONS: { id: Duration; label: string; desc: string }[] = [
+  { id: "short", label: "Short", desc: "Up to 1 hour" },
+  { id: "medium", label: "Medium", desc: "2-3 hours" },
+  { id: "long", label: "Long", desc: "4+ hours (iron butt)" },
+  { id: "any", label: "Any", desc: "Show all" },
+];
+
 export default function VibePicker({ onSubmit, onBack }: VibePickerProps) {
   const [selectedVibe, setSelectedVibe] = useState<Vibe | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty | null>(null);
+  const [selectedDuration, setSelectedDuration] = useState<Duration>("any");
 
   return (
     <div className="space-y-6">
@@ -34,7 +42,7 @@ export default function VibePicker({ onSubmit, onBack }: VibePickerProps) {
           What&apos;s the vibe?
         </h2>
         <p className="text-sm text-zinc-400">
-          Pick your ride style and skill level.
+          Pick your ride style, skill level, and how long you want to ride.
         </p>
       </div>
 
@@ -75,6 +83,26 @@ export default function VibePicker({ onSubmit, onBack }: VibePickerProps) {
         </div>
       </div>
 
+      <div>
+        <p className="text-sm text-zinc-400 mb-3">How long do you want to ride?</p>
+        <div className="grid grid-cols-2 gap-2">
+          {DURATIONS.map((dur) => (
+            <button
+              key={dur.id}
+              onClick={() => setSelectedDuration(dur.id)}
+              className={`p-3 rounded-lg border text-left transition-all ${
+                selectedDuration === dur.id
+                  ? "border-[#FF6B2B] bg-[#FF6B2B]/10"
+                  : "border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]"
+              }`}
+            >
+              <span className="text-white font-semibold text-sm block">{dur.label}</span>
+              <span className="text-xs text-zinc-500">{dur.desc}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="flex gap-3">
         <button
           onClick={onBack}
@@ -86,7 +114,7 @@ export default function VibePicker({ onSubmit, onBack }: VibePickerProps) {
           onClick={() =>
             selectedVibe &&
             selectedDifficulty &&
-            onSubmit(selectedVibe, selectedDifficulty)
+            onSubmit(selectedVibe, selectedDifficulty, selectedDuration)
           }
           disabled={!selectedVibe || !selectedDifficulty}
           className="flex-1 h-14 rounded-lg bg-[#FF6B2B] text-white text-lg font-bold hover:bg-[#FF6B2B]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

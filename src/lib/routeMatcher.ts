@@ -32,16 +32,34 @@ export interface Route {
 
 export type Vibe = "twisty" | "scenic" | "cruisy" | "mix";
 export type Difficulty = "beginner" | "intermediate" | "advanced" | "any";
+export type Duration = "short" | "medium" | "long" | "any";
+
+const DURATION_RANGES: Record<Duration, { min: number; max: number }> = {
+  short: { min: 0, max: 60 },        // up to 1 hour
+  medium: { min: 60, max: 180 },      // 1-3 hours
+  long: { min: 180, max: Infinity },   // 4+ hours (iron butt)
+  any: { min: 0, max: Infinity },
+};
 
 /**
- * Filter and score routes by vibe + difficulty only.
+ * Filter and score routes by vibe, difficulty, and duration.
  * Meeting point is computed AFTER route selection.
  */
-export function filterRoutes(vibe: Vibe, difficulty: Difficulty): Route[] {
+export function filterRoutes(
+  vibe: Vibe,
+  difficulty: Difficulty,
+  duration: Duration = "any"
+): Route[] {
   const routes = routesData as Route[];
+  const dRange = DURATION_RANGES[duration];
 
   const scored = routes.map((route) => {
     let score = 0;
+
+    // Duration filter — hard exclude if outside range
+    if (route.durationMinutes < dRange.min || route.durationMinutes > dRange.max) {
+      return { route, score: 0 };
+    }
 
     // Vibe matching
     if (vibe === "mix") {
@@ -61,6 +79,11 @@ export function filterRoutes(vibe: Vibe, difficulty: Difficulty): Route[] {
       score += 2;
     } else if (route.difficulty === difficulty) {
       score += 3;
+    }
+
+    // Duration bonus — prefer routes closer to the middle of the selected range
+    if (duration !== "any") {
+      score += 1;
     }
 
     return { route, score };

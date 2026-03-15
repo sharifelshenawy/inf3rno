@@ -8,7 +8,7 @@ import RouteResult from "@/components/RouteResult";
 import { findOptimalMeetingPoint } from "@/lib/midpoint";
 import type { ScoredMeetingPoint } from "@/lib/midpoint";
 import { filterRoutes } from "@/lib/routeMatcher";
-import type { Route, Vibe, Difficulty } from "@/lib/routeMatcher";
+import type { Route, Vibe, Difficulty, Duration } from "@/lib/routeMatcher";
 import { decodeRidePlan } from "@/lib/shareUrl";
 import { computeRangeKm } from "@/lib/types";
 import { geocodeSuburb } from "@/lib/geocode";
@@ -326,10 +326,10 @@ function GuestPlanContent() {
     setStep("vibe");
   };
 
-  const handleVibeSubmit = (selectedVibe: Vibe, selectedDifficulty: Difficulty) => {
+  const handleVibeSubmit = (selectedVibe: Vibe, selectedDifficulty: Difficulty, selectedDuration?: Duration) => {
     setVibe(selectedVibe);
     setDifficulty(selectedDifficulty);
-    const filtered = filterRoutes(selectedVibe, selectedDifficulty);
+    const filtered = filterRoutes(selectedVibe, selectedDifficulty, selectedDuration);
     setCandidateRoutes(filtered);
     setStep("routes");
   };

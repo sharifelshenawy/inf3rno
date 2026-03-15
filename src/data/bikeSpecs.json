@@ -1,0 +1,569 @@
+[
+  {
+    "make": "Honda",
+    "model": "CB300R",
+    "year": 2024,
+    "tankLitres": 10.0,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "Honda",
+    "model": "CB500F",
+    "year": 2024,
+    "tankLitres": 17.1,
+    "consumptionPer100km": 4.2
+  },
+  {
+    "make": "Honda",
+    "model": "CB500X",
+    "year": 2024,
+    "tankLitres": 17.7,
+    "consumptionPer100km": 4.3
+  },
+  {
+    "make": "Honda",
+    "model": "CB650R",
+    "year": 2024,
+    "tankLitres": 15.4,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Honda",
+    "model": "CBR600RR",
+    "year": 2024,
+    "tankLitres": 18.0,
+    "consumptionPer100km": 6.5
+  },
+  {
+    "make": "Honda",
+    "model": "CBR1000RR-R",
+    "year": 2024,
+    "tankLitres": 16.1,
+    "consumptionPer100km": 7.0
+  },
+  {
+    "make": "Honda",
+    "model": "CRF300L",
+    "year": 2024,
+    "tankLitres": 7.8,
+    "consumptionPer100km": 3.6
+  },
+  {
+    "make": "Honda",
+    "model": "Africa Twin",
+    "year": 2024,
+    "tankLitres": 24.8,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Honda",
+    "model": "Rebel 500",
+    "year": 2024,
+    "tankLitres": 11.2,
+    "consumptionPer100km": 4.2
+  },
+  {
+    "make": "Honda",
+    "model": "Rebel 1100",
+    "year": 2024,
+    "tankLitres": 13.6,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Honda",
+    "model": "Gold Wing",
+    "year": 2024,
+    "tankLitres": 21.1,
+    "consumptionPer100km": 6.8
+  },
+  {
+    "make": "Yamaha",
+    "model": "MT-03",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "Yamaha",
+    "model": "MT-07",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 4.5
+  },
+  {
+    "make": "Yamaha",
+    "model": "MT-09",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Yamaha",
+    "model": "MT-10",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 6.5
+  },
+  {
+    "make": "Yamaha",
+    "model": "YZF-R3",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 3.9
+  },
+  {
+    "make": "Yamaha",
+    "model": "YZF-R7",
+    "year": 2024,
+    "tankLitres": 13.0,
+    "consumptionPer100km": 5.0
+  },
+  {
+    "make": "Yamaha",
+    "model": "YZF-R1",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 7.0
+  },
+  {
+    "make": "Yamaha",
+    "model": "Tenere 700",
+    "year": 2024,
+    "tankLitres": 16.0,
+    "consumptionPer100km": 4.8
+  },
+  {
+    "make": "Yamaha",
+    "model": "XSR700",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 4.6
+  },
+  {
+    "make": "Yamaha",
+    "model": "XSR900",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Yamaha",
+    "model": "NIKEN",
+    "year": 2024,
+    "tankLitres": 18.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Z400",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 4.0
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Z650",
+    "year": 2024,
+    "tankLitres": 15.0,
+    "consumptionPer100km": 4.8
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Z900",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Z900RS",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Kawasaki",
+    "model": "ZX-6R",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 6.5
+  },
+  {
+    "make": "Kawasaki",
+    "model": "ZX-10R",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 7.0
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Ninja 400",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 4.0
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Ninja 650",
+    "year": 2024,
+    "tankLitres": 15.0,
+    "consumptionPer100km": 4.8
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Vulcan S",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 4.8
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Versys 650",
+    "year": 2024,
+    "tankLitres": 21.0,
+    "consumptionPer100km": 5.0
+  },
+  {
+    "make": "Kawasaki",
+    "model": "Versys 1000",
+    "year": 2024,
+    "tankLitres": 21.0,
+    "consumptionPer100km": 6.0
+  },
+  {
+    "make": "Suzuki",
+    "model": "SV650",
+    "year": 2024,
+    "tankLitres": 14.5,
+    "consumptionPer100km": 4.8
+  },
+  {
+    "make": "Suzuki",
+    "model": "GSX-S750",
+    "year": 2023,
+    "tankLitres": 16.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Suzuki",
+    "model": "GSX-S1000",
+    "year": 2024,
+    "tankLitres": 19.0,
+    "consumptionPer100km": 6.2
+  },
+  {
+    "make": "Suzuki",
+    "model": "GSX-R600",
+    "year": 2023,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 6.5
+  },
+  {
+    "make": "Suzuki",
+    "model": "GSX-R1000R",
+    "year": 2024,
+    "tankLitres": 16.0,
+    "consumptionPer100km": 7.0
+  },
+  {
+    "make": "Suzuki",
+    "model": "V-Strom 650",
+    "year": 2024,
+    "tankLitres": 20.0,
+    "consumptionPer100km": 4.8
+  },
+  {
+    "make": "Suzuki",
+    "model": "V-Strom 1050",
+    "year": 2024,
+    "tankLitres": 20.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Suzuki",
+    "model": "Hayabusa",
+    "year": 2024,
+    "tankLitres": 20.0,
+    "consumptionPer100km": 7.0
+  },
+  {
+    "make": "Suzuki",
+    "model": "Boulevard S40",
+    "year": 2024,
+    "tankLitres": 10.5,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "BMW",
+    "model": "G310R",
+    "year": 2024,
+    "tankLitres": 11.0,
+    "consumptionPer100km": 3.5
+  },
+  {
+    "make": "BMW",
+    "model": "F900R",
+    "year": 2024,
+    "tankLitres": 13.0,
+    "consumptionPer100km": 5.2
+  },
+  {
+    "make": "BMW",
+    "model": "F900XR",
+    "year": 2024,
+    "tankLitres": 15.5,
+    "consumptionPer100km": 5.3
+  },
+  {
+    "make": "BMW",
+    "model": "S1000RR",
+    "year": 2024,
+    "tankLitres": 16.5,
+    "consumptionPer100km": 7.0
+  },
+  {
+    "make": "BMW",
+    "model": "S1000R",
+    "year": 2024,
+    "tankLitres": 16.5,
+    "consumptionPer100km": 6.2
+  },
+  {
+    "make": "BMW",
+    "model": "R1250GS",
+    "year": 2024,
+    "tankLitres": 20.0,
+    "consumptionPer100km": 5.6
+  },
+  {
+    "make": "BMW",
+    "model": "R1250RT",
+    "year": 2024,
+    "tankLitres": 25.0,
+    "consumptionPer100km": 6.2
+  },
+  {
+    "make": "Ducati",
+    "model": "Monster",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Ducati",
+    "model": "Panigale V4",
+    "year": 2024,
+    "tankLitres": 16.0,
+    "consumptionPer100km": 7.5
+  },
+  {
+    "make": "Ducati",
+    "model": "Multistrada V4",
+    "year": 2024,
+    "tankLitres": 22.0,
+    "consumptionPer100km": 6.0
+  },
+  {
+    "make": "Ducati",
+    "model": "Scrambler",
+    "year": 2024,
+    "tankLitres": 13.5,
+    "consumptionPer100km": 5.2
+  },
+  {
+    "make": "Ducati",
+    "model": "Streetfighter V4",
+    "year": 2024,
+    "tankLitres": 16.0,
+    "consumptionPer100km": 7.2
+  },
+  {
+    "make": "KTM",
+    "model": "390 Duke",
+    "year": 2024,
+    "tankLitres": 13.4,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "KTM",
+    "model": "790 Duke",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 5.2
+  },
+  {
+    "make": "KTM",
+    "model": "890 Duke R",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "KTM",
+    "model": "1290 Super Duke R",
+    "year": 2024,
+    "tankLitres": 16.0,
+    "consumptionPer100km": 6.8
+  },
+  {
+    "make": "KTM",
+    "model": "390 Adventure",
+    "year": 2024,
+    "tankLitres": 14.5,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "KTM",
+    "model": "890 Adventure",
+    "year": 2024,
+    "tankLitres": 20.0,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Triumph",
+    "model": "Street Triple 765",
+    "year": 2024,
+    "tankLitres": 15.0,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Triumph",
+    "model": "Speed Triple 1200",
+    "year": 2024,
+    "tankLitres": 15.5,
+    "consumptionPer100km": 6.5
+  },
+  {
+    "make": "Triumph",
+    "model": "Tiger 900",
+    "year": 2024,
+    "tankLitres": 20.0,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Triumph",
+    "model": "Bonneville T120",
+    "year": 2024,
+    "tankLitres": 14.5,
+    "consumptionPer100km": 5.0
+  },
+  {
+    "make": "Triumph",
+    "model": "Trident 660",
+    "year": 2024,
+    "tankLitres": 14.0,
+    "consumptionPer100km": 5.0
+  },
+  {
+    "make": "Husqvarna",
+    "model": "Svartpilen 401",
+    "year": 2024,
+    "tankLitres": 13.4,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "Husqvarna",
+    "model": "Vitpilen 401",
+    "year": 2024,
+    "tankLitres": 13.4,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "Husqvarna",
+    "model": "Norden 901",
+    "year": 2024,
+    "tankLitres": 19.0,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Aprilia",
+    "model": "RS 660",
+    "year": 2024,
+    "tankLitres": 15.0,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Aprilia",
+    "model": "Tuono 660",
+    "year": 2024,
+    "tankLitres": 15.0,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Royal Enfield",
+    "model": "Himalayan",
+    "year": 2024,
+    "tankLitres": 17.0,
+    "consumptionPer100km": 3.8
+  },
+  {
+    "make": "Royal Enfield",
+    "model": "Classic 350",
+    "year": 2024,
+    "tankLitres": 13.0,
+    "consumptionPer100km": 3.5
+  },
+  {
+    "make": "Royal Enfield",
+    "model": "Meteor 350",
+    "year": 2024,
+    "tankLitres": 15.0,
+    "consumptionPer100km": 3.5
+  },
+  {
+    "make": "Royal Enfield",
+    "model": "Continental GT 650",
+    "year": 2024,
+    "tankLitres": 12.5,
+    "consumptionPer100km": 4.2
+  },
+  {
+    "make": "Harley-Davidson",
+    "model": "Sportster S",
+    "year": 2024,
+    "tankLitres": 11.8,
+    "consumptionPer100km": 6.0
+  },
+  {
+    "make": "Harley-Davidson",
+    "model": "Street Bob 114",
+    "year": 2024,
+    "tankLitres": 13.2,
+    "consumptionPer100km": 5.8
+  },
+  {
+    "make": "Harley-Davidson",
+    "model": "Road Glide",
+    "year": 2024,
+    "tankLitres": 22.7,
+    "consumptionPer100km": 6.5
+  },
+  {
+    "make": "Harley-Davidson",
+    "model": "Fat Boy",
+    "year": 2024,
+    "tankLitres": 18.9,
+    "consumptionPer100km": 6.0
+  },
+  {
+    "make": "Indian",
+    "model": "Scout",
+    "year": 2024,
+    "tankLitres": 12.5,
+    "consumptionPer100km": 5.5
+  },
+  {
+    "make": "Indian",
+    "model": "Chief",
+    "year": 2024,
+    "tankLitres": 15.1,
+    "consumptionPer100km": 6.0
+  },
+  {
+    "make": "Indian",
+    "model": "FTR 1200",
+    "year": 2024,
+    "tankLitres": 13.0,
+    "consumptionPer100km": 6.0
+  }
+]

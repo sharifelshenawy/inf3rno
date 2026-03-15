@@ -21,8 +21,8 @@ export default function NavLinks({
   destination,
 }: NavLinksProps) {
   const googleUrl = generateGoogleMapsUrl(meetingPoint, waypoints, destination);
-  const wazeUrl = generateWazeUrl(destination);
-  const appleUrl = generateAppleMapsUrl(destination);
+  const wazeUrl = generateWazeUrl(meetingPoint, waypoints, destination);
+  const appleUrl = generateAppleMapsUrl(meetingPoint, waypoints, destination);
 
   const links = [
     { label: "Google Maps", url: googleUrl, icon: "\u{1F5FA}\uFE0F" },

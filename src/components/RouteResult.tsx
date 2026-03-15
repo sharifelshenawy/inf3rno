@@ -14,7 +14,10 @@ import RouteGallery from "./RouteGallery";
 import { RIDER_COLORS } from "@/lib/constants";
 import { encodeRidePlan } from "@/lib/shareUrl";
 import { fetchRouteGeometry } from "@/lib/routing";
+import { planFuelStops } from "@/lib/fuel-planner";
 import poiData from "@/data/poi.json";
+
+type FuelPlan = ReturnType<typeof planFuelStops>;
 
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
@@ -49,9 +52,24 @@ export default function RouteResult({
   const [copied, setCopied] = useState(false);
   const [routeGeometry, setRouteGeometry] = useState<[number, number][] | undefined>();
   const [commuteGeometries, setCommuteGeometries] = useState<Record<number, [number, number][]>>({});
+  const [fuelPlan, setFuelPlan] = useState<FuelPlan | null>(null);
 
   const destination = route.destinations[selectedDest];
   const mp = scored.meetingPoint;
+
+  // Compute fuel plan when route + rangeKm are available
+  useEffect(() => {
+    if (rangeKm === undefined) return;
+
+    const waypoints = [
+      { lat: mp.lat, lng: mp.lng },
+      ...route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng })),
+      { lat: destination.lat, lng: destination.lng },
+    ];
+
+    const plan = planFuelStops(route.id, waypoints, rangeKm);
+    setFuelPlan(plan);
+  }, [route.id, route.waypoints, mp.lat, mp.lng, destination.lat, destination.lng, rangeKm]);
 
   const riderMarkers: RiderMarker[] = riders.map((r, i) => ({
     lat: r.lat,
@@ -194,6 +212,118 @@ export default function RouteResult({
           </div>
         )}
       </div>
+
+      {/* Fuel Plan */}
+      {rangeKm !== undefined && fuelPlan && (
+        <div className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A] space-y-3">
+          <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
+            Fuel Plan
+          </p>
+
+          {!fuelPlan.needsFuelStops ? (
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
+              <span className="text-sm">&#x26FD;</span>
+              <p className="text-sm text-[#10B981] font-medium">
+                You&apos;re good &mdash; estimated {fuelPlan.arrivalFuelPercent}% fuel at destination
+              </p>
+            </div>
+          ) : (
+            <div className="relative pl-6">
+              {/* Timeline vertical line */}
+              <div className="absolute left-[9px] top-2 bottom-2 w-px bg-[#2A2A2A]" />
+
+              {/* Start marker */}
+              <div className="relative flex items-center gap-3 pb-4">
+                <div className="absolute left-[-15px] w-[13px] h-[13px] rounded-full bg-[#FF6B2B] border-2 border-[#0A0A0A] z-10" />
+                <span className="text-xs text-zinc-400">
+                  Depart with full tank &mdash; {Math.round(rangeKm)} km range
+                </span>
+              </div>
+
+              {/* Fuel stops */}
+              {fuelPlan.stops.map((stop, i) => {
+                const fuelColor =
+                  stop.estimatedFuelRemaining > 40
+                    ? "#10B981"
+                    : stop.estimatedFuelRemaining >= 20
+                      ? "#F59E0B"
+                      : "#EF4444";
+                const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${stop.poi.lat},${stop.poi.lng}&travelmode=driving`;
+
+                return (
+                  <div key={i} className="relative pb-4">
+                    <div
+                      className="absolute left-[-15px] w-[13px] h-[13px] rounded-full border-2 border-[#0A0A0A] z-10"
+                      style={{ backgroundColor: fuelColor }}
+                    />
+                    <div className="ml-2 p-3 rounded-lg bg-[#1A1A1A] border border-[#2A2A2A] space-y-1.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm text-white font-medium">
+                          &#x26FD; {stop.poi.name}
+                        </span>
+                        <span
+                          className="text-xs font-semibold px-1.5 py-0.5 rounded"
+                          style={{ color: fuelColor, backgroundColor: `${fuelColor}15` }}
+                        >
+                          {stop.estimatedFuelRemaining}%
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3 text-xs text-zinc-500">
+                        <span>{stop.distanceFromStartKm} km from start</span>
+                        <span>&middot;</span>
+                        <span>{stop.distanceFromPrevStopKm} km from prev stop</span>
+                      </div>
+                      {stop.poi.notes && (
+                        <p className="text-xs text-zinc-500">{stop.poi.notes}</p>
+                      )}
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-[#FF6B2B] hover:text-[#FF8B5B] transition-colors mt-1"
+                      >
+                        Open in Google Maps &rarr;
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Destination arrival */}
+              <div className="relative flex items-center gap-3">
+                <div
+                  className="absolute left-[-15px] w-[13px] h-[13px] rounded-full border-2 border-[#0A0A0A] z-10"
+                  style={{
+                    backgroundColor:
+                      fuelPlan.arrivalFuelPercent > 40
+                        ? "#10B981"
+                        : fuelPlan.arrivalFuelPercent >= 20
+                          ? "#F59E0B"
+                          : "#EF4444",
+                  }}
+                />
+                <span className="text-xs text-zinc-400">
+                  Arrive at destination with ~
+                  <span
+                    className="font-semibold"
+                    style={{
+                      color:
+                        fuelPlan.arrivalFuelPercent > 40
+                          ? "#10B981"
+                          : fuelPlan.arrivalFuelPercent >= 20
+                            ? "#F59E0B"
+                            : "#EF4444",
+                    }}
+                  >
+                    {fuelPlan.arrivalFuelPercent}%
+                  </span>{" "}
+                  fuel
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Destination picker */}
       {route.destinations.length > 1 && (

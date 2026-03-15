@@ -40,7 +40,9 @@ Features and ideas for future sessions.
 - [ ] **Live location tracking** — riders can see each other on the map during the ride. Auto-expires after 12 hours or when ride ends. MUST include privacy safeguards (see design spec for requirements: opt-in only, kill switch, location fuzzing near start/end, no tracking during commute home)
 - [ ] **Built-in navigation** — our own nav tool using Valhalla routing, with hazard overlays. Reduces dependency on Google Maps/Waze/Apple Maps
 - [ ] **Waze hazard data integration** — research: does Waze have an API/feed for police, roadworks, accidents? If so, overlay on our map. (Note: Waze Community Partners program may provide data access, or we can crowdsource our own hazard reports)
-- [ ] Weather integration (warn if rain expected on route)
+- [ ] **Weather analysis per suburb** — fetch weather forecasts for each suburb/waypoint along the route (not just one city forecast). Riders experience micro-climates (e.g., sunny in CBD, raining in Clyde). Show weather icons/regions on the map overlay for each zone. Use BOM (Bureau of Meteorology) API or OpenWeatherMap for suburb-level forecasts. Tell riders what to prepare for: "Pack rain gear for the Dandenongs section, clear skies on the coast"
+- [ ] **Ride preparation checklist** — based on weather + route: suggest gear (rain jacket, heated grips, sunscreen), warn about conditions (wet roads, fog, wind). Always show the safety message: "Prepare for the slide, not the ride. Wear all your gear, all the time."
+- [ ] **ATGATT safety banner** — persistent but dismissible safety reminder encouraging full gear. Link to gear guides and crash statistics
 - [ ] Traffic-aware meeting point suggestions
 - [ ] Dynamic route adjustment based on group size
 - [ ] Post-ride summary with stats (distance, time, average speed, route completed)

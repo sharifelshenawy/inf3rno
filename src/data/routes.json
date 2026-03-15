@@ -369,7 +369,7 @@
       { "name": "Bright Brewery", "lat": -36.7300, "lng": 146.9650, "type": "brewery", "position": "enroute" }
     ],
     "highlights": ["1840m summit", "Infinite alpine views", "Danny's Lookout", "Tight descents to Omeo"],
-    "warnings": ["Snow chains required in declared snow season", "Cold even in summer at altitude", "Long ride from Melbourne — plan overnight or early start"]
+    "warnings": ["Road may be closed in snow season — check conditions before riding", "Cold even in summer at altitude — pack warm layers", "Long ride from Melbourne — plan overnight or early start"]
   },
   {
     "id": "south-gippsland-cruise",

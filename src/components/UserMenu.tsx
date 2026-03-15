@@ -89,9 +89,10 @@ export default function UserMenu({ handle, displayName }: UserMenuProps) {
           </Link>
           <div className="border-t border-[#2A2A2A]" />
           <button
-            onClick={() => {
+            onClick={async () => {
               setOpen(false);
-              signOut({ callbackUrl: "/" });
+              await signOut({ redirect: false });
+              window.location.href = "/";
             }}
             className="block w-full text-left px-4 py-2.5 text-sm text-zinc-400 hover:bg-[#1F1F1F] hover:text-red-400 transition-colors"
           >

@@ -65,6 +65,7 @@ model User {
   accounts     Account[]
   sessions     Session[]
   bikes        Bike[]
+  soloRides    SoloRide[]
   ridesCreated Ride[]       @relation("RideCreator")
   rideMembers  RideMember[]
   rideVotes    RideVote[]
@@ -97,6 +98,27 @@ enum RidingLevel {
   BEGINNER
   INTERMEDIATE
   ADVANCED
+}
+
+model SoloRide {
+  id              String   @id @default(cuid())
+  userId          String
+  routeId         String
+  destinationName String?
+  meetingPointId  String?
+  vibe            String
+  difficulty      String
+  riderLat        Float
+  riderLng        Float
+  riderSuburb     String?
+  bikeMake        String?
+  bikeModel       String?
+  rangeKm         Float?
+  createdAt       DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
 }
 
 model Ride {

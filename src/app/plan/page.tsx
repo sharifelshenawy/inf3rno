@@ -250,7 +250,7 @@ function SoloPlanContent() {
     }
   }, [searchParams, computeMeetingPoint, profileLoaded]);
 
-  // Save ride plan to localStorage when result is reached
+  // Save ride plan to localStorage AND database when result is reached
   useEffect(() => {
     if (step === "result" && selectedRoute && rider) {
       const plan: SavedRidePlan = {
@@ -265,8 +265,29 @@ function SoloPlanContent() {
         savedAt: new Date().toISOString(),
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
+
+      // Also save to database for authenticated users
+      fetch("/api/solo-rides", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          routeId: selectedRoute.id,
+          destinationName: selectedRoute.destinations[0]?.name || null,
+          meetingPointId: scored?.meetingPoint?.id || null,
+          vibe,
+          difficulty,
+          riderLat: rider.lat,
+          riderLng: rider.lng,
+          riderSuburb: rider.displayName,
+          bikeMake: selectedBike?.make || null,
+          bikeModel: selectedBike?.model || null,
+          rangeKm: selectedBike?.rangeKm || null,
+        }),
+      }).catch(() => {
+        // Silently fail — localStorage is the primary persistence
+      });
     }
-  }, [step, selectedRoute, rider, selectedBike, vibe, difficulty]);
+  }, [step, selectedRoute, rider, selectedBike, vibe, difficulty, scored]);
 
   const handleResumePlan = () => {
     if (!savedPlan || !savedRoute) return;

@@ -25,6 +25,8 @@ interface RouteResultProps {
   vibe: Vibe;
   difficulty: Difficulty;
   onReset: () => void;
+  rangeKm?: number;
+  bikeName?: string;
 }
 
 const DIFFICULTY_COLORS: Record<string, string> = {
@@ -40,6 +42,8 @@ export default function RouteResult({
   vibe,
   difficulty,
   onReset,
+  rangeKm,
+  bikeName,
 }: RouteResultProps) {
   const [selectedDest, setSelectedDest] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -111,6 +115,24 @@ export default function RouteResult({
         point={mp}
         riderDistances={scored.riderDistances}
       />
+
+      {/* Bike fuel range */}
+      {rangeKm !== undefined && (
+        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#141414] border border-[#2A2A2A] text-xs text-zinc-400">
+          <span className="text-[#FF6B2B]">&#x26FD;</span>
+          <span>
+            Fuel range: <strong className="text-white">{Math.round(rangeKm)} km</strong>
+          </span>
+          {bikeName && (
+            <span className="ml-auto text-zinc-500">{bikeName}</span>
+          )}
+          {route.distanceKm > rangeKm && (
+            <span className="ml-2 text-yellow-400 font-medium">
+              (route exceeds range)
+            </span>
+          )}
+        </div>
+      )}
 
       <Map
         meetingPoint={{ lat: mp.lat, lng: mp.lng }}

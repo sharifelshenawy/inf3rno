@@ -96,6 +96,19 @@ export default function LandingPage() {
           </Link>
         </div>
       </div>
+
+      {/* Footer */}
+      <p className="text-center text-xs text-zinc-600 pt-4">
+        Built for Melbourne riders &mdash;{" "}
+        <a
+          href="https://github.com/sharifelshenawy/inf3rno/issues/new"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-zinc-500 hover:text-[#FF6B2B] transition-colors"
+        >
+          Give feedback
+        </a>
+      </p>
     </div>
   );
 }

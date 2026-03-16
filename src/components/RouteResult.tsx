@@ -373,7 +373,7 @@ export default function RouteResult({
           const segments: { from: string; to: string }[] = [];
           const wpLabels = route.waypoints.map((wp) => wp.label);
 
-          segments.push({ from: "Meeting point", to: wpLabels[0] });
+          segments.push({ from: isSoloRide ? "Start" : "Meeting point", to: wpLabels[0] });
           for (let i = 0; i < wpLabels.length - 1; i++) {
             segments.push({ from: wpLabels[i], to: wpLabels[i + 1] });
           }
@@ -519,6 +519,15 @@ export default function RouteResult({
 
       <p className="text-center text-xs text-zinc-600 py-2">
         inf3rno &mdash; Built for Melbourne riders
+        <br />
+        <a
+          href="https://github.com/sharifelshenawy/inf3rno/issues/new"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-zinc-500 hover:text-[#FF6B2B] transition-colors"
+        >
+          Give feedback or report a bug
+        </a>
       </p>
     </div>
   );

@@ -87,6 +87,15 @@ export default function UserMenu({ handle, displayName }: UserMenuProps) {
           >
             Profile
           </Link>
+          <a
+            href="https://github.com/sharifelshenawy/inf3rno/issues/new"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-zinc-400 hover:bg-[#1F1F1F] hover:text-[#FF6B2B] transition-colors"
+          >
+            Give feedback
+          </a>
           <div className="border-t border-[#2A2A2A]" />
           <button
             onClick={async () => {

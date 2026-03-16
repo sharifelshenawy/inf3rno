@@ -274,10 +274,13 @@ export function buildRoutePlan(
 
   const userLocation: LatLng = { lat: userLat, lng: userLng };
 
-  // Auto-detect direction if not provided
+  // Direction logic:
+  // - If explicitly provided (user clicked "Ride in reverse"), use it
+  // - Otherwise default to "forward" but check if reverse would be better
+  const suggestion = suggestDirection(userLocation, route);
   const directionResult = direction
     ? { direction, suggestReverse: false, reverseReason: undefined }
-    : suggestDirection(userLocation, route);
+    : { direction: "forward" as const, suggestReverse: suggestion.suggestReverse, reverseReason: suggestion.reverseReason };
 
   const activeDirection = directionResult.direction;
   const { start: routeStart, end: routeEnd } = getRouteEndpoints(

@@ -22,7 +22,7 @@ function LoginContent() {
 
   const [phase, setPhase] = useState<Phase>("email");
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
+  const [codeChars, setCodeChars] = useState<string[]>(Array(8).fill(""));
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(false);
@@ -73,10 +73,76 @@ function LoginContent() {
     }
   };
 
+  const fullCode = codeChars.join("");
+
+  const handleCharChange = (index: number, value: string) => {
+    // Only allow letters
+    const char = value.replace(/[^a-zA-Z]/g, "").toUpperCase().slice(-1);
+    const newChars = [...codeChars];
+    newChars[index] = char;
+    setCodeChars(newChars);
+    setError("");
+
+    // Auto-advance to next input
+    if (char && index < 7) {
+      const next = document.getElementById(`code-${index + 1}`);
+      next?.focus();
+    }
+
+    // Auto-submit when all 8 chars entered
+    if (char && index === 7 && newChars.every((c) => c)) {
+      // Small delay to let state update
+      setTimeout(() => {
+        document.getElementById("code-submit")?.click();
+      }, 50);
+    }
+  };
+
+  const handleCharKeyDown = (index: number, e: React.KeyboardEvent) => {
+    if (e.key === "Backspace" && !codeChars[index] && index > 0) {
+      // Move back on backspace when current field is empty
+      const prev = document.getElementById(`code-${index - 1}`);
+      prev?.focus();
+      const newChars = [...codeChars];
+      newChars[index - 1] = "";
+      setCodeChars(newChars);
+    }
+  };
+
+  const handleCharPaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    const pasted = e.clipboardData
+      .getData("text")
+      .replace(/[^a-zA-Z]/g, "")
+      .toUpperCase()
+      .slice(0, 8);
+    if (!pasted) return;
+
+    const newChars = [...codeChars];
+    for (let i = 0; i < pasted.length && i < 8; i++) {
+      newChars[i] = pasted[i];
+    }
+    setCodeChars(newChars);
+
+    // Focus the next empty field or the last one
+    const nextEmpty = newChars.findIndex((c) => !c);
+    const focusIdx = nextEmpty === -1 ? 7 : nextEmpty;
+    setTimeout(() => {
+      document.getElementById(`code-${focusIdx}`)?.focus();
+    }, 0);
+
+    // Auto-submit if all filled
+    if (newChars.every((c) => c)) {
+      setTimeout(() => {
+        document.getElementById("code-submit")?.click();
+      }, 100);
+    }
+  };
+
   const handleCodeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!code.trim()) {
-      setError("Please enter the code");
+    if (fullCode.length < 8) {
+      setError("Please enter all 8 characters");
       return;
     }
 
@@ -86,7 +152,7 @@ function LoginContent() {
     try {
       const result = await signIn("email-code", {
         email,
-        code: code.trim(),
+        code: fullCode,
         redirect: false,
       });
 
@@ -112,7 +178,7 @@ function LoginContent() {
 
   const handleBackToEmail = () => {
     setPhase("email");
-    setCode("");
+    setCodeChars(Array(8).fill(""));
     setError("");
   };
 
@@ -180,34 +246,46 @@ function LoginContent() {
               </p>
               <p className="text-white font-medium mb-4 truncate">{email}</p>
 
-              <label
-                htmlFor="code"
-                className="block text-sm font-medium text-[#999999] mb-2"
-              >
+              <label className="block text-sm font-medium text-[#999999] mb-3">
                 Enter code
               </label>
-              <input
-                id="code"
-                type="text"
-                value={code}
-                onChange={(e) => {
-                  setCode(e.target.value);
-                  setError("");
-                }}
-                placeholder="XXXX-XXXX"
-                autoComplete="one-time-code"
-                autoFocus
-                maxLength={9}
-                className="w-full px-4 py-3 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white placeholder-[#555555] text-center text-xl font-mono tracking-widest focus:outline-none focus:border-[#FF6B2B] transition-colors"
-              />
+              <div className="flex items-center justify-center gap-1.5">
+                {codeChars.map((char, i) => (
+                  <span key={i} className="contents">
+                    {i === 4 && (
+                      <span className="text-zinc-600 text-lg font-bold mx-0.5">-</span>
+                    )}
+                    <input
+                      id={`code-${i}`}
+                      type="text"
+                      inputMode="text"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="characters"
+                      spellCheck={false}
+                      data-1p-ignore
+                      data-lpignore="true"
+                      value={char}
+                      onChange={(e) => handleCharChange(i, e.target.value)}
+                      onKeyDown={(e) => handleCharKeyDown(i, e)}
+                      onPaste={i === 0 ? handleCharPaste : undefined}
+                      onFocus={(e) => e.target.select()}
+                      autoFocus={i === 0}
+                      maxLength={1}
+                      className="w-10 h-12 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-center text-xl font-mono uppercase focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                    />
+                  </span>
+                ))}
+              </div>
 
               {error && (
                 <p className="mt-3 text-sm text-red-400">{error}</p>
               )}
 
               <button
+                id="code-submit"
                 type="submit"
-                disabled={loading}
+                disabled={loading || fullCode.length < 8}
                 className="mt-4 w-full py-3.5 bg-[#FF6B2B] text-black font-bold text-base rounded-lg hover:bg-[#FF8B5B] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? "Verifying..." : "Verify"}

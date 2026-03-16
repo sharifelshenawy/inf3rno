@@ -746,6 +746,7 @@ function GuestPlanContent() {
             onReset={handleReset}
             rangeKm={rangeKm ?? undefined}
             bikeName={selectedBike ? `${selectedBike.make} ${selectedBike.model}` : undefined}
+            isSoloRide
           />
         )}
       </div>

@@ -31,6 +31,7 @@ interface RouteResultProps {
   onReset: () => void;
   rangeKm?: number;
   bikeName?: string;
+  isSoloRide?: boolean;
 }
 
 const DIFFICULTY_COLORS: Record<string, string> = {
@@ -48,6 +49,7 @@ export default function RouteResult({
   onReset,
   rangeKm,
   bikeName,
+  isSoloRide,
 }: RouteResultProps) {
   const [selectedDest, setSelectedDest] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -217,6 +219,7 @@ export default function RouteResult({
       <MeetingPointCard
         point={mp}
         riderDistances={scored.riderDistances}
+        isSoloRide={isSoloRide}
       />
 
       {/* Bike fuel range */}

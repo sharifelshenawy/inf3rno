@@ -856,6 +856,7 @@ function SoloPlanContent() {
             onReset={handleReset}
             rangeKm={rangeKm ?? undefined}
             bikeName={selectedBike ? `${selectedBike.make} ${selectedBike.model}` : undefined}
+            isSoloRide
           />
         )}
       </div>

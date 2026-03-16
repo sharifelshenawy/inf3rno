@@ -4,6 +4,7 @@ import { RIDER_COLORS } from "@/lib/constants";
 interface MeetingPointProps {
   point: MeetingPointType;
   riderDistances?: RiderDistance[];
+  isSoloRide?: boolean;
 }
 
 const AMENITY_LABELS: Record<string, string> = {
@@ -18,6 +19,7 @@ const AMENITY_LABELS: Record<string, string> = {
 export default function MeetingPointCard({
   point,
   riderDistances,
+  isSoloRide,
 }: MeetingPointProps) {
   const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${point.lat},${point.lng}&travelmode=driving`;
 
@@ -25,7 +27,7 @@ export default function MeetingPointCard({
     <div className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A]">
       <div>
         <p className="text-xs text-[#FF6B2B] font-semibold uppercase tracking-wider mb-1">
-          Meeting Point
+          {isSoloRide ? "Starting Area" : "Meeting Point"}
         </p>
         <h3 className="text-lg font-bold text-white">{point.name}</h3>
         <p className="text-sm text-zinc-400 mt-0.5">{point.address}</p>

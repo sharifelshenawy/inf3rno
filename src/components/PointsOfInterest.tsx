@@ -53,7 +53,7 @@ export default function PointsOfInterest({
 
       {needsFuelWarning && (
         <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/20 flex items-start gap-2">
-          <span className="text-sm">\u26FD</span>
+          <span className="text-sm">{"\u26FD"}</span>
           <div>
             <p className="text-xs text-yellow-400 font-medium">
               Fuel range warning

@@ -197,6 +197,7 @@ export default function RouteResult({
       )}
 
       <Map
+        key={`${route.id}-${destination.lat}-${destination.lng}`}
         meetingPoint={{ lat: mp.lat, lng: mp.lng }}
         waypoints={route.waypoints.map((wp) => ({
           lat: wp.lat,

@@ -54,6 +54,24 @@ export default function RouteResult({
   const [routeGeometry, setRouteGeometry] = useState<[number, number][] | undefined>();
   const [commuteGeometries, setCommuteGeometries] = useState<Record<number, [number, number][]>>({});
   const [fuelPlan, setFuelPlan] = useState<FuelPlan | null>(null);
+  const [showAtgatt, setShowAtgatt] = useState(false);
+
+  // ATGATT banner: show unless dismissed within the last 7 days
+  useEffect(() => {
+    const STORAGE_KEY = "inf3rno_atgatt_dismissed";
+    const dismissed = localStorage.getItem(STORAGE_KEY);
+    if (dismissed) {
+      const dismissedAt = parseInt(dismissed, 10);
+      const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+      if (Date.now() - dismissedAt < sevenDaysMs) return;
+    }
+    setShowAtgatt(true);
+  }, []);
+
+  const dismissAtgatt = () => {
+    localStorage.setItem("inf3rno_atgatt_dismissed", String(Date.now()));
+    setShowAtgatt(false);
+  };
 
   const destination = route.destinations[selectedDest];
   const mp = scored.meetingPoint;
@@ -136,6 +154,42 @@ export default function RouteResult({
 
   return (
     <div className="space-y-4">
+      {/* ATGATT safety banner */}
+      {showAtgatt && (
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#1A1A0A] border border-yellow-500/20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-5 h-5 text-yellow-400/90 flex-shrink-0"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.484 2.17a.75.75 0 0 1 1.032 0 11.209 11.209 0 0 0 7.877 3.08.75.75 0 0 1 .722.515 12.74 12.74 0 0 1 .635 3.985c0 5.942-4.064 10.933-9.563 12.348a.749.749 0 0 1-.374 0C6.314 20.683 2.25 15.692 2.25 9.75c0-1.39.223-2.73.635-3.985a.75.75 0 0 1 .722-.516 11.209 11.209 0 0 0 7.877-3.08Z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <p className="text-xs text-yellow-400/90 leading-snug">
+            Prepare for the slide, not the ride. Wear all your gear, all the time.
+          </p>
+          <button
+            onClick={dismissAtgatt}
+            className="ml-auto flex-shrink-0 p-1 text-yellow-400/50 hover:text-yellow-400/80 transition-colors"
+            aria-label="Dismiss safety reminder"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-4 h-4"
+            >
+              <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       <MeetingPointCard
         point={mp}
         riderDistances={scored.riderDistances}

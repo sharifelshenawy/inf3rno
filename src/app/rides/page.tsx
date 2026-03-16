@@ -167,23 +167,7 @@ export default function RidesListPage() {
 
   return (
     <div className="space-y-6 py-2">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-white">My Rides</h2>
-        <div className="flex gap-2">
-          <Link
-            href="/plan"
-            className="px-3 py-2 border border-[#2A2A2A] text-zinc-400 font-semibold text-sm rounded-lg hover:border-[#FF6B2B]/50 transition-colors"
-          >
-            Solo
-          </Link>
-          <Link
-            href="/rides/new"
-            className="px-3 py-2 bg-[#FF6B2B] text-black font-bold text-sm rounded-lg hover:bg-[#FF8B5B] transition-colors"
-          >
-            Group
-          </Link>
-        </div>
-      </div>
+      <h2 className="text-2xl font-bold text-white">My Rides</h2>
 
       {/* Tabs */}
       <div className="flex gap-1 bg-[#141414] rounded-lg p-1 border border-[#2A2A2A]">
@@ -228,7 +212,7 @@ export default function RidesListPage() {
                   isLoading={deletingId === ride.id}
                   onAction={() => handleDeleteSolo(ride.id)}
                 >
-                  <div className="p-4 rounded-xl bg-[#141414] border border-[#2A2A2A] space-y-2">
+                  <Link href="/plan" className="block p-4 rounded-xl bg-[#141414] border border-[#2A2A2A] space-y-2 hover:border-[#3A3A3A] transition-colors">
                     <div className="flex items-center justify-between gap-3">
                       <div className="min-w-0">
                         <h3 className="text-white font-semibold truncate">
@@ -260,7 +244,7 @@ export default function RidesListPage() {
                         </>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 </SwipeableCard>
               ))}
             </div>

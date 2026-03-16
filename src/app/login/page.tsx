@@ -249,7 +249,7 @@ function LoginContent() {
               <label className="block text-sm font-medium text-[#999999] mb-3">
                 Enter code
               </label>
-              <div className="flex items-center justify-center gap-1.5">
+              <div className="flex items-center justify-center gap-1 sm:gap-1.5">
                 {codeChars.map((char, i) => (
                   <span key={i} className="contents">
                     {i === 4 && (
@@ -272,7 +272,7 @@ function LoginContent() {
                       onFocus={(e) => e.target.select()}
                       autoFocus={i === 0}
                       maxLength={1}
-                      className="w-10 h-12 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-center text-xl font-mono uppercase focus:outline-none focus:border-[#FF6B2B] transition-colors"
+                      className="w-8 h-10 sm:w-10 sm:h-12 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-white text-center text-lg sm:text-xl font-mono uppercase focus:outline-none focus:border-[#FF6B2B] transition-colors"
                     />
                   </span>
                 ))}

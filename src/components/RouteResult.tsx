@@ -55,6 +55,7 @@ export default function RouteResult({
   const [commuteGeometries, setCommuteGeometries] = useState<Record<number, [number, number][]>>({});
   const [fuelPlan, setFuelPlan] = useState<FuelPlan | null>(null);
   const [showAtgatt, setShowAtgatt] = useState(false);
+  const [showFullRouteNav, setShowFullRouteNav] = useState(false);
 
   // ATGATT banner: show unless dismissed within the last 7 days
   useEffect(() => {
@@ -137,7 +138,7 @@ export default function RouteResult({
     fetchGeometries();
   }, [fetchGeometries]);
 
-  const handleShare = () => {
+  const handleShare = async () => {
     trackEvent("share_clicked", { routeId: route.id });
     const url = encodeRidePlan({
       riders,
@@ -146,10 +147,33 @@ export default function RouteResult({
       routeId: route.id,
       destinationIdx: selectedDest,
     });
-    navigator.clipboard.writeText(url).then(() => {
+
+    const shareTitle = `Check out my ride — ${route.name}`;
+    const shareText = `${route.name} — ${route.distanceKm}km, ~${Math.round(route.durationMinutes / 60)}h ${route.durationMinutes % 60}m. Planned with inf3rno`;
+
+    if (typeof navigator.share === "function") {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url,
+        });
+        trackEvent("share_clicked", { routeId: route.id, method: "native" });
+        return;
+      } catch (err) {
+        // User cancelled or share failed - fall through to clipboard
+        if (err instanceof Error && err.name === "AbortError") return;
+      }
+    }
+
+    // Fallback: copy to clipboard
+    try {
+      await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    });
+    } catch {
+      // Clipboard API not available
+    }
   };
 
   return (
@@ -226,55 +250,7 @@ export default function RouteResult({
         commuteGeometries={commuteGeometries}
       />
 
-      {/* Route details */}
-      <div className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A] space-y-3">
-        <div>
-          <h3 className="text-lg font-bold text-white">{route.name}</h3>
-          <p className="text-sm text-zinc-400 mt-1">{route.description}</p>
-        </div>
-
-        <div className="flex items-center gap-2 flex-wrap">
-          <span
-            className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${
-              DIFFICULTY_COLORS[route.difficulty] ||
-              "bg-zinc-500/20 text-zinc-400"
-            }`}
-          >
-            {route.difficulty}
-          </span>
-          <span className="text-xs text-zinc-500">
-            {route.distanceKm} km
-          </span>
-          <span className="text-xs text-zinc-500">&middot;</span>
-          <span className="text-xs text-zinc-500">
-            ~{Math.round(route.durationMinutes / 60)}h{" "}
-            {route.durationMinutes % 60}m
-          </span>
-        </div>
-
-        {route.highlights.length > 0 && (
-          <div className="flex gap-2 flex-wrap">
-            {route.highlights.map((h) => (
-              <span
-                key={h}
-                className="px-2 py-0.5 rounded-full text-xs bg-[#FF6B2B]/10 text-[#FF6B2B] border border-[#FF6B2B]/20"
-              >
-                {h}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {route.warnings.length > 0 && (
-          <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/20">
-            <p className="text-xs text-yellow-400/80">
-              {route.warnings.join(" \u2022 ")}
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* Fuel Plan */}
+      {/* Fuel Plan — shown immediately below map for visibility */}
       {rangeKm !== undefined && fuelPlan && (
         <div className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A] space-y-3">
           <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
@@ -386,6 +362,80 @@ export default function RouteResult({
         </div>
       )}
 
+      {/* Route details */}
+      <div className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A] space-y-3">
+        <div>
+          <h3 className="text-lg font-bold text-white">{route.name}</h3>
+          <p className="text-sm text-zinc-400 mt-1">{route.description}</p>
+        </div>
+
+        <div className="flex items-center gap-2 flex-wrap">
+          <span
+            className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+              DIFFICULTY_COLORS[route.difficulty] ||
+              "bg-zinc-500/20 text-zinc-400"
+            }`}
+          >
+            {route.difficulty}
+          </span>
+          <span className="text-xs text-zinc-500">
+            {route.distanceKm} km
+          </span>
+          <span className="text-xs text-zinc-500">&middot;</span>
+          <span className="text-xs text-zinc-500">
+            ~{Math.round(route.durationMinutes / 60)}h{" "}
+            {route.durationMinutes % 60}m
+          </span>
+        </div>
+
+        {route.highlights.length > 0 && (
+          <div className="flex gap-2 flex-wrap">
+            {route.highlights.map((h) => (
+              <span
+                key={h}
+                className="px-2 py-0.5 rounded-full text-xs bg-[#FF6B2B]/10 text-[#FF6B2B] border border-[#FF6B2B]/20"
+              >
+                {h}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {route.warnings.length > 0 && (
+          <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/20">
+            <p className="text-xs text-yellow-400/80">
+              {route.warnings.join(" \u2022 ")}
+            </p>
+          </div>
+        )}
+
+        {/* Estimated timing at waypoints */}
+        {route.waypoints.length > 0 && (() => {
+          const segments: { from: string; to: string }[] = [];
+          const wpLabels = route.waypoints.map((wp) => wp.label);
+
+          segments.push({ from: "Meeting point", to: wpLabels[0] });
+          for (let i = 0; i < wpLabels.length - 1; i++) {
+            segments.push({ from: wpLabels[i], to: wpLabels[i + 1] });
+          }
+          segments.push({ from: wpLabels[wpLabels.length - 1], to: destination.name });
+
+          const minutesPerSegment = Math.round(route.durationMinutes / segments.length);
+
+          return (
+            <div className="space-y-1.5">
+              <p className="text-xs text-zinc-500 font-semibold">Estimated timing</p>
+              {segments.map((seg, i) => (
+                <div key={i} className="flex items-center justify-between text-xs text-zinc-500">
+                  <span>{seg.from} &rarr; {seg.to}</span>
+                  <span className="tabular-nums">~{minutesPerSegment} min</span>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
+      </div>
+
       {/* Destination picker */}
       {route.destinations.length > 1 && (
         <div className="space-y-2">
@@ -429,14 +479,48 @@ export default function RouteResult({
         />
       )}
 
-      <NavLinks
-        meetingPoint={{ lat: mp.lat, lng: mp.lng }}
-        waypoints={route.waypoints.map((wp) => ({
-          lat: wp.lat,
-          lng: wp.lng,
-        }))}
-        destination={{ lat: destination.lat, lng: destination.lng }}
-      />
+      {/* Navigate to meeting point — primary CTA */}
+      <a
+        href={`https://www.google.com/maps/dir/?api=1&destination=${mp.lat},${mp.lng}&travelmode=driving`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackEvent("nav_link_clicked", { app: "Google Maps", target: "meeting_point" })}
+        className="block w-full h-12 rounded-lg bg-[#FF6B2B] text-white font-semibold text-sm text-center leading-[3rem] hover:bg-[#FF8B5B] transition-colors"
+      >
+        Navigate to Meeting Point &rarr;
+      </a>
+
+      {/* Full route navigation — collapsible */}
+      <div className="space-y-2">
+        <button
+          onClick={() => setShowFullRouteNav((prev) => !prev)}
+          className="flex items-center justify-between w-full text-xs text-zinc-500 uppercase tracking-wider font-semibold"
+        >
+          <span>Full route navigation</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className={`w-4 h-4 transition-transform ${showFullRouteNav ? "rotate-180" : ""}`}
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+        {showFullRouteNav && (
+          <NavLinks
+            meetingPoint={{ lat: mp.lat, lng: mp.lng }}
+            waypoints={route.waypoints.map((wp) => ({
+              lat: wp.lat,
+              lng: wp.lng,
+            }))}
+            destination={{ lat: destination.lat, lng: destination.lng }}
+          />
+        )}
+      </div>
 
       <div className="flex gap-3">
         <button

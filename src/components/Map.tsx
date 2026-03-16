@@ -106,7 +106,7 @@ export default function Map({
     <MapContainer
       center={[meetingPoint.lat, meetingPoint.lng]}
       zoom={10}
-      className="h-72 w-full rounded-lg"
+      className="h-80 sm:h-96 w-full rounded-lg"
       zoomControl={false}
       attributionControl={false}
     >

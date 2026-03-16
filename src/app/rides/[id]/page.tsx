@@ -725,36 +725,70 @@ export default function RideDetailPage() {
           )}
 
           {/* Map */}
-          {fullRoute && results?.meetingPoint && destination && (
-            <Map
-              meetingPoint={{
-                lat: results.meetingPoint.lat,
-                lng: results.meetingPoint.lng,
-              }}
-              waypoints={fullRoute.waypoints.map((wp) => ({
-                lat: wp.lat,
-                lng: wp.lng,
-              }))}
-              routeEnd={{
-                lat: fullRoute.waypoints[fullRoute.waypoints.length - 1].lat,
-                lng: fullRoute.waypoints[fullRoute.waypoints.length - 1].lng,
-              }}
-              destination={{
-                lat: destination.lat,
-                lng: destination.lng,
-              }}
-              riders={ride.members
+          {fullRoute && results?.meetingPoint && destination && (() => {
+            const rideMapLegs = [
+              {
+                polyline: [
+                  [results.meetingPoint.lat, results.meetingPoint.lng] as [number, number],
+                  ...fullRoute.waypoints.map((wp): [number, number] => [wp.lat, wp.lng]),
+                ],
+                style: "solid-orange" as const,
+              },
+              {
+                polyline: [
+                  [fullRoute.waypoints[fullRoute.waypoints.length - 1].lat, fullRoute.waypoints[fullRoute.waypoints.length - 1].lng] as [number, number],
+                  [destination.lat, destination.lng] as [number, number],
+                ],
+                style: "dashed-orange" as const,
+              },
+              ...ride.members
                 .filter((m) => m.startLat !== null && m.startLng !== null)
                 .map((m) => ({
-                  lat: m.startLat as number,
-                  lng: m.startLng as number,
+                  polyline: [
+                    [m.startLat as number, m.startLng as number] as [number, number],
+                    [results.meetingPoint!.lat, results.meetingPoint!.lng] as [number, number],
+                  ],
+                  style: "dashed-rider" as const,
                   color: "#FF6B2B",
-                  displayName:
-                    m.user.displayName || m.user.handle || "Rider",
-                }))}
-              pois={routePois}
-            />
-          )}
+                })),
+            ];
+            const rideMapMarkers = [
+              {
+                position: [results.meetingPoint.lat, results.meetingPoint.lng] as [number, number],
+                type: "start" as const,
+                label: results.meetingPoint.name,
+              },
+              ...fullRoute.waypoints.map((wp) => ({
+                position: [wp.lat, wp.lng] as [number, number],
+                type: "waypoint" as const,
+                label: wp.label,
+              })),
+              {
+                position: [destination.lat, destination.lng] as [number, number],
+                type: "destination" as const,
+                label: destination.name,
+              },
+              ...ride.members
+                .filter((m) => m.startLat !== null && m.startLng !== null)
+                .map((m) => ({
+                  position: [m.startLat as number, m.startLng as number] as [number, number],
+                  type: "rider" as const,
+                  label: m.user.displayName || m.user.handle || "Rider",
+                  color: "#FF6B2B",
+                })),
+              ...routePois.map((poi) => ({
+                position: [poi.lat, poi.lng] as [number, number],
+                type: (poi.type === "fuel" ? "fuel" : poi.type === "medical" ? "medical" : "cafe") as "fuel" | "medical" | "cafe",
+                label: poi.name,
+              })),
+            ];
+            return (
+              <Map
+                legs={rideMapLegs}
+                markers={rideMapMarkers}
+              />
+            );
+          })()}
 
           {/* Route photos */}
           {fullRoute && <RouteGallery routeId={fullRoute.id} />}

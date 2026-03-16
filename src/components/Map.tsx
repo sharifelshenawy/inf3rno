@@ -11,31 +11,56 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import type { PointOfInterest } from "@/lib/poi";
 
-interface LatLng {
-  lat: number;
-  lng: number;
+export interface MapLeg {
+  polyline: [number, number][];
+  style: "solid-orange" | "dashed-orange" | "dashed-rider";
+  color?: string; // override for rider-specific colors
 }
 
-export interface RiderMarker {
-  lat: number;
-  lng: number;
-  color: string;
-  displayName: string;
+export interface MapMarker {
+  position: [number, number];
+  type:
+    | "start"
+    | "waypoint"
+    | "routeEnd"
+    | "destination"
+    | "fuel"
+    | "medical"
+    | "cafe"
+    | "rider";
+  label?: string;
+  color?: string;
 }
 
-interface MapProps {
-  meetingPoint: LatLng;
-  waypoints: LatLng[];
-  routeEnd: LatLng;
-  destination: LatLng;
-  riders: RiderMarker[];
-  pois?: PointOfInterest[];
-  routeGeometry?: [number, number][];
-  destinationLegGeometry?: [number, number][];
-  commuteGeometries?: Record<number, [number, number][]>;
+export interface MapProps {
+  legs: MapLeg[];
+  markers?: MapMarker[];
+  fitBounds?: boolean;
 }
+
+const LEG_STYLES: Record<
+  MapLeg["style"],
+  (color?: string) => L.PathOptions
+> = {
+  "solid-orange": () => ({
+    color: "#FF6B2B",
+    weight: 3,
+    opacity: 0.9,
+  }),
+  "dashed-orange": () => ({
+    color: "#FF6B2B",
+    weight: 3,
+    opacity: 0.6,
+    dashArray: "8, 8",
+  }),
+  "dashed-rider": (color?: string) => ({
+    color: color || "#3B82F6",
+    weight: 2,
+    opacity: 0.6,
+    dashArray: "6, 8",
+  }),
+};
 
 function createIcon(color: string, size: number = 12): L.DivIcon {
   return L.divIcon({
@@ -62,12 +87,24 @@ function createPoiIcon(type: "fuel" | "medical" | "rest" | "cafe"): L.DivIcon {
   });
 }
 
-const meetingIcon = createIcon("#FF6B2B", 16);
-const waypointIcon = createIcon("#3B82F6", 10);
-const destinationIcon = createIcon("#10B981", 16);
-const fuelIcon = createPoiIcon("fuel");
-const medicalIcon = createPoiIcon("medical");
-const cafeIcon = createPoiIcon("cafe");
+const MARKER_ICONS: Record<
+  MapMarker["type"],
+  (color?: string) => L.DivIcon
+> = {
+  start: () => createIcon("#FF6B2B", 16),
+  waypoint: () => createIcon("#3B82F6", 10),
+  routeEnd: () => createIcon("#3B82F6", 10),
+  destination: () => createIcon("#10B981", 16),
+  fuel: () => createPoiIcon("fuel"),
+  medical: () => createPoiIcon("medical"),
+  cafe: () => createPoiIcon("cafe"),
+  rider: (color?: string) => createIcon(color || "#3B82F6", 12),
+};
+
+interface LatLng {
+  lat: number;
+  lng: number;
+}
 
 function FitBounds({ points }: { points: LatLng[] }) {
   const map = useMap();
@@ -83,41 +120,30 @@ function FitBounds({ points }: { points: LatLng[] }) {
   return null;
 }
 
-export default function Map({
-  meetingPoint,
-  waypoints,
-  routeEnd,
-  destination,
-  riders,
-  pois = [],
-  routeGeometry,
-  destinationLegGeometry,
-  commuteGeometries,
-}: MapProps) {
-  const allPoints = [
-    meetingPoint,
-    ...waypoints,
-    routeEnd,
-    destination,
-    ...riders.map((r) => ({ lat: r.lat, lng: r.lng })),
-  ];
+export default function Map({ legs, markers = [], fitBounds: doFitBounds = true }: MapProps) {
+  // Collect all points from legs + markers for bounds fitting
+  const allPoints: LatLng[] = [];
 
-  // Main route: meeting point → waypoints → route end (solid orange)
-  const routeLine: [number, number][] = routeGeometry || [
-    [meetingPoint.lat, meetingPoint.lng],
-    ...waypoints.map((wp): [number, number] => [wp.lat, wp.lng]),
-    [routeEnd.lat, routeEnd.lng],
-  ];
+  for (const leg of legs) {
+    for (const [lat, lng] of leg.polyline) {
+      allPoints.push({ lat, lng });
+    }
+  }
+  for (const marker of markers) {
+    allPoints.push({ lat: marker.position[0], lng: marker.position[1] });
+  }
 
-  // Last leg: route end → destination (dashed orange — the "where to eat" leg)
-  const destLeg: [number, number][] = destinationLegGeometry || [
-    [routeEnd.lat, routeEnd.lng],
-    [destination.lat, destination.lng],
-  ];
+  // Default center: first marker or first polyline point or Melbourne
+  const defaultCenter: [number, number] =
+    markers.length > 0
+      ? markers[0].position
+      : legs.length > 0 && legs[0].polyline.length > 0
+        ? legs[0].polyline[0]
+        : [-37.8136, 144.9631];
 
   return (
     <MapContainer
-      center={[meetingPoint.lat, meetingPoint.lng]}
+      center={defaultCenter}
       zoom={10}
       className="h-80 sm:h-96 w-full rounded-lg"
       zoomControl={false}
@@ -127,91 +153,39 @@ export default function Map({
         url="https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="https://carto.com/">CARTO</a>'
       />
-      <FitBounds points={allPoints} />
+      {doFitBounds && allPoints.length > 0 && <FitBounds points={allPoints} />}
 
-      {/* Rider commute lines — dashed, in each rider's color */}
-      {riders.map((rider, i) => (
+      {/* Render legs */}
+      {legs.map((leg, i) => (
         <Polyline
-          key={`commute-${i}`}
-          positions={
-            commuteGeometries?.[i] || [
-              [rider.lat, rider.lng],
-              [meetingPoint.lat, meetingPoint.lng],
-            ]
-          }
-          pathOptions={{
-            color: rider.color,
-            weight: 2,
-            opacity: 0.6,
-            dashArray: "6, 8",
-          }}
+          key={`leg-${i}`}
+          positions={leg.polyline}
+          pathOptions={LEG_STYLES[leg.style](leg.color)}
         />
       ))}
 
-      {/* Main route line — solid orange */}
-      <Polyline
-        positions={routeLine}
-        pathOptions={{ color: "#FF6B2B", weight: 3, opacity: 0.9 }}
-      />
+      {/* Render markers */}
+      {markers.map((marker, i) => {
+        const icon = MARKER_ICONS[marker.type](marker.color);
+        const zOffset = marker.type === "destination" ? 1000 : 0;
 
-      {/* Destination leg — dashed orange (last leg to cafe/pub/lookout) */}
-      <Polyline
-        positions={destLeg}
-        pathOptions={{ color: "#FF6B2B", weight: 3, opacity: 0.6, dashArray: "8, 8" }}
-      />
-
-      {/* POI markers */}
-      {pois.map((poi, i) => (
-        <Marker
-          key={`poi-${i}`}
-          position={[poi.lat, poi.lng]}
-          icon={poi.type === "fuel" ? fuelIcon : poi.type === "medical" ? medicalIcon : poi.type === "cafe" ? cafeIcon : createPoiIcon("rest")}
-        >
-          <Popup>
-            <div style={{ color: "#000", fontSize: "12px" }}>
-              <strong>{poi.name}</strong>
-              {poi.notes && <p style={{ margin: "4px 0 0", fontSize: "11px" }}>{poi.notes}</p>}
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-
-      {/* Rider markers */}
-      {riders.map((rider, i) => (
-        <Marker
-          key={`r-${i}`}
-          position={[rider.lat, rider.lng]}
-          icon={createIcon(rider.color, 12)}
-        />
-      ))}
-
-      {/* Meeting point */}
-      <Marker
-        position={[meetingPoint.lat, meetingPoint.lng]}
-        icon={meetingIcon}
-      />
-
-      {/* Waypoints */}
-      {waypoints.map((wp, i) => (
-        <Marker
-          key={`wp-${i}`}
-          position={[wp.lat, wp.lng]}
-          icon={waypointIcon}
-        />
-      ))}
-
-      {/* Route end marker — where the curated route finishes */}
-      <Marker
-        position={[routeEnd.lat, routeEnd.lng]}
-        icon={waypointIcon}
-      />
-
-      {/* Destination — the final stop (cafe/pub/lookout) */}
-      <Marker
-        position={[destination.lat, destination.lng]}
-        icon={destinationIcon}
-        zIndexOffset={1000}
-      />
+        return (
+          <Marker
+            key={`marker-${i}`}
+            position={marker.position}
+            icon={icon}
+            zIndexOffset={zOffset}
+          >
+            {marker.label && (
+              <Popup>
+                <div style={{ color: "#000", fontSize: "12px" }}>
+                  <strong>{marker.label}</strong>
+                </div>
+              </Popup>
+            )}
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 }

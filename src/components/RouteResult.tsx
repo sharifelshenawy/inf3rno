@@ -94,7 +94,7 @@ export default function RouteResult({
       { lat: destination.lat, lng: destination.lng },
     ];
 
-    const plan = planFuelStops(route.id, waypoints, rangeKm);
+    const plan = planFuelStops(route.id, waypoints, rangeKm, route.distanceKm);
     setFuelPlan(plan);
   }, [route.id, route.waypoints, mp.lat, mp.lng, destination.lat, destination.lng, rangeKm]);
 

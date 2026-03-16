@@ -34,11 +34,13 @@ interface FuelPlan {
  * @param routeId - curated route ID (to look up POIs)
  * @param waypoints - ordered route points (meeting point → waypoints → destination)
  * @param rangeKm - bike's safe fuel range (already includes 20% safety margin from computeRangeKm)
+ * @param routeDistanceKm - actual road distance from route data (not haversine)
  */
 export function planFuelStops(
   routeId: string,
   waypoints: LatLng[],
-  rangeKm: number
+  rangeKm: number,
+  routeDistanceKm?: number
 ): FuelPlan {
   if (waypoints.length < 2) {
     return { stops: [], totalDistanceKm: 0, rangeKm, needsFuelStops: false, arrivalFuelPercent: 100 };
@@ -48,14 +50,23 @@ export function planFuelStops(
   const routePois = (poiData as Record<string, PointOfInterest[]>)[routeId] || [];
   const fuelStations = routePois.filter((p) => p.type === "fuel");
 
-  // Calculate cumulative distances along the route
+  // Calculate cumulative haversine distances (for proportional station placement)
   const segmentDistances: number[] = [];
-  let totalDistanceKm = 0;
+  let haversineTotal = 0;
   for (let i = 1; i < waypoints.length; i++) {
     const dist = haversineDistance(waypoints[i - 1], waypoints[i]);
     segmentDistances.push(dist);
-    totalDistanceKm += dist;
+    haversineTotal += dist;
   }
+
+  // Use actual road distance if provided, otherwise use haversine with a 1.4x
+  // multiplier to account for road winding (twisty roads are ~1.3-1.6x longer
+  // than straight-line distance)
+  const ROAD_WINDING_FACTOR = 1.4;
+  let totalDistanceKm = routeDistanceKm || Math.round(haversineTotal * ROAD_WINDING_FACTOR);
+
+  // Scale factor: how much longer is the road vs haversine
+  const scaleFactor = haversineTotal > 0 ? totalDistanceKm / haversineTotal : 1;
 
   // If total distance is within range, no stops needed
   // But check if we'd arrive with less than 20% fuel
@@ -93,7 +104,8 @@ export function planFuelStops(
     return {
       station,
       distanceFromRoute: minDist,
-      distanceAlongRoute: nearestCumulativeDist,
+      // Scale haversine distance to actual road distance
+      distanceAlongRoute: nearestCumulativeDist * scaleFactor,
     };
   })
     // Only consider stations within 10km of the route

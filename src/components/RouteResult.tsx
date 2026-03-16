@@ -96,15 +96,21 @@ export default function RouteResult({
   const routePois: PointOfInterest[] =
     (poiData as Record<string, PointOfInterest[]>)[route.id] || [];
 
-  // Fetch main route geometry ONCE (meeting point → waypoints → route end)
-  // This doesn't change when destination changes
+  // Fetch main route geometry ONCE (meeting point → route shape → route end)
+  // Uses routeShape (dense helper points) for Valhalla if available,
+  // falls back to waypoints. routeShape is NOT used for Google Maps deep links.
   useEffect(() => {
     let cancelled = false;
     async function fetchMainRoute() {
       try {
+        // Use dense routeShape for Valhalla accuracy, fall back to sparse waypoints
+        const shapePoints = route.routeShape
+          ? route.routeShape.map((p) => ({ lat: p.lat, lng: p.lng }))
+          : route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng }));
+
         const routePoints = [
           { lat: mp.lat, lng: mp.lng },
-          ...route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng })),
+          ...shapePoints,
         ];
         const routeGeo = await fetchRouteGeometry(routePoints);
         if (!cancelled && routeGeo) setRouteGeometry(routeGeo);

@@ -15,6 +15,11 @@ export interface RouteDestination {
   description?: string;
 }
 
+export interface RouteShapePoint {
+  lat: number;
+  lng: number;
+}
+
 export interface Route {
   id: string;
   name: string;
@@ -26,6 +31,7 @@ export interface Route {
   region: string;
   meetingPointIds: string[];
   waypoints: RouteWaypoint[];
+  routeShape?: RouteShapePoint[];  // Dense helper points for Valhalla — NOT sent to Google Maps
   destinations: RouteDestination[];
   highlights: string[];
   warnings: string[];

@@ -57,7 +57,6 @@ export default function RouteResult({
   const [routePolyline, setRoutePolyline] = useState<[number, number][] | null>(null);
   const [loading, setLoading] = useState(true);
   const [fuelPlan, setFuelPlan] = useState<FuelPlan | null>(null);
-  const [showFullRouteNav, setShowFullRouteNav] = useState(false);
 
   const destination = route.destinations[selectedDest];
   const mp = scored.meetingPoint;
@@ -699,65 +698,37 @@ export default function RouteResult({
         </a>
       </div>
 
-      {/* Full route navigation — collapsible */}
+      {/* Open in other apps */}
       <div className="space-y-2">
-        <button
-          onClick={() => setShowFullRouteNav((prev) => !prev)}
-          className="flex items-center justify-between w-full text-xs text-zinc-500 uppercase tracking-wider font-semibold"
-        >
-          <span>Full route navigation</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className={`w-4 h-4 transition-transform ${showFullRouteNav ? "rotate-180" : ""}`}
+        <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
+          Also available in
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          <a
+            href={googleUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent("nav_link_clicked", { app: "Google Maps" })}
+            className="flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] hover:border-[#FF6B2B] transition-colors text-center"
           >
-            <path
-              fillRule="evenodd"
-              d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        {showFullRouteNav && (
-          <div className="space-y-2">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
-              Open in
-            </p>
-            <div className="grid grid-cols-3 gap-2">
-              <a
-                href={googleUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("nav_link_clicked", { app: "Google Maps" })}
-                className="flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] hover:border-[#FF6B2B] transition-colors text-center"
-              >
-                <span className="text-xl">{"\u{1F5FA}\uFE0F"}</span>
-                <span className="text-xs text-zinc-400 font-medium">Google Maps</span>
-              </a>
-              <a
-                href={wazeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("nav_link_clicked", { app: "Waze" })}
-                className="flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] hover:border-[#FF6B2B] transition-colors text-center"
-              >
-                <span className="text-xl">{"\u{1F698}"}</span>
-                <span className="text-xs text-zinc-400 font-medium">Waze</span>
-              </a>
-              <a
-                href={appleUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("nav_link_clicked", { app: "Apple Maps" })}
-                className="flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] hover:border-[#FF6B2B] transition-colors text-center"
-              >
-                <span className="text-xl">{"\u{1F34E}"}</span>
-                <span className="text-xs text-zinc-400 font-medium">Apple Maps</span>
-              </a>
-            </div>
+            <span className="text-xl">{"\u{1F5FA}\uFE0F"}</span>
+            <span className="text-xs text-zinc-400 font-medium">Google Maps</span>
+          </a>
+          <div className="relative flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] opacity-50 cursor-not-allowed text-center">
+            <span className="text-xl">{"\u{1F698}"}</span>
+            <span className="text-xs text-zinc-600 font-medium">Waze</span>
+            <span className="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 rounded-full bg-[#FF6B2B]/20 text-[9px] text-[#FF6B2B] font-bold border border-[#FF6B2B]/30">
+              Soon
+            </span>
           </div>
-        )}
+          <div className="relative flex flex-col items-center gap-1 p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] opacity-50 cursor-not-allowed text-center">
+            <span className="text-xl">{"\u{1F34E}"}</span>
+            <span className="text-xs text-zinc-600 font-medium">Apple Maps</span>
+            <span className="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 rounded-full bg-[#FF6B2B]/20 text-[9px] text-[#FF6B2B] font-bold border border-[#FF6B2B]/30">
+              Soon
+            </span>
+          </div>
+        </div>
       </div>
 
       <div className="flex gap-3">

@@ -210,6 +210,38 @@ export default function RouteResult({
       />
 
       {/* Fuel Plan — shown immediately below map for visibility */}
+      {/* Destination picker — above fuel plan so changes flow down */}
+      {route.destinations.length > 1 && (
+        <div className="space-y-2">
+          <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
+            Destination
+          </p>
+          <div className="space-y-2">
+            {route.destinations.map((dest, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedDest(i)}
+                className={`w-full text-left p-3 rounded-lg border transition-all flex items-center justify-between ${
+                  selectedDest === i
+                    ? "border-[#FF6B2B] bg-[#FF6B2B]/10"
+                    : "border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]"
+                }`}
+              >
+                <div>
+                  <span className="text-white font-medium text-sm">
+                    {dest.name}
+                  </span>
+                  <span className="text-xs text-zinc-500 ml-2">
+                    {dest.position === "enroute" ? "Along route" : "End point"}
+                  </span>
+                </div>
+                <span className="text-xs text-zinc-500">{dest.type}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {rangeKm !== undefined && fuelPlan && (
         <div className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A] space-y-3">
           <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
@@ -372,60 +404,42 @@ export default function RouteResult({
         {route.waypoints.length > 0 && (() => {
           const segments: { from: string; to: string }[] = [];
           const wpLabels = route.waypoints.map((wp) => wp.label);
+          const startLabel = isSoloRide ? "Start" : "Meeting point";
 
-          segments.push({ from: isSoloRide ? "Start" : "Meeting point", to: wpLabels[0] });
+          segments.push({ from: startLabel, to: wpLabels[0] });
           for (let i = 0; i < wpLabels.length - 1; i++) {
             segments.push({ from: wpLabels[i], to: wpLabels[i + 1] });
           }
           segments.push({ from: wpLabels[wpLabels.length - 1], to: destination.name });
 
-          const minutesPerSegment = Math.round(route.durationMinutes / segments.length);
+          // For enroute destinations, estimate shorter total time proportionally
+          const isEnroute = destination.position === "enroute";
+          const totalSegments = route.waypoints.length + 1; // full route segments
+          const activeSegments = segments.length;
+          const estimatedTotalMin = isEnroute
+            ? Math.round(route.durationMinutes * (activeSegments / totalSegments) * 0.8)
+            : route.durationMinutes;
+          const minutesPerSegment = Math.round(estimatedTotalMin / activeSegments);
+          const totalTimeStr = estimatedTotalMin >= 60
+            ? `${Math.floor(estimatedTotalMin / 60)}h ${estimatedTotalMin % 60}m`
+            : `${estimatedTotalMin}m`;
 
           return (
             <div className="space-y-1.5">
-              <p className="text-xs text-zinc-500 font-semibold">Estimated timing</p>
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-zinc-500 font-semibold">Estimated timing</p>
+                <p className="text-xs text-zinc-400 font-medium">~{totalTimeStr} total</p>
+              </div>
               {segments.map((seg, i) => (
                 <div key={i} className="flex items-center justify-between text-xs text-zinc-500">
-                  <span>{seg.from} &rarr; {seg.to}</span>
-                  <span className="tabular-nums">~{minutesPerSegment} min</span>
+                  <span className="truncate mr-2">{seg.from} &rarr; {seg.to}</span>
+                  <span className="tabular-nums shrink-0">~{minutesPerSegment} min</span>
                 </div>
               ))}
             </div>
           );
         })()}
       </div>
-
-      {/* Destination picker */}
-      {route.destinations.length > 1 && (
-        <div className="space-y-2">
-          <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
-            Destination
-          </p>
-          <div className="space-y-2">
-            {route.destinations.map((dest, i) => (
-              <button
-                key={i}
-                onClick={() => setSelectedDest(i)}
-                className={`w-full text-left p-3 rounded-lg border transition-all flex items-center justify-between ${
-                  selectedDest === i
-                    ? "border-[#FF6B2B] bg-[#FF6B2B]/10"
-                    : "border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]"
-                }`}
-              >
-                <div>
-                  <span className="text-white font-medium text-sm">
-                    {dest.name}
-                  </span>
-                  <span className="text-xs text-zinc-500 ml-2">
-                    {dest.position === "enroute" ? "Along route" : "End point"}
-                  </span>
-                </div>
-                <span className="text-xs text-zinc-500">{dest.type}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Route Photos */}
       <RouteGallery routeId={route.id} />

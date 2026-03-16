@@ -1,0 +1,1198 @@
+{
+  "reefton-spur": {
+    "startFuel": {
+      "name": "Caltex Warburton",
+      "lat": -37.7540,
+      "lng": 145.6870,
+      "brand": "Caltex",
+      "address": "3458 Warburton Highway, Warburton VIC 3799"
+    },
+    "destinations": [
+      {
+        "name": "Marysville Country Bakery & Cafe",
+        "lat": -37.5096,
+        "lng": 145.7476,
+        "type": "bakery",
+        "position": "endpoint",
+        "description": "Famous meat pies and coffee. Up to 40 motorcycles parked out front on sunny weekends. The quintessential Reefton Spur finish line stop.",
+        "source": "Netrider forum ride reports, Shannons Club ride guide"
+      },
+      {
+        "name": "Freshly Blended",
+        "lat": -37.5100,
+        "lng": 145.7480,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Quieter alternative to the bakery with garden courtyard seating. Access via car park behind bakery or narrow laneway. Where locals go.",
+        "source": "Shannons Club Victoria Reefton Spur guide"
+      },
+      {
+        "name": "Keppel Cafe Marysville",
+        "lat": -37.5090,
+        "lng": 145.7470,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Quality coffee and food in a relaxed setting. Good outdoor seating area popular with riders.",
+        "source": "Visit Melbourne dining guide"
+      },
+      {
+        "name": "Bruno's Art & Sculpture Garden",
+        "lat": -37.5050,
+        "lng": 145.7510,
+        "type": "attraction",
+        "position": "endpoint",
+        "description": "Unique sculpture garden in the bush. Worth a wander after the ride.",
+        "source": "Visit Melbourne attractions"
+      },
+      {
+        "name": "Reefton Hotel",
+        "lat": -37.7700,
+        "lng": 145.5600,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Historic pub licensed since 1886 at McMahons Creek. Attracts bikers in force on sunny weekends. Watch bikes roar past from the outdoor area.",
+        "source": "Shannons Club ride guide, Adventure Rider forum"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Reefton Hotel",
+        "lat": -37.7700,
+        "lng": 145.5600,
+        "type": "pub",
+        "detour": "on-route",
+        "notes": "1600 Woods Point Rd, McMahons Creek. Historic biker pub est. 1886. Cold beer, counter meals. Last stop before the Spur."
+      },
+      {
+        "name": "Marysville General Store (fuel)",
+        "lat": -37.5093,
+        "lng": 145.7440,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Basic fuel available at the end of the route in Marysville."
+      }
+    ]
+  },
+  "black-spur": {
+    "startFuel": {
+      "name": "BP Healesville",
+      "lat": -37.6536,
+      "lng": 145.5269,
+      "brand": "BP",
+      "address": "66 Maroondah Highway, Healesville VIC 3777"
+    },
+    "destinations": [
+      {
+        "name": "Ray's Black Spur Roadhouse",
+        "lat": -37.5170,
+        "lng": 145.7250,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Legendary biker fuel stop at Narbethong. Coffee, burgers, and basic supplies. A favourite on the Netrider forums.",
+        "source": "Netrider forum 'Name your fav Biker Cafe/fuelstop' thread"
+      },
+      {
+        "name": "Black Spur Inn",
+        "lat": -37.5700,
+        "lng": 145.6600,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Top spot to warm up by the fire in winter. In summer you can't move for all the motorcyclists. Historic country pub in the forest.",
+        "source": "Shannons Club Black Spur ride guide"
+      },
+      {
+        "name": "Marysville Country Bakery & Cafe",
+        "lat": -37.5096,
+        "lng": 145.7476,
+        "type": "bakery",
+        "position": "endpoint",
+        "description": "Famous meat pies, big parking area for bikes. Popular biker haunt on weekends.",
+        "source": "Shannons Club ride guide, multiple ride reports"
+      },
+      {
+        "name": "Buxton Hotel",
+        "lat": -37.4267,
+        "lng": 145.7117,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Popular choice for a mid-point feed. Distinctive race bike mounted on the roof. Counter meals and cold beer.",
+        "source": "Shannons Club Black Spur guide"
+      },
+      {
+        "name": "Igloo Roadhouse",
+        "lat": -37.4267,
+        "lng": 145.7130,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "Home of the famous 'Bucky Burger'. Quick bite and coffee at 2220 Maroondah Hwy, Buxton.",
+        "source": "GdayPubs.com.au Black Spur pub trail"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Healesville Hotel",
+        "lat": -37.6536,
+        "lng": 145.5269,
+        "type": "pub",
+        "detour": "on-route",
+        "notes": "256 Maroondah Hwy. Restored 1910 gastropub with great local wines and beer. Fill up on coffee and brunch before the Spur."
+      },
+      {
+        "name": "Black Spur Inn",
+        "lat": -37.5700,
+        "lng": 145.6600,
+        "type": "pub",
+        "detour": "on-route",
+        "notes": "Country pub mid-Spur. Log fire in winter, packed with riders in summer."
+      },
+      {
+        "name": "Shell Healesville",
+        "lat": -37.6530,
+        "lng": 145.5250,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Full service fuel station in Healesville. Fill up before the Spur."
+      }
+    ]
+  },
+  "donna-buang": {
+    "startFuel": {
+      "name": "Caltex Warburton",
+      "lat": -37.7540,
+      "lng": 145.6870,
+      "brand": "Caltex",
+      "address": "3458 Warburton Highway, Warburton VIC 3799"
+    },
+    "destinations": [
+      {
+        "name": "Mt Donna Buang Viewing Tower",
+        "lat": -37.7170,
+        "lng": 145.6850,
+        "type": "lookout",
+        "position": "endpoint",
+        "description": "21m tall tower at 1245m summit with 360-degree views over Victoria Alps and Yarra Valley. Grassy picnic area and public toilets at the top.",
+        "source": "motorcyclerides.com.au, Wikipedia"
+      },
+      {
+        "name": "Cog Bike Cafe",
+        "lat": -37.7540,
+        "lng": 145.6910,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "42 Station Road, Warburton. Coffee, cakes, and good times on the Rail Trail. Lively with cyclists and motorcyclists.",
+        "source": "Visit Melbourne, TripAdvisor"
+      },
+      {
+        "name": "Warburton Waterwheel",
+        "lat": -37.7545,
+        "lng": 145.6890,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "Good coffee at the start/end of the ride. Last decent cafe before the climb.",
+        "source": "motorcyclerides.com.au Warburton guide"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Caltex Warburton",
+        "lat": -37.7540,
+        "lng": 145.6870,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "3458 Warburton Hwy. Last fuel before the summit climb. Fill up here."
+      },
+      {
+        "name": "Mt Donna Buang Summit Rest Area",
+        "lat": -37.7170,
+        "lng": 145.6850,
+        "type": "rest",
+        "detour": "on-route",
+        "notes": "Public toilets, grassy area, and 21m viewing tower at summit. No food or fuel."
+      }
+    ]
+  },
+  "great-ocean-road-torquay": {
+    "startFuel": {
+      "name": "United Torquay",
+      "lat": -38.3310,
+      "lng": 144.3250,
+      "brand": "United",
+      "address": "Surf Coast Highway, Torquay VIC 3228"
+    },
+    "destinations": [
+      {
+        "name": "Apollo Bay Seafood Cafe",
+        "lat": -38.7568,
+        "lng": 143.6700,
+        "type": "restaurant",
+        "position": "endpoint",
+        "description": "Family-owned for almost two decades. Fresh local seafood, fish and chips with gummy shark (flake), mussels, oysters, local crayfish. Rear courtyard.",
+        "source": "TripAdvisor, Yelp reviews"
+      },
+      {
+        "name": "Apollo Bay Fishermen's Co-op",
+        "lat": -38.7570,
+        "lng": 143.6680,
+        "type": "restaurant",
+        "position": "endpoint",
+        "description": "Classic deep-fried fish and chips steps from the shore. Fresh off the boat. Currently at 18 Pascoe Street during redevelopment.",
+        "source": "apollobayfishcoop.com.au"
+      },
+      {
+        "name": "Apollo Bay Hotel",
+        "lat": -38.7565,
+        "lng": 143.6710,
+        "type": "pub",
+        "position": "endpoint",
+        "description": "Pub meals, steaks, pizza. Views over the foreshore. Great for a cold beer after the ride.",
+        "source": "Great Ocean Road restaurant guides"
+      },
+      {
+        "name": "Wye River General Store",
+        "lat": -38.6333,
+        "lng": 143.8897,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "35 Great Ocean Rd, Wye River. Buzzy spot with great food and coffee. Excellent lunch stop between Lorne and Apollo Bay.",
+        "source": "AMCN Travel Yarn Great Ocean Road feature"
+      },
+      {
+        "name": "Grand Pacific Hotel Lorne",
+        "lat": -38.5410,
+        "lng": 143.9750,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Impressive heritage hotel built 1879 at the end of Mountjoy Parade. Classic pub meals and drinks with coastal atmosphere.",
+        "source": "AMCN travel feature, Great Ocean Road guides"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Shell Lorne",
+        "lat": -38.5400,
+        "lng": 143.9750,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "74 Mountjoy Parade, Lorne. Mid-route fuel. Note: 95RON not available on GOR, only 91 & 98 RON."
+      },
+      {
+        "name": "BP Anglesea",
+        "lat": -38.4080,
+        "lng": 144.1850,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel stop early in the ride."
+      },
+      {
+        "name": "Aireys Inlet — Split Point Lighthouse",
+        "lat": -38.4630,
+        "lng": 144.0980,
+        "type": "lookout",
+        "detour": "1-2 min detour",
+        "notes": "Quick photo stop at the iconic lighthouse. Short detour off the GOR."
+      },
+      {
+        "name": "Teddy's Lookout — Lorne",
+        "lat": -38.5480,
+        "lng": 143.9650,
+        "type": "lookout",
+        "detour": "1-2 min detour",
+        "notes": "Panoramic views of the coastline. Short ride up from Lorne."
+      },
+      {
+        "name": "BP Apollo Bay",
+        "lat": -38.7560,
+        "lng": 143.6710,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "End of route fuel. Fill up before return trip."
+      }
+    ]
+  },
+  "lorne-deans-marsh": {
+    "startFuel": {
+      "name": "Shell Lorne",
+      "lat": -38.5400,
+      "lng": 143.9750,
+      "brand": "Shell",
+      "address": "74 Mountjoy Parade, Lorne VIC 3232"
+    },
+    "destinations": [
+      {
+        "name": "The Store Deans Marsh",
+        "lat": -38.3810,
+        "lng": 143.8700,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "All-in-one hub: cafe, traditional general store, and bottle shop. Good coffee and country Anzac biscuits. 20 minutes inland from Lorne.",
+        "source": "Netrider forum 'fav Biker Cafe/fuelstop' thread, thestoredeansmarsh.com.au"
+      },
+      {
+        "name": "Martians Cafe & Bar",
+        "lat": -38.3810,
+        "lng": 143.8710,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "12 Lorne Rd, Deans Marsh. Cafe, bar, live music venue, bottle shop and petrol station. Hippy vibe with fantastic ambience. Note: may have changed hands — check before visiting.",
+        "source": "Netrider forum, bestbikingroads.com Lorne-Deans Marsh review"
+      },
+      {
+        "name": "Forrest Brewing Co",
+        "lat": -38.5170,
+        "lng": 143.7150,
+        "type": "brewery",
+        "position": "endpoint",
+        "description": "26 Grant St, Forrest. Sibling-owned microbrewery since 2010. Relaxed dining hall, come in your riding gear. Kid, dog, and bike friendly.",
+        "source": "forrestbrewing.com.au, Broadsheet Melbourne"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Shell Lorne",
+        "lat": -38.5400,
+        "lng": 143.9750,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "74 Mountjoy Parade. Fuel up before heading inland. No fuel on the route."
+      },
+      {
+        "name": "Teddy's Lookout",
+        "lat": -38.5480,
+        "lng": 143.9650,
+        "type": "lookout",
+        "detour": "1-2 min detour",
+        "notes": "Panoramic coastal views. Quick stop before climbing inland."
+      }
+    ]
+  },
+  "skenes-creek-otways": {
+    "startFuel": {
+      "name": "BP Apollo Bay",
+      "lat": -38.7560,
+      "lng": 143.6710,
+      "brand": "BP",
+      "address": "Great Ocean Road, Apollo Bay VIC 3233"
+    },
+    "destinations": [
+      {
+        "name": "Forrest Brewing Co",
+        "lat": -38.5170,
+        "lng": 143.7150,
+        "type": "brewery",
+        "position": "endpoint",
+        "description": "26 Grant St, Forrest. Craft brewery with relaxed dining hall. Come in your riding gear. Great post-ride beers and food.",
+        "source": "forrestbrewing.com.au, Broadsheet Melbourne"
+      },
+      {
+        "name": "Forrest General Store",
+        "lat": -38.5170,
+        "lng": 143.7170,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Coffee and basic supplies in the town centre. Good for a quick refuel stop.",
+        "source": "Visit Great Ocean Road"
+      },
+      {
+        "name": "Apollo Bay Seafood Cafe",
+        "lat": -38.7568,
+        "lng": 143.6700,
+        "type": "restaurant",
+        "position": "enroute",
+        "description": "Start or finish at Apollo Bay with fresh local seafood and fish & chips.",
+        "source": "TripAdvisor reviews"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "BP Apollo Bay",
+        "lat": -38.7560,
+        "lng": 143.6710,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel up in Apollo Bay before the climb. No fuel on the route to Forrest."
+      }
+    ]
+  },
+  "kinglake-loop": {
+    "startFuel": {
+      "name": "BP Hurstbridge",
+      "lat": -37.6380,
+      "lng": 145.1930,
+      "brand": "BP",
+      "address": "Heidelberg-Kinglake Rd, Hurstbridge VIC 3099"
+    },
+    "destinations": [
+      {
+        "name": "St Andrews Hotel",
+        "lat": -37.6120,
+        "lng": 145.2780,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Corner Kangaroo Ground Rd & St Andrews Rd. Known for bikes, live bands, open fireplaces, and great pub food. Motorbike and hotrod haven. Part of the Kinglake Pub Trail.",
+        "source": "thestandrewshotel.com.au, Nillumbik Shire Council"
+      },
+      {
+        "name": "Kinglake General Store & Cafe",
+        "lat": -37.4580,
+        "lng": 145.3700,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Coffee and basic supplies in the heart of Kinglake. Good rest stop after the climb.",
+        "source": "bikesales.com.au Top 10 Melbourne road rides"
+      },
+      {
+        "name": "Kinglake National Park Lookout",
+        "lat": -37.4700,
+        "lng": 145.3500,
+        "type": "lookout",
+        "position": "enroute",
+        "description": "Panoramic valley views from the ridge. Pull over for photos and leg stretch.",
+        "source": "Visit Melbourne"
+      },
+      {
+        "name": "Picollo Mecannico",
+        "lat": -37.6730,
+        "lng": 145.1530,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "Diamond Creek. Good coffee stop on the way to or from the loop. Popular with riders.",
+        "source": "Netrider forum"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "St Andrews Hotel",
+        "lat": -37.6120,
+        "lng": 145.2780,
+        "type": "pub",
+        "detour": "on-route",
+        "notes": "Classic biker pub with live bands on weekends. Great pub grub and cold beer. On the loop route."
+      },
+      {
+        "name": "Shell Whittlesea",
+        "lat": -37.5130,
+        "lng": 145.1180,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel up before or after the loop."
+      },
+      {
+        "name": "BP Hurstbridge",
+        "lat": -37.6380,
+        "lng": 145.1930,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel near the start of the ride."
+      }
+    ]
+  },
+  "dandenong-ranges": {
+    "startFuel": {
+      "name": "7-Eleven Bayswater",
+      "lat": -37.8377,
+      "lng": 145.2865,
+      "brand": "7-Eleven",
+      "address": "936 Mountain Highway, Bayswater VIC 3153"
+    },
+    "destinations": [
+      {
+        "name": "SkyHigh Mount Dandenong",
+        "lat": -37.8285,
+        "lng": 145.3672,
+        "type": "lookout",
+        "position": "endpoint",
+        "description": "Award-winning bistro at the summit with 70+ tables. Motorcycle parking $3. Coffee, lunch menu, panoramic views. Open 7 days from 10.15am.",
+        "source": "thevillages.com.au, Visit Melbourne"
+      },
+      {
+        "name": "Pie in the Sky",
+        "lat": -37.8620,
+        "lng": 145.3580,
+        "type": "bakery",
+        "position": "enroute",
+        "description": "43 Olinda-Monbulk Rd, Olinda. Award-winning pies since 1993. A Dandenong Ranges institution.",
+        "source": "TripAdvisor, local guides"
+      },
+      {
+        "name": "Miss Marple's Tearooms",
+        "lat": -37.8330,
+        "lng": 145.3550,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "382 Mt Dandenong Tourist Rd. Purpose-built Tudor-style building with Agatha Christie theme. Scones, tea, and English fare.",
+        "source": "thevillages.com.au Dandenong Ranges"
+      },
+      {
+        "name": "Sassafras Bakehouse",
+        "lat": -37.8620,
+        "lng": 145.3580,
+        "type": "bakery",
+        "position": "enroute",
+        "description": "Village bakery in charming Sassafras. Fresh bread, pastries, and coffee.",
+        "source": "Visit Melbourne"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "BP Bayswater",
+        "lat": -37.8420,
+        "lng": 145.2700,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Full service fuel station at the start. No fuel stations in the Dandenong Ranges villages."
+      },
+      {
+        "name": "SkyHigh Mount Dandenong",
+        "lat": -37.8285,
+        "lng": 145.3672,
+        "type": "lookout",
+        "detour": "on-route",
+        "notes": "Motorcycle parking $3. Coffee kiosk open from 10.15am. Public toilets available."
+      }
+    ]
+  },
+  "mornington-loop": {
+    "startFuel": {
+      "name": "Shell Frankston",
+      "lat": -38.1430,
+      "lng": 145.1220,
+      "brand": "Shell",
+      "address": "Nepean Highway, Frankston VIC 3199"
+    },
+    "destinations": [
+      {
+        "name": "Flinders Hotel",
+        "lat": -38.4800,
+        "lng": 145.0200,
+        "type": "pub",
+        "position": "endpoint",
+        "description": "23 Cook Street, Flinders. Historic coastal pub since 1889. Bistro, sports bar, outdoor dining. Modern Australian cuisine, seafood, steaks. Metres from the Western Port coastline.",
+        "source": "flindershotel.com.au, Visit Melbourne"
+      },
+      {
+        "name": "Cape Schanck Lighthouse",
+        "lat": -38.4873,
+        "lng": 144.8656,
+        "type": "lookout",
+        "position": "endpoint",
+        "description": "420 Cape Schanck Rd. Heritage lighthouse built 1859 on Bass Strait. Boardwalk, views, picnic area.",
+        "source": "Parks Victoria, Visit Melbourne"
+      },
+      {
+        "name": "Merricks General Wine Store",
+        "lat": -38.3740,
+        "lng": 145.0830,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "3460 Frankston-Flinders Rd, Merricks. Cellar door, bistro, cafe, and art gallery. Famous scones and gourmet breakfasts. Open daily 8:30am-5pm.",
+        "source": "Broadsheet Melbourne, TripAdvisor"
+      },
+      {
+        "name": "Arthurs Seat Eagle Summit Cafe",
+        "lat": -38.3590,
+        "lng": 144.9510,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "Summit cafe at the highest point on the Peninsula. Hot beverages, pies, sandwiches. Licensed with local wine, beer, cider. Sweeping views of Port Phillip Bay.",
+        "source": "aseagle.com.au, Visit Victoria"
+      },
+      {
+        "name": "The Epicurean Red Hill",
+        "lat": -38.3810,
+        "lng": 145.0120,
+        "type": "restaurant",
+        "position": "enroute",
+        "description": "165 Shoreham Rd, Red Hill South. Italian bakery, cheese larder, cucina and wine centre. All locally sourced Mornington Peninsula produce.",
+        "source": "Visit Melbourne, Yelp reviews"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "BP Mornington",
+        "lat": -38.2190,
+        "lng": 145.0370,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Mid-route fuel stop."
+      },
+      {
+        "name": "United Rosebud",
+        "lat": -38.3560,
+        "lng": 144.9200,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Last fuel before peninsula tip and Cape Schanck."
+      },
+      {
+        "name": "Arthurs Seat Lookout",
+        "lat": -38.3590,
+        "lng": 144.9510,
+        "type": "lookout",
+        "detour": "1-2 min detour",
+        "notes": "Panoramic views of the Peninsula and Port Phillip Bay. Hairpin climb up is popular with riders."
+      }
+    ]
+  },
+  "yarra-valley-loop": {
+    "startFuel": {
+      "name": "Shell Lilydale",
+      "lat": -37.7560,
+      "lng": 145.3530,
+      "brand": "Shell",
+      "address": "Maroondah Highway, Lilydale VIC 3140"
+    },
+    "destinations": [
+      {
+        "name": "Healesville Hotel",
+        "lat": -37.6536,
+        "lng": 145.5269,
+        "type": "pub",
+        "position": "enroute",
+        "description": "256 Maroondah Hwy. Beautifully restored 1910 gastropub. Simple, fresh, local food. Great wine list from the Yarra Valley region. Healesville Harvest cafe next door.",
+        "source": "healesvillehotel.com, Gourmet Traveller review"
+      },
+      {
+        "name": "Black Spur Inn",
+        "lat": -37.5700,
+        "lng": 145.6600,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Country pub nestled in the mountain ash forest mid-Spur. Log fire in winter, bike-packed deck in summer.",
+        "source": "Shannons Club Black Spur guide"
+      },
+      {
+        "name": "Marysville Country Bakery & Cafe",
+        "lat": -37.5096,
+        "lng": 145.7476,
+        "type": "bakery",
+        "position": "enroute",
+        "description": "17 Murchison St, Marysville. Famous pies and coffee. The classic biker stop with 40+ bikes parked out front on weekends.",
+        "source": "Netrider forum, Shannons Club"
+      },
+      {
+        "name": "Cog Bike Cafe — Warburton",
+        "lat": -37.7540,
+        "lng": 145.6910,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "42 Station Road, Warburton. Good coffee and cakes on the Rail Trail.",
+        "source": "Visit Melbourne, TripAdvisor"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Shell Healesville",
+        "lat": -37.6530,
+        "lng": 145.5250,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fill up here for the Black Spur. Essential mid-route fuel."
+      },
+      {
+        "name": "Marysville General Store (fuel)",
+        "lat": -37.5093,
+        "lng": 145.7440,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Basic fuel. Top up before heading to Warburton."
+      },
+      {
+        "name": "BP Warburton",
+        "lat": -37.7540,
+        "lng": 145.6870,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel available at the end of the loop."
+      },
+      {
+        "name": "Buxton Hotel",
+        "lat": -37.4267,
+        "lng": 145.7117,
+        "type": "pub",
+        "detour": "1-2 min detour",
+        "notes": "Popular mid-point feed stop. Race bike on the roof. Counter meals."
+      }
+    ]
+  },
+  "yarra-glen-loop": {
+    "startFuel": {
+      "name": "Shell Lilydale",
+      "lat": -37.7560,
+      "lng": 145.3530,
+      "brand": "Shell",
+      "address": "Maroondah Highway, Lilydale VIC 3140"
+    },
+    "destinations": [
+      {
+        "name": "Healesville Hotel",
+        "lat": -37.6536,
+        "lng": 145.5269,
+        "type": "pub",
+        "position": "endpoint",
+        "description": "256 Maroondah Hwy. Restored 1910 gastropub. Local wines, craft beers, and refined pub food. A warm gathering place for locals and riders.",
+        "source": "healesvillehotel.com, Gourmet Traveller"
+      },
+      {
+        "name": "Yarra Valley Chocolaterie & Ice Creamery",
+        "lat": -37.6820,
+        "lng": 145.4410,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "35 Old Healesville Rd, Yarra Glen. Free chocolate tastings, Belgian-style chocolates, artisan ice cream. On a back road perfect for bikes.",
+        "source": "yvci.com.au, bikesales.com.au Top 10 Melbourne rides"
+      },
+      {
+        "name": "Yarra Glen Grand Hotel",
+        "lat": -37.6580,
+        "lng": 145.3730,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Historic pub in the heart of Yarra Glen. Good counter meals and cold beer with vineyard views.",
+        "source": "Visit Yarra Valley"
+      },
+      {
+        "name": "Four Pillars Gin Distillery",
+        "lat": -37.6540,
+        "lng": 145.5310,
+        "type": "attraction",
+        "position": "endpoint",
+        "description": "Healesville. Award-winning gin distillery with tastings and a gin garden. Popular rider stop.",
+        "source": "Visit Yarra Valley"
+      },
+      {
+        "name": "TarraWarra Estate",
+        "lat": -37.6620,
+        "lng": 145.4650,
+        "type": "restaurant",
+        "position": "enroute",
+        "description": "Winery restaurant with art gallery. Fine dining in a stunning architectural setting with vineyard views.",
+        "source": "Visit Yarra Valley"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Shell Healesville",
+        "lat": -37.6530,
+        "lng": 145.5250,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Full service fuel station at the end of the loop."
+      },
+      {
+        "name": "Yarra Valley Chocolaterie",
+        "lat": -37.6820,
+        "lng": 145.4410,
+        "type": "cafe",
+        "detour": "1-2 min detour",
+        "notes": "Free chocolate tastings. On a back road between Yarra Glen and Healesville."
+      }
+    ]
+  },
+  "mt-baw-baw": {
+    "startFuel": {
+      "name": "BP Warragul",
+      "lat": -38.0280,
+      "lng": 145.5580,
+      "brand": "BP",
+      "address": "22-38 Alfred Street, Warragul VIC 3820"
+    },
+    "destinations": [
+      {
+        "name": "Noojee Hotel (Nooj Pub)",
+        "lat": -37.9800,
+        "lng": 145.7500,
+        "type": "pub",
+        "position": "enroute",
+        "description": "411 Mt Baw Baw Tourist Rd, Noojee. Country pub on the Latrobe River. Wood-fired pizzas, gluten-free & vegan options. A favourite meeting spot for motorcyclists after the scenic rainforest ride.",
+        "source": "noojeehotel.com.au, TripAdvisor, Spirit of Tasmania guide"
+      },
+      {
+        "name": "Mt Baw Baw Village Cafe",
+        "lat": -37.8390,
+        "lng": 146.2710,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Cafe at 1460m altitude in the Alpine Village. Open Friday-Monday for meals. Recovery spot after the gruelling climb.",
+        "source": "mountbawbaw.com.au, Ride On Magazine"
+      },
+      {
+        "name": "Little Red Duck Cafe",
+        "lat": -37.9800,
+        "lng": 145.7480,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "1 Bennett St, Noojee. Cafe and general store in the former railway town. Good coffee and light meals.",
+        "source": "AMCN Great Alpine Road feature"
+      },
+      {
+        "name": "Noojee Trestle Bridge",
+        "lat": -37.9800,
+        "lng": 145.7500,
+        "type": "attraction",
+        "position": "enroute",
+        "description": "Historic railway trestle bridge. Short walk from the Noojee carpark. Great photo op.",
+        "source": "Visit Victoria"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "BP Warragul",
+        "lat": -38.0280,
+        "lng": 145.5580,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "FILL UP — no fuel between Warragul and the summit. Closest fuel towns are 60km from the resort."
+      },
+      {
+        "name": "United Noojee",
+        "lat": -37.9790,
+        "lng": 145.7480,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Last fuel before alpine section. Check availability — small town fuel stop."
+      },
+      {
+        "name": "Noojee Hotel",
+        "lat": -37.9800,
+        "lng": 145.7500,
+        "type": "pub",
+        "detour": "on-route",
+        "notes": "Country pub. Wood-fired pizza, beer, toilets. Last decent food before the climb."
+      }
+    ]
+  },
+  "lerderderg-gorge": {
+    "startFuel": {
+      "name": "Shell Bacchus Marsh",
+      "lat": -37.6740,
+      "lng": 144.4320,
+      "brand": "Shell",
+      "address": "Main Street, Bacchus Marsh VIC 3340"
+    },
+    "destinations": [
+      {
+        "name": "Farmers Arms Hotel Daylesford",
+        "lat": -37.3486,
+        "lng": 144.1500,
+        "type": "pub",
+        "position": "endpoint",
+        "description": "Daylesford's oldest pub since 1857. Refined pub classics — beer battered fish, venison pot pie, duck sausages. 16 wines by the glass, 12 beers on tap. Local produce menu.",
+        "source": "farmersarmsdaylesford.com.au, Time Out Melbourne, Shannons Victorian Goldfield Ride"
+      },
+      {
+        "name": "Hepburn Bathhouse & Spa",
+        "lat": -37.3170,
+        "lng": 144.1410,
+        "type": "attraction",
+        "position": "endpoint",
+        "description": "Iconic mineral springs bathhouse. Perfect post-ride relaxation. 5 min north of Daylesford.",
+        "source": "Visit Daylesford"
+      },
+      {
+        "name": "Lerderderg Gorge Lookout",
+        "lat": -37.5500,
+        "lng": 144.3200,
+        "type": "lookout",
+        "position": "enroute",
+        "description": "Dramatic gorge views. Significant geological site with diverse vegetation and wildlife. Pull-off area with short walk.",
+        "source": "Parks Victoria, Great Dividing Trail Association"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Shell Bacchus Marsh",
+        "lat": -37.6740,
+        "lng": 144.4320,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel at the start. No fuel between Bacchus Marsh and Daylesford."
+      },
+      {
+        "name": "BP Daylesford",
+        "lat": -37.3490,
+        "lng": 144.1520,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel at the end of the route in Daylesford."
+      },
+      {
+        "name": "Lerderderg Gorge Lookout",
+        "lat": -37.5500,
+        "lng": 144.3200,
+        "type": "lookout",
+        "detour": "1-2 min detour",
+        "notes": "Quick stop for gorge views and leg stretch. Short walk from road."
+      }
+    ]
+  },
+  "blackwood-trentham-loop": {
+    "startFuel": {
+      "name": "Shell Bacchus Marsh",
+      "lat": -37.6740,
+      "lng": 144.4320,
+      "brand": "Shell",
+      "address": "Main Street, Bacchus Marsh VIC 3340"
+    },
+    "destinations": [
+      {
+        "name": "RedBeard Historic Bakery",
+        "lat": -37.3880,
+        "lng": 144.3170,
+        "type": "bakery",
+        "position": "enroute",
+        "description": "38A High St, Trentham. Organic sourdough baked in an 1891 woodfired Scotch oven. Cafe with tours and classes. A Trentham institution.",
+        "source": "Netrider forum 'fav Biker Cafe/fuelstop', redbeardbakery.com.au"
+      },
+      {
+        "name": "Blackwood Hotel",
+        "lat": -37.4720,
+        "lng": 144.3050,
+        "type": "pub",
+        "position": "enroute",
+        "description": "22 Martin Street, Blackwood. One of Victoria's oldest continuously licensed hotels since the 1860s. Hearty pub meals. The historic Cobb & Co stop.",
+        "source": "blackwoodhotel.com.au, bikesales.com.au Top 10 Melbourne rides"
+      },
+      {
+        "name": "Hotel Trentham",
+        "lat": -37.3880,
+        "lng": 144.3180,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Heart of Trentham. Original pub built 1926 for local potato farmers and gold prospectors. Classic country pub atmosphere.",
+        "source": "hoteltrentham.com.au"
+      },
+      {
+        "name": "Trentham Falls",
+        "lat": -37.3900,
+        "lng": 144.3100,
+        "type": "attraction",
+        "position": "enroute",
+        "description": "Victoria's tallest single-drop waterfall at 32m. Short walk from the car park. Quick scenic stop.",
+        "source": "Parks Victoria"
+      },
+      {
+        "name": "Farmers Arms Hotel Daylesford",
+        "lat": -37.3486,
+        "lng": 144.1500,
+        "type": "pub",
+        "position": "endpoint",
+        "description": "Daylesford's oldest pub since 1857. Outstanding pub food with local produce. Great beer and wine selection.",
+        "source": "farmersarmsdaylesford.com.au, Time Out Melbourne"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Blackwood Hotel",
+        "lat": -37.4720,
+        "lng": 144.3050,
+        "type": "pub",
+        "detour": "on-route",
+        "notes": "22 Martin St. Historic country pub. Counter meals, cold beer, toilets. Mid-ride stop."
+      },
+      {
+        "name": "RedBeard Historic Bakery",
+        "lat": -37.3880,
+        "lng": 144.3170,
+        "type": "cafe",
+        "detour": "on-route",
+        "notes": "38A High St, Trentham. World-class sourdough bakery. Coffee and baked goods."
+      },
+      {
+        "name": "Shell Bacchus Marsh",
+        "lat": -37.6740,
+        "lng": 144.4320,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel at start. No fuel between Bacchus Marsh and Daylesford."
+      },
+      {
+        "name": "BP Daylesford",
+        "lat": -37.3490,
+        "lng": 144.1520,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Fuel at end of route."
+      }
+    ]
+  },
+  "great-alpine-road": {
+    "startFuel": {
+      "name": "Great Alpine Road Fuel Stop (Bright)",
+      "lat": -37.7280,
+      "lng": 146.9599,
+      "brand": "Independent",
+      "address": "1 Anderson Street, Bright VIC 3741"
+    },
+    "destinations": [
+      {
+        "name": "Bright Brewery",
+        "lat": -36.7300,
+        "lng": 146.9650,
+        "type": "brewery",
+        "position": "enroute",
+        "description": "121 Great Alpine Road, Bright. Award-winning craft brewery on the banks of the Ovens River. Open daily for lunch and dinner. Three-time Gold Medal Winner for Best Tourism Brewery in Victoria.",
+        "source": "brightbrewery.com.au, Ride High Country"
+      },
+      {
+        "name": "The Blue Duck Inn",
+        "lat": -37.0100,
+        "lng": 147.3100,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Omeo Highway, Anglers Rest. Legendary landmark pub for riders at a hairpin bend. About 100 motorcyclists drop in weekly. Hearty pub meals, rustic cabins for overnight stays. Surrounded by Alpine National Park.",
+        "source": "Motor Bike Nation review, TripAdvisor, Wikipedia"
+      },
+      {
+        "name": "Omeo High Country Cafe",
+        "lat": -37.0990,
+        "lng": 147.5930,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "184 Day Ave, Omeo. Good coffee and bakery fare. Pies, cakes, and hot meals. Recovery stop at the end of the alpine descent.",
+        "source": "AMCN Great Alpine Road feature"
+      },
+      {
+        "name": "Dinner Plain Alpine Village",
+        "lat": -37.0350,
+        "lng": 147.1970,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "12km from Mt Hotham. Most riders prefer stopping here over Hotham Heights. Good cafe for food and coffee at altitude.",
+        "source": "motorcyclerides.com.au Mt Hotham to Omeo"
+      },
+      {
+        "name": "Danny's Lookout — Mt Hotham",
+        "lat": -37.0370,
+        "lng": 147.1500,
+        "type": "lookout",
+        "position": "enroute",
+        "description": "Panoramic alpine views from near the summit. Iconic photo spot at 1840m. Pull-off area with short walk.",
+        "source": "Visit Victoria, multiple ride reports"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "BP Alpine Bright",
+        "lat": -36.7280,
+        "lng": 146.9599,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "76 Gavan St, Bright. FILL UP — no reliable fuel for 130km to Omeo. Last guaranteed fuel."
+      },
+      {
+        "name": "Zirky's Cafe — Mt Hotham",
+        "lat": -37.0470,
+        "lng": 147.1430,
+        "type": "cafe",
+        "detour": "on-route",
+        "notes": "1 Great Alpine Rd, Hotham Heights. Open daily from 8am. Coffee, pastries, and hot meals at altitude."
+      },
+      {
+        "name": "Dinner Plain fuel (seasonal)",
+        "lat": -37.0350,
+        "lng": 147.1970,
+        "type": "fuel",
+        "detour": "1-2 min detour",
+        "notes": "Limited seasonal fuel. Do NOT rely on this — fill up in Bright."
+      },
+      {
+        "name": "Omeo Fuel",
+        "lat": -37.0990,
+        "lng": 147.5920,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "End of route fuel. Fill up for the return trip."
+      }
+    ]
+  },
+  "south-gippsland-cruise": {
+    "startFuel": {
+      "name": "BP Korumburra",
+      "lat": -38.2100,
+      "lng": 145.5610,
+      "brand": "BP",
+      "address": "2 Commercial Street, Korumburra VIC 3950"
+    },
+    "destinations": [
+      {
+        "name": "Fish Creek Hotel",
+        "lat": -38.4400,
+        "lng": 145.6900,
+        "type": "pub",
+        "position": "enroute",
+        "description": "Iconic 1939 Art Deco pub in the heart of Fish Creek. Open 7 days for lunch and dinner. Quality bistro meals. 25 minutes from Wilsons Promontory gates.",
+        "source": "fishcreekhotel.com.au, TripAdvisor reviews"
+      },
+      {
+        "name": "Loch Village Foodstore & Cafe",
+        "lat": -38.3600,
+        "lng": 145.7100,
+        "type": "cafe",
+        "position": "enroute",
+        "description": "Great egg and bacon focaccia and hot chocolate. Clean toilets next door. Recommended on Netrider forums as a biker cafe/fuelstop.",
+        "source": "Netrider forum 'fav Biker Cafe/fuelstop' thread"
+      },
+      {
+        "name": "Yanakie General Store",
+        "lat": -38.8100,
+        "lng": 146.1500,
+        "type": "cafe",
+        "position": "endpoint",
+        "description": "Last supplies before Wilsons Promontory NP. General store with petrol, basic food. Essential fuel stop — no fuel in the national park.",
+        "source": "Visit South Gippsland, Explore Shaw guide"
+      },
+      {
+        "name": "Wilsons Promontory NP Entrance",
+        "lat": -38.8500,
+        "lng": 146.1800,
+        "type": "landmark",
+        "position": "endpoint",
+        "description": "Entry to Victoria's most loved national park. Spectacular coastal scenery, wildlife, and walking tracks.",
+        "source": "Parks Victoria"
+      },
+      {
+        "name": "Fish Creek Galleries",
+        "lat": -38.4400,
+        "lng": 145.6910,
+        "type": "attraction",
+        "position": "enroute",
+        "description": "Six galleries in Fish Creek, the arts and culture hub of South Gippsland. Worth a wander between courses at the pub.",
+        "source": "Visit South Gippsland"
+      }
+    ],
+    "pitstops": [
+      {
+        "name": "Loch Village Foodstore & Cafe",
+        "lat": -38.3600,
+        "lng": 145.7100,
+        "type": "cafe",
+        "detour": "on-route",
+        "notes": "Netrider-recommended biker cafe. Egg & bacon focaccia, hot chocolate, clean toilets."
+      },
+      {
+        "name": "United Fish Creek",
+        "lat": -38.4400,
+        "lng": 145.6910,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "Mid-route fuel stop in Fish Creek."
+      },
+      {
+        "name": "Yanakie General Store & Fuel",
+        "lat": -38.8100,
+        "lng": 146.1500,
+        "type": "fuel",
+        "detour": "on-route",
+        "notes": "LAST FUEL before Wilsons Promontory NP. No fuel anywhere in the park."
+      },
+      {
+        "name": "Foster fuel",
+        "lat": -38.6550,
+        "lng": 146.2000,
+        "type": "fuel",
+        "detour": "5 min detour",
+        "notes": "Alternative fuel stop if coming via Foster instead of direct to the Prom."
+      }
+    ]
+  }
+}

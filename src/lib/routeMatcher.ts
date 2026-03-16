@@ -12,6 +12,7 @@ export interface RouteDestination {
   lng: number;
   type: string;
   position: "endpoint" | "enroute";
+  description?: string;
 }
 
 export interface Route {

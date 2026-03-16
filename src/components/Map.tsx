@@ -44,11 +44,12 @@ function createIcon(color: string, size: number = 12): L.DivIcon {
   });
 }
 
-function createPoiIcon(type: "fuel" | "medical" | "rest"): L.DivIcon {
+function createPoiIcon(type: "fuel" | "medical" | "rest" | "cafe"): L.DivIcon {
   const icons: Record<string, { emoji: string; bg: string }> = {
     fuel: { emoji: "\u26FD", bg: "#854d0e" },
     medical: { emoji: "\u{2795}", bg: "#991b1b" },
     rest: { emoji: "\u2615", bg: "#1e40af" },
+    cafe: { emoji: "\u2615", bg: "#9a3412" },
   };
   const config = icons[type] || icons.rest;
   return L.divIcon({
@@ -64,6 +65,7 @@ const waypointIcon = createIcon("#3B82F6", 10);
 const destinationIcon = createIcon("#10B981", 16);
 const fuelIcon = createPoiIcon("fuel");
 const medicalIcon = createPoiIcon("medical");
+const cafeIcon = createPoiIcon("cafe");
 
 function FitBounds({ points }: { points: LatLng[] }) {
   const map = useMap();
@@ -146,7 +148,7 @@ export default function Map({
         <Marker
           key={`poi-${i}`}
           position={[poi.lat, poi.lng]}
-          icon={poi.type === "fuel" ? fuelIcon : poi.type === "medical" ? medicalIcon : createPoiIcon("rest")}
+          icon={poi.type === "fuel" ? fuelIcon : poi.type === "medical" ? medicalIcon : poi.type === "cafe" ? cafeIcon : createPoiIcon("rest")}
         >
           <Popup>
             <div style={{ color: "#000", fontSize: "12px" }}>
@@ -181,10 +183,11 @@ export default function Map({
         />
       ))}
 
-      {/* Destination */}
+      {/* Destination — rendered last with high z-index to stay on top of route line */}
       <Marker
         position={[destination.lat, destination.lng]}
         icon={destinationIcon}
+        zIndexOffset={1000}
       />
     </MapContainer>
   );

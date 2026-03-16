@@ -1,98 +1,120 @@
 {
   "reefton-spur": [
-    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Last fuel before Reefton Spur" },
-    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service" },
-    { "name": "Marysville General Store (fuel)", "lat": -37.7790, "lng": 145.7440, "type": "fuel", "notes": "Basic fuel at end of route" },
+    { "name": "Caltex Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Fill up here before departing. 3458 Warburton Highway, Warburton VIC 3799." },
+    { "name": "Reefton Hotel", "lat": -37.7700, "lng": 145.5600, "type": "cafe", "notes": "1600 Woods Point Rd, McMahons Creek. Historic biker pub est. 1886. Cold beer, counter meals. Last stop before the Spur." },
+    { "name": "Marysville General Store (fuel)", "lat": -37.5093, "lng": 145.7440, "type": "fuel", "notes": "Basic fuel available at the end of the route in Marysville." },
     { "name": "Warburton Medical Centre", "lat": -37.7535, "lng": 145.6880, "type": "medical", "notes": "GP clinic — weekdays only" },
     { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" },
     { "name": "Marysville CFA / Ambulance", "lat": -37.7810, "lng": 145.7430, "type": "medical", "notes": "Emergency services" }
   ],
   "black-spur": [
-    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service" },
-    { "name": "Marysville General Store (fuel)", "lat": -37.7790, "lng": 145.7440, "type": "fuel", "notes": "Basic fuel" },
+    { "name": "BP Healesville", "lat": -37.6536, "lng": 145.5269, "type": "fuel", "notes": "Fill up here before departing. 66 Maroondah Highway, Healesville VIC 3777." },
+    { "name": "Healesville Hotel", "lat": -37.6536, "lng": 145.5269, "type": "cafe", "notes": "256 Maroondah Hwy. Restored 1910 gastropub with great local wines and beer. Fill up on coffee and brunch before the Spur." },
+    { "name": "Black Spur Inn", "lat": -37.5700, "lng": 145.6600, "type": "cafe", "notes": "Country pub mid-Spur. Log fire in winter, packed with riders in summer." },
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service fuel station in Healesville. Fill up before the Spur." },
     { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" },
     { "name": "Marysville CFA / Ambulance", "lat": -37.7810, "lng": 145.7430, "type": "medical", "notes": "Emergency services" }
   ],
   "donna-buang": [
-    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Last fuel before climb" },
+    { "name": "Caltex Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Fill up here before departing. 3458 Warburton Hwy. Last fuel before the summit climb." },
+    { "name": "Mt Donna Buang Summit Rest Area", "lat": -37.7170, "lng": 145.6850, "type": "rest", "notes": "Public toilets, grassy area, and 21m viewing tower at summit. No food or fuel." },
     { "name": "Warburton Medical Centre", "lat": -37.7535, "lng": 145.6880, "type": "medical", "notes": "GP clinic — weekdays only" },
     { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "Nearest emergency — 30 min" }
   ],
   "great-ocean-road-torquay": [
-    { "name": "United Torquay", "lat": -38.3310, "lng": 144.3250, "type": "fuel", "notes": "Full service" },
-    { "name": "BP Anglesea", "lat": -38.4080, "lng": 144.1850, "type": "fuel", "notes": "On the GOR" },
-    { "name": "Shell Lorne", "lat": -38.5400, "lng": 143.9750, "type": "fuel", "notes": "Mid-route fuel" },
-    { "name": "BP Apollo Bay", "lat": -38.7560, "lng": 143.6710, "type": "fuel", "notes": "End of route" },
+    { "name": "United Torquay", "lat": -38.3310, "lng": 144.3250, "type": "fuel", "notes": "Fill up here before departing. Surf Coast Highway, Torquay VIC 3228." },
+    { "name": "BP Anglesea", "lat": -38.4080, "lng": 144.1850, "type": "fuel", "notes": "Fuel stop early in the ride." },
+    { "name": "Aireys Inlet — Split Point Lighthouse", "lat": -38.4630, "lng": 144.0980, "type": "rest", "notes": "Quick photo stop at the iconic lighthouse. Short detour off the GOR." },
+    { "name": "Shell Lorne", "lat": -38.5400, "lng": 143.9750, "type": "fuel", "notes": "74 Mountjoy Parade, Lorne. Mid-route fuel. Note: 95RON not available on GOR, only 91 & 98 RON." },
+    { "name": "Teddy's Lookout — Lorne", "lat": -38.5480, "lng": 143.9650, "type": "rest", "notes": "Panoramic views of the coastline. Short ride up from Lorne." },
+    { "name": "BP Apollo Bay", "lat": -38.7560, "lng": 143.6710, "type": "fuel", "notes": "End of route fuel. Fill up before return trip." },
     { "name": "Lorne Community Hospital", "lat": -38.5430, "lng": 143.9760, "type": "medical", "notes": "Urgent care" },
     { "name": "Apollo Bay Medical Centre", "lat": -38.7570, "lng": 143.6720, "type": "medical", "notes": "GP + urgent care" },
     { "name": "Geelong University Hospital", "lat": -38.1600, "lng": 144.3500, "type": "medical", "notes": "Major hospital — pre-route" }
   ],
   "lorne-deans-marsh": [
-    { "name": "Shell Lorne", "lat": -38.5400, "lng": 143.9750, "type": "fuel", "notes": "Fuel up before heading inland" },
+    { "name": "Shell Lorne", "lat": -38.5400, "lng": 143.9750, "type": "fuel", "notes": "Fill up here before departing. 74 Mountjoy Parade. Fuel up before heading inland. No fuel on the route." },
+    { "name": "Teddy's Lookout", "lat": -38.5480, "lng": 143.9650, "type": "rest", "notes": "Panoramic coastal views. Quick stop before climbing inland." },
     { "name": "Lorne Community Hospital", "lat": -38.5430, "lng": 143.9760, "type": "medical", "notes": "Urgent care" }
   ],
   "skenes-creek-otways": [
-    { "name": "BP Apollo Bay", "lat": -38.7560, "lng": 143.6710, "type": "fuel", "notes": "Near route start" },
+    { "name": "BP Apollo Bay", "lat": -38.7560, "lng": 143.6710, "type": "fuel", "notes": "Fill up here before departing. Fuel up in Apollo Bay before the climb. No fuel on the route to Forrest." },
     { "name": "Apollo Bay Medical Centre", "lat": -38.7570, "lng": 143.6720, "type": "medical", "notes": "GP + urgent care" }
   ],
   "kinglake-loop": [
-    { "name": "Shell Whittlesea", "lat": -37.5130, "lng": 145.1180, "type": "fuel", "notes": "Fuel before loop" },
-    { "name": "BP Hurstbridge", "lat": -37.6380, "lng": 145.1930, "type": "fuel", "notes": "Near start" },
+    { "name": "BP Hurstbridge", "lat": -37.6380, "lng": 145.1930, "type": "fuel", "notes": "Fill up here before departing. Heidelberg-Kinglake Rd, Hurstbridge VIC 3099." },
+    { "name": "St Andrews Hotel", "lat": -37.6120, "lng": 145.2780, "type": "cafe", "notes": "Classic biker pub with live bands on weekends. Great pub grub and cold beer. On the loop route." },
+    { "name": "Shell Whittlesea", "lat": -37.5130, "lng": 145.1180, "type": "fuel", "notes": "Fuel up before or after the loop." },
     { "name": "Northern Hospital (Epping)", "lat": -37.6380, "lng": 145.0630, "type": "medical", "notes": "Major hospital — 30 min from route" },
     { "name": "Whittlesea Medical Centre", "lat": -37.5120, "lng": 145.1170, "type": "medical", "notes": "GP clinic" }
   ],
   "dandenong-ranges": [
-    { "name": "BP Bayswater", "lat": -37.8420, "lng": 145.2700, "type": "fuel", "notes": "Full service at start" },
+    { "name": "7-Eleven Bayswater", "lat": -37.8377, "lng": 145.2865, "type": "fuel", "notes": "Fill up here before departing. 936 Mountain Highway, Bayswater VIC 3153." },
+    { "name": "BP Bayswater", "lat": -37.8420, "lng": 145.2700, "type": "fuel", "notes": "Full service fuel station at the start. No fuel stations in the Dandenong Ranges villages." },
+    { "name": "SkyHigh Mount Dandenong", "lat": -37.8285, "lng": 145.3672, "type": "rest", "notes": "Motorcycle parking $3. Coffee kiosk open from 10.15am. Public toilets available." },
     { "name": "Angliss Hospital — Upper Ferntree Gully", "lat": -37.8840, "lng": 145.3100, "type": "medical", "notes": "24hr emergency" }
   ],
   "mornington-loop": [
-    { "name": "Shell Frankston", "lat": -38.1430, "lng": 145.1220, "type": "fuel", "notes": "Full service at start" },
-    { "name": "BP Mornington", "lat": -38.2190, "lng": 145.0370, "type": "fuel", "notes": "Mid-route" },
-    { "name": "United Rosebud", "lat": -38.3560, "lng": 144.9200, "type": "fuel", "notes": "Before peninsula tip" },
+    { "name": "Shell Frankston", "lat": -38.1430, "lng": 145.1220, "type": "fuel", "notes": "Fill up here before departing. Nepean Highway, Frankston VIC 3199." },
+    { "name": "BP Mornington", "lat": -38.2190, "lng": 145.0370, "type": "fuel", "notes": "Mid-route fuel stop." },
+    { "name": "United Rosebud", "lat": -38.3560, "lng": 144.9200, "type": "fuel", "notes": "Last fuel before peninsula tip and Cape Schanck." },
+    { "name": "Arthurs Seat Lookout", "lat": -38.3590, "lng": 144.9510, "type": "rest", "notes": "Panoramic views of the Peninsula and Port Phillip Bay. Hairpin climb up is popular with riders." },
     { "name": "Frankston Hospital", "lat": -38.1500, "lng": 145.1350, "type": "medical", "notes": "24hr emergency" },
     { "name": "Rosebud Hospital", "lat": -38.3580, "lng": 144.9150, "type": "medical", "notes": "Urgent care" }
   ],
   "yarra-valley-loop": [
-    { "name": "Shell Lilydale", "lat": -37.7560, "lng": 145.3530, "type": "fuel", "notes": "Start point fuel" },
-    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Mid-route fuel — fill up here" },
-    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Last fuel on loop" },
+    { "name": "Shell Lilydale", "lat": -37.7560, "lng": 145.3530, "type": "fuel", "notes": "Fill up here before departing. Maroondah Highway, Lilydale VIC 3140." },
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Fill up here for the Black Spur. Essential mid-route fuel." },
+    { "name": "Marysville General Store (fuel)", "lat": -37.5093, "lng": 145.7440, "type": "fuel", "notes": "Basic fuel. Top up before heading to Warburton." },
+    { "name": "BP Warburton", "lat": -37.7540, "lng": 145.6870, "type": "fuel", "notes": "Fuel available at the end of the loop." },
+    { "name": "Buxton Hotel", "lat": -37.4267, "lng": 145.7117, "type": "cafe", "notes": "Popular mid-point feed stop. Race bike on the roof. Counter meals." },
     { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" },
     { "name": "Warburton Medical Centre", "lat": -37.7535, "lng": 145.6880, "type": "medical", "notes": "GP clinic — weekdays only" }
   ],
   "yarra-glen-loop": [
-    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service" },
+    { "name": "Shell Lilydale", "lat": -37.7560, "lng": 145.3530, "type": "fuel", "notes": "Fill up here before departing. Maroondah Highway, Lilydale VIC 3140." },
+    { "name": "Shell Healesville", "lat": -37.6530, "lng": 145.5250, "type": "fuel", "notes": "Full service fuel station at the end of the loop." },
+    { "name": "Yarra Valley Chocolaterie", "lat": -37.6820, "lng": 145.4410, "type": "cafe", "notes": "Free chocolate tastings. On a back road between Yarra Glen and Healesville." },
     { "name": "Healesville Hospital", "lat": -37.6540, "lng": 145.5200, "type": "medical", "notes": "24hr emergency" }
   ],
   "mt-baw-baw": [
-    { "name": "BP Warragul", "lat": -38.0280, "lng": 145.5580, "type": "fuel", "notes": "FILL UP — no fuel until end" },
-    { "name": "United Noojee", "lat": -37.9790, "lng": 145.7480, "type": "fuel", "notes": "Last fuel before alpine section" },
+    { "name": "BP Warragul", "lat": -38.0280, "lng": 145.5580, "type": "fuel", "notes": "Fill up here before departing. FILL UP — no fuel between Warragul and the summit. Closest fuel towns are 60km from the resort." },
+    { "name": "United Noojee", "lat": -37.9790, "lng": 145.7480, "type": "fuel", "notes": "Last fuel before alpine section. Check availability — small town fuel stop." },
+    { "name": "Noojee Hotel", "lat": -37.9800, "lng": 145.7500, "type": "cafe", "notes": "Country pub. Wood-fired pizza, beer, toilets. Last decent food before the climb." },
     { "name": "West Gippsland Hospital — Warragul", "lat": -38.0300, "lng": 145.5550, "type": "medical", "notes": "24hr emergency" },
     { "name": "Noojee Fire Station / Ambulance", "lat": -37.9800, "lng": 145.7500, "type": "medical", "notes": "Emergency services — call 000" }
   ],
   "lerderderg-gorge": [
-    { "name": "Shell Bacchus Marsh", "lat": -37.6740, "lng": 144.4320, "type": "fuel", "notes": "Fuel at start" },
-    { "name": "BP Daylesford", "lat": -37.3490, "lng": 144.1520, "type": "fuel", "notes": "Fuel at end" },
+    { "name": "Shell Bacchus Marsh", "lat": -37.6740, "lng": 144.4320, "type": "fuel", "notes": "Fill up here before departing. Main Street, Bacchus Marsh VIC 3340. No fuel between Bacchus Marsh and Daylesford." },
+    { "name": "BP Daylesford", "lat": -37.3490, "lng": 144.1520, "type": "fuel", "notes": "Fuel at the end of the route in Daylesford." },
+    { "name": "Lerderderg Gorge Lookout", "lat": -37.5500, "lng": 144.3200, "type": "rest", "notes": "Quick stop for gorge views and leg stretch. Short walk from road." },
     { "name": "Bacchus Marsh Hospital", "lat": -37.6750, "lng": 144.4350, "type": "medical", "notes": "Urgent care" },
     { "name": "Daylesford Hospital", "lat": -37.3500, "lng": 144.1530, "type": "medical", "notes": "Urgent care" }
   ],
   "blackwood-trentham-loop": [
-    { "name": "Shell Bacchus Marsh", "lat": -37.6740, "lng": 144.4320, "type": "fuel", "notes": "Fuel at start" },
-    { "name": "BP Daylesford", "lat": -37.3490, "lng": 144.1520, "type": "fuel", "notes": "Fuel at end" },
+    { "name": "Shell Bacchus Marsh", "lat": -37.6740, "lng": 144.4320, "type": "fuel", "notes": "Fill up here before departing. Main Street, Bacchus Marsh VIC 3340. No fuel between Bacchus Marsh and Daylesford." },
+    { "name": "Blackwood Hotel", "lat": -37.4720, "lng": 144.3050, "type": "cafe", "notes": "22 Martin St. Historic country pub. Counter meals, cold beer, toilets. Mid-ride stop." },
+    { "name": "RedBeard Historic Bakery", "lat": -37.3880, "lng": 144.3170, "type": "cafe", "notes": "38A High St, Trentham. World-class sourdough bakery. Coffee and baked goods." },
+    { "name": "BP Daylesford", "lat": -37.3490, "lng": 144.1520, "type": "fuel", "notes": "Fuel at end of route." },
     { "name": "Bacchus Marsh Hospital", "lat": -37.6750, "lng": 144.4350, "type": "medical", "notes": "Urgent care" },
     { "name": "Daylesford Hospital", "lat": -37.3500, "lng": 144.1530, "type": "medical", "notes": "Urgent care" }
   ],
   "great-alpine-road": [
-    { "name": "Shell Bright", "lat": -36.7310, "lng": 146.9640, "type": "fuel", "notes": "FILL UP — no fuel for 130km" },
-    { "name": "Dinner Plain fuel (seasonal)", "lat": -37.0350, "lng": 147.1970, "type": "fuel", "notes": "Limited — check before relying on it" },
-    { "name": "Omeo Fuel", "lat": -37.0990, "lng": 147.5920, "type": "fuel", "notes": "End of route fuel" },
+    { "name": "Great Alpine Road Fuel Stop (Bright)", "lat": -37.7280, "lng": 146.9599, "type": "fuel", "notes": "Fill up here before departing. 1 Anderson Street, Bright VIC 3741." },
+    { "name": "BP Alpine Bright", "lat": -36.7280, "lng": 146.9599, "type": "fuel", "notes": "76 Gavan St, Bright. FILL UP — no reliable fuel for 130km to Omeo. Last guaranteed fuel." },
+    { "name": "Zirky's Cafe — Mt Hotham", "lat": -37.0470, "lng": 147.1430, "type": "cafe", "notes": "1 Great Alpine Rd, Hotham Heights. Open daily from 8am. Coffee, pastries, and hot meals at altitude." },
+    { "name": "Dinner Plain fuel (seasonal)", "lat": -37.0350, "lng": 147.1970, "type": "fuel", "notes": "Limited seasonal fuel. Do NOT rely on this — fill up in Bright." },
+    { "name": "Omeo Fuel", "lat": -37.0990, "lng": 147.5920, "type": "fuel", "notes": "End of route fuel. Fill up for the return trip." },
     { "name": "Bright Hospital", "lat": -36.7290, "lng": 146.9620, "type": "medical", "notes": "Urgent care" },
     { "name": "Omeo District Hospital", "lat": -37.1000, "lng": 147.5940, "type": "medical", "notes": "Small rural hospital" },
     { "name": "Mt Hotham Alpine Resort First Aid", "lat": -37.0470, "lng": 147.1430, "type": "medical", "notes": "Seasonal — ski season only" }
   ],
   "south-gippsland-cruise": [
-    { "name": "Shell Korumburra", "lat": -38.2100, "lng": 145.5610, "type": "fuel", "notes": "Fuel at start" },
-    { "name": "United Fish Creek", "lat": -38.4400, "lng": 145.6910, "type": "fuel", "notes": "Mid-route fuel" },
-    { "name": "Foster fuel", "lat": -38.6550, "lng": 146.2000, "type": "fuel", "notes": "Last fuel before Prom" },
+    { "name": "BP Korumburra", "lat": -38.2100, "lng": 145.5610, "type": "fuel", "notes": "Fill up here before departing. 2 Commercial Street, Korumburra VIC 3950." },
+    { "name": "Loch Village Foodstore & Cafe", "lat": -38.3600, "lng": 145.7100, "type": "cafe", "notes": "Netrider-recommended biker cafe. Egg & bacon focaccia, hot chocolate, clean toilets." },
+    { "name": "United Fish Creek", "lat": -38.4400, "lng": 145.6910, "type": "fuel", "notes": "Mid-route fuel stop in Fish Creek." },
+    { "name": "Yanakie General Store & Fuel", "lat": -38.8100, "lng": 146.1500, "type": "fuel", "notes": "LAST FUEL before Wilsons Promontory NP. No fuel anywhere in the park." },
+    { "name": "Foster fuel", "lat": -38.6550, "lng": 146.2000, "type": "fuel", "notes": "Alternative fuel stop if coming via Foster instead of direct to the Prom." },
     { "name": "Korumburra Medical Centre", "lat": -38.2110, "lng": 145.5620, "type": "medical", "notes": "GP clinic" },
     { "name": "Foster Hospital", "lat": -38.6560, "lng": 146.2010, "type": "medical", "notes": "Urgent care" }
   ]

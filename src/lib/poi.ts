@@ -4,7 +4,7 @@ export interface PointOfInterest {
   name: string;
   lat: number;
   lng: number;
-  type: "fuel" | "medical" | "rest";
+  type: "fuel" | "medical" | "rest" | "cafe";
   notes?: string;
 }
 

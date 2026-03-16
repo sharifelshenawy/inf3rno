@@ -222,21 +222,28 @@ export default function RouteResult({
               <button
                 key={i}
                 onClick={() => setSelectedDest(i)}
-                className={`w-full text-left p-3 rounded-lg border transition-all flex items-center justify-between ${
+                className={`w-full text-left p-3 rounded-lg border transition-all ${
                   selectedDest === i
                     ? "border-[#FF6B2B] bg-[#FF6B2B]/10"
                     : "border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]"
                 }`}
               >
-                <div>
-                  <span className="text-white font-medium text-sm">
-                    {dest.name}
-                  </span>
-                  <span className="text-xs text-zinc-500 ml-2">
-                    {dest.position === "enroute" ? "Along route" : "End point"}
-                  </span>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-white font-medium text-sm">
+                      {dest.name}
+                    </span>
+                    <span className="text-xs text-zinc-500 ml-2">
+                      {dest.position === "enroute" ? "Along route" : "End point"}
+                    </span>
+                  </div>
+                  <span className="text-xs text-zinc-500">{dest.type}</span>
                 </div>
-                <span className="text-xs text-zinc-500">{dest.type}</span>
+                {dest.description && (
+                  <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed">
+                    {dest.description}
+                  </p>
+                )}
               </button>
             ))}
           </div>

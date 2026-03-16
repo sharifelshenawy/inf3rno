@@ -12,6 +12,7 @@ const TYPE_CONFIG: Record<string, { label: string; icon: string; color: string }
   fuel: { label: "Fuel", icon: "\u26FD", color: "text-yellow-400" },
   medical: { label: "Medical", icon: "\u{1F3E5}", color: "text-red-400" },
   rest: { label: "Rest Stop", icon: "\u2615", color: "text-blue-400" },
+  cafe: { label: "Cafe / Pub", icon: "\u2615", color: "text-orange-400" },
 };
 
 export default function PointsOfInterest({

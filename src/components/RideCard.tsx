@@ -36,12 +36,12 @@ export default function RideCard({ ride }: RideCardProps) {
     STATUS_COLORS[ride.status] || "bg-zinc-500/20 text-zinc-400";
 
   return (
-    <Link href={`/rides/${ride.id}`} className="block group">
+    <Link href={`/rides/${ride.id}`} className="block">
       <div className="rounded-xl border border-[#2A2A2A] bg-[#141414] p-4 space-y-2 hover:border-[#FF6B2B]/50 transition-colors">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-white font-bold truncate">{ride.title}</h3>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-white font-bold truncate min-w-0">{ride.title}</h3>
           <span
-            className={`shrink-0 px-2 py-0.5 rounded-full text-xs font-medium border ${statusColor}`}
+            className={`shrink-0 px-2 py-0.5 rounded-full text-xs font-medium border whitespace-nowrap ${statusColor}`}
           >
             {ride.status}
           </span>

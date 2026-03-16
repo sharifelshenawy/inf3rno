@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import RideCard from "@/components/RideCard";
+import SwipeableCard from "@/components/SwipeableCard";
 import routesData from "@/data/routes.json";
 import type { Route } from "@/lib/routeMatcher";
 
@@ -14,6 +16,7 @@ interface GroupRideItem {
   memberCount: number;
   vibe: string | null;
   difficulty: string | null;
+  creatorId: string;
   createdAt: string;
 }
 
@@ -49,6 +52,10 @@ function formatDate(dateStr: string): string {
 }
 
 export default function RidesListPage() {
+  const { data: session } = useSession();
+  const sessionUser = session?.user as { id?: string } | undefined;
+  const currentUserId = sessionUser?.id;
+
   const [groupRides, setGroupRides] = useState<GroupRideItem[]>([]);
   const [soloRides, setSoloRides] = useState<SoloRideItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -80,7 +87,6 @@ export default function RidesListPage() {
   }, []);
 
   const handleDeleteSolo = async (id: string) => {
-    if (!confirm("Delete this ride?")) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/solo-rides?id=${id}`, { method: "DELETE" });
@@ -95,7 +101,6 @@ export default function RidesListPage() {
   };
 
   const handleDeleteGroup = async (id: string) => {
-    if (!confirm("Cancel this ride?")) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/rides/${id}`, { method: "DELETE" });
@@ -109,6 +114,28 @@ export default function RidesListPage() {
     } finally {
       setDeletingId(null);
     }
+  };
+
+  const handleLeaveGroup = async (id: string) => {
+    if (!currentUserId) return;
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/rides/${id}/members/${currentUserId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setGroupRides((prev) => prev.filter((r) => r.id !== id));
+      }
+    } catch {
+      // Silently fail
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  /** Returns whether the current user is the leader of a group ride */
+  const isLeader = (ride: GroupRideItem): boolean => {
+    return currentUserId !== undefined && ride.creatorId === currentUserId;
   };
 
   const activeGroupRides = groupRides.filter((r) => ACTIVE_STATUSES.includes(r.status));
@@ -193,49 +220,48 @@ export default function RidesListPage() {
                 </p>
               )}
               {soloRides.map((ride) => (
-                <div
+                <SwipeableCard
                   key={ride.id}
-                  className="p-4 rounded-lg bg-[#141414] border border-[#2A2A2A] space-y-2"
+                  actionLabel="Delete"
+                  desktopLabel="Delete"
+                  confirmMessage="Delete this ride?"
+                  isLoading={deletingId === ride.id}
+                  onAction={() => handleDeleteSolo(ride.id)}
                 >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-white font-semibold">
-                        {getRouteName(ride.routeId)}
-                      </h3>
-                      <p className="text-xs text-zinc-500 mt-0.5">
-                        {formatDate(ride.createdAt)}
-                        {ride.riderSuburb && ` \u2022 from ${ride.riderSuburb}`}
-                      </p>
+                  <div className="p-4 rounded-xl bg-[#141414] border border-[#2A2A2A] space-y-2">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <h3 className="text-white font-semibold truncate">
+                          {getRouteName(ride.routeId)}
+                        </h3>
+                        <p className="text-xs text-zinc-500 mt-0.5">
+                          {formatDate(ride.createdAt)}
+                          {ride.riderSuburb && ` \u2022 from ${ride.riderSuburb}`}
+                        </p>
+                      </div>
+                      <span className="shrink-0 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30 whitespace-nowrap">
+                        solo
+                      </span>
                     </div>
-                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                      solo
-                    </span>
+                    <div className="flex items-center gap-3 text-xs text-zinc-500">
+                      <span>{ride.vibe}</span>
+                      <span>&middot;</span>
+                      <span>{ride.difficulty}</span>
+                      {ride.bikeMake && (
+                        <>
+                          <span>&middot;</span>
+                          <span>{ride.bikeMake} {ride.bikeModel}</span>
+                        </>
+                      )}
+                      {ride.rangeKm && (
+                        <>
+                          <span>&middot;</span>
+                          <span>{Math.round(ride.rangeKm)} km range</span>
+                        </>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-zinc-500">
-                    <span>{ride.vibe}</span>
-                    <span>&middot;</span>
-                    <span>{ride.difficulty}</span>
-                    {ride.bikeMake && (
-                      <>
-                        <span>&middot;</span>
-                        <span>{ride.bikeMake} {ride.bikeModel}</span>
-                      </>
-                    )}
-                    {ride.rangeKm && (
-                      <>
-                        <span>&middot;</span>
-                        <span>{Math.round(ride.rangeKm)} km range</span>
-                      </>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => handleDeleteSolo(ride.id)}
-                    disabled={deletingId === ride.id}
-                    className="text-xs text-zinc-600 hover:text-red-400 transition-colors"
-                  >
-                    {deletingId === ride.id ? "Deleting..." : "Delete"}
-                  </button>
-                </div>
+                </SwipeableCard>
               ))}
             </div>
           )}
@@ -248,18 +274,29 @@ export default function RidesListPage() {
                   Active Group Rides
                 </p>
               )}
-              {activeGroupRides.map((ride) => (
-                <div key={ride.id} className="relative">
-                  <RideCard ride={ride} />
-                  <button
-                    onClick={() => handleDeleteGroup(ride.id)}
-                    disabled={deletingId === ride.id}
-                    className="absolute top-3 right-3 text-xs text-zinc-600 hover:text-red-400 transition-colors"
+              {activeGroupRides.map((ride) => {
+                const leader = isLeader(ride);
+                return (
+                  <SwipeableCard
+                    key={ride.id}
+                    actionLabel={leader ? "Cancel" : "Leave"}
+                    desktopLabel={leader ? "Cancel" : "Leave"}
+                    confirmMessage={
+                      leader
+                        ? "Cancel this ride for everyone?"
+                        : "Leave this ride?"
+                    }
+                    isLoading={deletingId === ride.id}
+                    onAction={() =>
+                      leader
+                        ? handleDeleteGroup(ride.id)
+                        : handleLeaveGroup(ride.id)
+                    }
                   >
-                    {deletingId === ride.id ? "..." : "Cancel"}
-                  </button>
-                </div>
-              ))}
+                    <RideCard ride={ride} />
+                  </SwipeableCard>
+                );
+              })}
             </div>
           )}
 

@@ -14,7 +14,7 @@
       { "lat": -37.8167, "lng": 145.5500, "label": "Reefton — left over wooden bridge" },
       { "lat": -37.7833, "lng": 145.5500, "label": "Reefton Spur Rd" },
       { "lat": -37.6900, "lng": 145.7100, "label": "Cumberland Junction" },
-      { "lat": -37.7800, "lng": 145.7300, "label": "Marysville" }
+      { "lat": -37.5093, "lng": 145.7476, "label": "Marysville" }
     ],
     "destinations": [
       { "name": "Marysville Country Bakery & Cafe", "lat": -37.5096, "lng": 145.7476, "type": "bakery", "position": "endpoint", "description": "Famous meat pies and coffee. Up to 40 motorcycles parked out front on sunny weekends. The quintessential Reefton Spur finish line stop." },
@@ -240,7 +240,7 @@
       { "lat": -37.6690, "lng": 145.3700, "label": "Yarra Glen" },
       { "lat": -37.6536, "lng": 145.5269, "label": "Healesville" },
       { "lat": -37.5700, "lng": 145.6600, "label": "Black Spur" },
-      { "lat": -37.7800, "lng": 145.7300, "label": "Marysville" },
+      { "lat": -37.5093, "lng": 145.7476, "label": "Marysville" },
       { "lat": -37.7550, "lng": 145.6890, "label": "Warburton" }
     ],
     "destinations": [
@@ -394,7 +394,7 @@
       { "lat": -38.2100, "lng": 145.5600, "label": "Start — Korumburra" },
       { "lat": -38.4400, "lng": 145.6900, "label": "Fish Creek" },
       { "lat": -38.6800, "lng": 146.0400, "label": "Wilsons Promontory Rd" },
-      { "lat": -38.6300, "lng": 145.9100, "label": "Yanakie" }
+      { "lat": -38.8100, "lng": 146.1500, "label": "Yanakie" }
     ],
     "destinations": [
       { "name": "Fish Creek Hotel", "lat": -38.4400, "lng": 145.6900, "type": "pub", "position": "enroute", "description": "Iconic 1939 Art Deco pub in the heart of Fish Creek. Open 7 days for lunch and dinner. Quality bistro meals. 25 minutes from Wilsons Promontory gates." },

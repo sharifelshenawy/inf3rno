@@ -64,6 +64,11 @@ export default function RouteResult({
   // Route end = last waypoint in the curated route. Destination is an extra leg FROM here.
   const routeEnd = route.waypoints[route.waypoints.length - 1];
 
+  // Clear destination leg geometry when destination changes (before new fetch completes)
+  useEffect(() => {
+    setDestLegGeometry(undefined);
+  }, [selectedDest]);
+
   // Track route completed when result is shown
   useEffect(() => {
     trackEvent("route_completed", { routeId: route.id, routeName: route.name });

@@ -735,6 +735,10 @@ export default function RideDetailPage() {
                 lat: wp.lat,
                 lng: wp.lng,
               }))}
+              routeEnd={{
+                lat: fullRoute.waypoints[fullRoute.waypoints.length - 1].lat,
+                lng: fullRoute.waypoints[fullRoute.waypoints.length - 1].lng,
+              }}
               destination={{
                 lat: destination.lat,
                 lng: destination.lng,

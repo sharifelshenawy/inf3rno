@@ -54,12 +54,15 @@ export default function RouteResult({
   const [selectedDest, setSelectedDest] = useState(0);
   const [copied, setCopied] = useState(false);
   const [routeGeometry, setRouteGeometry] = useState<[number, number][] | undefined>();
+  const [destLegGeometry, setDestLegGeometry] = useState<[number, number][] | undefined>();
   const [commuteGeometries, setCommuteGeometries] = useState<Record<number, [number, number][]>>({});
   const [fuelPlan, setFuelPlan] = useState<FuelPlan | null>(null);
   const [showFullRouteNav, setShowFullRouteNav] = useState(false);
 
   const destination = route.destinations[selectedDest];
   const mp = scored.meetingPoint;
+  // Route end = last waypoint in the curated route. Destination is an extra leg FROM here.
+  const routeEnd = route.waypoints[route.waypoints.length - 1];
 
   // Track route completed when result is shown
   useEffect(() => {
@@ -94,14 +97,20 @@ export default function RouteResult({
   // Fetch road-following geometries
   const fetchGeometries = useCallback(async () => {
     try {
-      // Fetch route geometry: meeting point → waypoints → destination
+      // Fetch main route geometry: meeting point → waypoints → route end
       const routePoints = [
         { lat: mp.lat, lng: mp.lng },
         ...route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng })),
-        { lat: destination.lat, lng: destination.lng },
       ];
       const routeGeo = await fetchRouteGeometry(routePoints);
       if (routeGeo) setRouteGeometry(routeGeo);
+
+      // Fetch destination leg: route end → selected destination
+      const destLegGeo = await fetchRouteGeometry([
+        { lat: routeEnd.lat, lng: routeEnd.lng },
+        { lat: destination.lat, lng: destination.lng },
+      ]);
+      if (destLegGeo) setDestLegGeometry(destLegGeo);
 
       // Fetch commute geometries for each rider
       const commutes: Record<number, [number, number][]> = {};
@@ -116,7 +125,7 @@ export default function RouteResult({
     } catch {
       // Fall back to straight lines silently
     }
-  }, [mp.lat, mp.lng, route.waypoints, destination.lat, destination.lng, riders]);
+  }, [mp.lat, mp.lng, route.waypoints, routeEnd.lat, routeEnd.lng, destination.lat, destination.lng, riders]);
 
   useEffect(() => {
     fetchGeometries();
@@ -203,10 +212,12 @@ export default function RouteResult({
           lat: wp.lat,
           lng: wp.lng,
         }))}
+        routeEnd={{ lat: routeEnd.lat, lng: routeEnd.lng }}
         destination={{ lat: destination.lat, lng: destination.lng }}
         riders={riderMarkers}
         pois={routePois}
         routeGeometry={routeGeometry}
+        destinationLegGeometry={destLegGeometry}
         commuteGeometries={commuteGeometries}
       />
 

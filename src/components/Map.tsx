@@ -28,10 +28,12 @@ export interface RiderMarker {
 interface MapProps {
   meetingPoint: LatLng;
   waypoints: LatLng[];
+  routeEnd: LatLng;
   destination: LatLng;
   riders: RiderMarker[];
   pois?: PointOfInterest[];
   routeGeometry?: [number, number][];
+  destinationLegGeometry?: [number, number][];
   commuteGeometries?: Record<number, [number, number][]>;
 }
 
@@ -84,23 +86,32 @@ function FitBounds({ points }: { points: LatLng[] }) {
 export default function Map({
   meetingPoint,
   waypoints,
+  routeEnd,
   destination,
   riders,
   pois = [],
   routeGeometry,
+  destinationLegGeometry,
   commuteGeometries,
 }: MapProps) {
   const allPoints = [
     meetingPoint,
     ...waypoints,
+    routeEnd,
     destination,
     ...riders.map((r) => ({ lat: r.lat, lng: r.lng })),
   ];
 
-  // Use OSRM road geometry if available, otherwise fall back to straight lines
+  // Main route: meeting point → waypoints → route end (solid orange)
   const routeLine: [number, number][] = routeGeometry || [
     [meetingPoint.lat, meetingPoint.lng],
     ...waypoints.map((wp): [number, number] => [wp.lat, wp.lng]),
+    [routeEnd.lat, routeEnd.lng],
+  ];
+
+  // Last leg: route end → destination (dashed orange — the "where to eat" leg)
+  const destLeg: [number, number][] = destinationLegGeometry || [
+    [routeEnd.lat, routeEnd.lng],
     [destination.lat, destination.lng],
   ];
 
@@ -137,10 +148,16 @@ export default function Map({
         />
       ))}
 
-      {/* Route line — solid orange */}
+      {/* Main route line — solid orange */}
       <Polyline
         positions={routeLine}
         pathOptions={{ color: "#FF6B2B", weight: 3, opacity: 0.9 }}
+      />
+
+      {/* Destination leg — dashed orange (last leg to cafe/pub/lookout) */}
+      <Polyline
+        positions={destLeg}
+        pathOptions={{ color: "#FF6B2B", weight: 3, opacity: 0.6, dashArray: "8, 8" }}
       />
 
       {/* POI markers */}
@@ -183,7 +200,13 @@ export default function Map({
         />
       ))}
 
-      {/* Destination — rendered last with high z-index to stay on top of route line */}
+      {/* Route end marker — where the curated route finishes */}
+      <Marker
+        position={[routeEnd.lat, routeEnd.lng]}
+        icon={waypointIcon}
+      />
+
+      {/* Destination — the final stop (cafe/pub/lookout) */}
       <Marker
         position={[destination.lat, destination.lng]}
         icon={destinationIcon}

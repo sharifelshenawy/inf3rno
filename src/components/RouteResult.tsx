@@ -96,26 +96,33 @@ export default function RouteResult({
   const routePois: PointOfInterest[] =
     (poiData as Record<string, PointOfInterest[]>)[route.id] || [];
 
-  // Fetch main route geometry ONCE (meeting point → route shape → route end)
-  // Uses routeShape (dense helper points) for Valhalla if available,
-  // falls back to waypoints. routeShape is NOT used for Google Maps deep links.
+  // Main route geometry:
+  // If routeShape exists, use it DIRECTLY as the polyline (it already follows roads).
+  // If no routeShape, fetch from Valhalla using sparse waypoints.
+  // Commute lines always fetched from Valhalla (just 2 points each, reliable).
   useEffect(() => {
     let cancelled = false;
-    async function fetchMainRoute() {
+
+    // If we have routeShape, use it directly — no Valhalla needed for main route
+    if (route.routeShape && route.routeShape.length > 0) {
+      setRouteGeometry(
+        route.routeShape.map((p): [number, number] => [p.lat, p.lng])
+      );
+    }
+
+    async function fetchGeometries() {
       try {
-        // Use dense routeShape for Valhalla accuracy, fall back to sparse waypoints
-        const shapePoints = route.routeShape
-          ? route.routeShape.map((p) => ({ lat: p.lat, lng: p.lng }))
-          : route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng }));
+        // Only fetch main route from Valhalla if no routeShape
+        if (!route.routeShape || route.routeShape.length === 0) {
+          const routePoints = [
+            { lat: mp.lat, lng: mp.lng },
+            ...route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng })),
+          ];
+          const routeGeo = await fetchRouteGeometry(routePoints);
+          if (!cancelled && routeGeo) setRouteGeometry(routeGeo);
+        }
 
-        const routePoints = [
-          { lat: mp.lat, lng: mp.lng },
-          ...shapePoints,
-        ];
-        const routeGeo = await fetchRouteGeometry(routePoints);
-        if (!cancelled && routeGeo) setRouteGeometry(routeGeo);
-
-        // Also fetch commute lines
+        // Fetch commute lines (rider → meeting point, just 2 points each)
         const commutes: Record<number, [number, number][]> = {};
         for (let i = 0; i < riders.length; i++) {
           const commuteGeo = await fetchRouteGeometry([
@@ -129,14 +136,18 @@ export default function RouteResult({
         // Fall back to straight lines
       }
     }
-    fetchMainRoute();
+    fetchGeometries();
     return () => { cancelled = true; };
   }, [mp.lat, mp.lng, route.waypoints, riders]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Fetch destination leg geometry SEPARATELY (re-fetches when destination changes)
+  // Fetch destination leg geometry SEPARATELY (only for "endpoint" destinations)
+  // "enroute" destinations are along the main route — no extra leg needed
   useEffect(() => {
     let cancelled = false;
-    setDestLegGeometry(undefined); // Clear old geometry immediately
+    setDestLegGeometry(undefined);
+
+    // Only draw a last leg for endpoint destinations (near the route end)
+    if (destination.position !== "endpoint") return;
 
     async function fetchDestLeg() {
       try {
@@ -151,7 +162,7 @@ export default function RouteResult({
     }
     fetchDestLeg();
     return () => { cancelled = true; };
-  }, [routeEnd.lat, routeEnd.lng, destination.lat, destination.lng]);
+  }, [routeEnd.lat, routeEnd.lng, destination.lat, destination.lng, destination.position]);
 
   const handleShare = async () => {
     trackEvent("share_clicked", { routeId: route.id });

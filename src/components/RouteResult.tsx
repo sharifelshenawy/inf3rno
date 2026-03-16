@@ -64,10 +64,7 @@ export default function RouteResult({
   // Route end = last waypoint in the curated route. Destination is an extra leg FROM here.
   const routeEnd = route.waypoints[route.waypoints.length - 1];
 
-  // Clear destination leg geometry when destination changes (before new fetch completes)
-  useEffect(() => {
-    setDestLegGeometry(undefined);
-  }, [selectedDest]);
+  // destLegGeometry is cleared and re-fetched in the destination leg useEffect below
 
   // Track route completed when result is shown
   useEffect(() => {
@@ -99,42 +96,56 @@ export default function RouteResult({
   const routePois: PointOfInterest[] =
     (poiData as Record<string, PointOfInterest[]>)[route.id] || [];
 
-  // Fetch road-following geometries
-  const fetchGeometries = useCallback(async () => {
-    try {
-      // Fetch main route geometry: meeting point → waypoints → route end
-      const routePoints = [
-        { lat: mp.lat, lng: mp.lng },
-        ...route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng })),
-      ];
-      const routeGeo = await fetchRouteGeometry(routePoints);
-      if (routeGeo) setRouteGeometry(routeGeo);
-
-      // Fetch destination leg: route end → selected destination
-      const destLegGeo = await fetchRouteGeometry([
-        { lat: routeEnd.lat, lng: routeEnd.lng },
-        { lat: destination.lat, lng: destination.lng },
-      ]);
-      if (destLegGeo) setDestLegGeometry(destLegGeo);
-
-      // Fetch commute geometries for each rider
-      const commutes: Record<number, [number, number][]> = {};
-      for (let i = 0; i < riders.length; i++) {
-        const commuteGeo = await fetchRouteGeometry([
-          { lat: riders[i].lat, lng: riders[i].lng },
-          { lat: mp.lat, lng: mp.lng },
-        ]);
-        if (commuteGeo) commutes[i] = commuteGeo;
-      }
-      setCommuteGeometries(commutes);
-    } catch {
-      // Fall back to straight lines silently
-    }
-  }, [mp.lat, mp.lng, route.waypoints, routeEnd.lat, routeEnd.lng, destination.lat, destination.lng, riders]);
-
+  // Fetch main route geometry ONCE (meeting point → waypoints → route end)
+  // This doesn't change when destination changes
   useEffect(() => {
-    fetchGeometries();
-  }, [fetchGeometries]);
+    let cancelled = false;
+    async function fetchMainRoute() {
+      try {
+        const routePoints = [
+          { lat: mp.lat, lng: mp.lng },
+          ...route.waypoints.map((wp) => ({ lat: wp.lat, lng: wp.lng })),
+        ];
+        const routeGeo = await fetchRouteGeometry(routePoints);
+        if (!cancelled && routeGeo) setRouteGeometry(routeGeo);
+
+        // Also fetch commute lines
+        const commutes: Record<number, [number, number][]> = {};
+        for (let i = 0; i < riders.length; i++) {
+          const commuteGeo = await fetchRouteGeometry([
+            { lat: riders[i].lat, lng: riders[i].lng },
+            { lat: mp.lat, lng: mp.lng },
+          ]);
+          if (!cancelled && commuteGeo) commutes[i] = commuteGeo;
+        }
+        if (!cancelled) setCommuteGeometries(commutes);
+      } catch {
+        // Fall back to straight lines
+      }
+    }
+    fetchMainRoute();
+    return () => { cancelled = true; };
+  }, [mp.lat, mp.lng, route.waypoints, riders]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Fetch destination leg geometry SEPARATELY (re-fetches when destination changes)
+  useEffect(() => {
+    let cancelled = false;
+    setDestLegGeometry(undefined); // Clear old geometry immediately
+
+    async function fetchDestLeg() {
+      try {
+        const destLegGeo = await fetchRouteGeometry([
+          { lat: routeEnd.lat, lng: routeEnd.lng },
+          { lat: destination.lat, lng: destination.lng },
+        ]);
+        if (!cancelled && destLegGeo) setDestLegGeometry(destLegGeo);
+      } catch {
+        // Fall back to straight line
+      }
+    }
+    fetchDestLeg();
+    return () => { cancelled = true; };
+  }, [routeEnd.lat, routeEnd.lng, destination.lat, destination.lng]);
 
   const handleShare = async () => {
     trackEvent("share_clicked", { routeId: route.id });
@@ -211,7 +222,7 @@ export default function RouteResult({
       )}
 
       <Map
-        key={`${route.id}-${destination.lat}-${destination.lng}`}
+        key={route.id}
         meetingPoint={{ lat: mp.lat, lng: mp.lng }}
         waypoints={route.waypoints.map((wp) => ({
           lat: wp.lat,
